@@ -64,11 +64,19 @@ class ObraSocialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ObraSociale $obraSociale)
+    public function destroy(Request $request, $id)
     {
-        $obraSociale->delete();
+        $borrar_obraSocial = 
+        [
+            'obra_social' => $request->obra_social
+        ];
 
+        ObraSociale::whereId($id)->delete($borrar_obraSocial);
 
-        return (new ObraSocialResource($obraSociale));
+        return response()->json([
+
+         'message' => '¡ Cobertura medica borrada!'
+        
+        ], 201);
     }
 }

@@ -10,4 +10,11 @@ class ObraSociale extends Model
     use HasFactory;
 
     protected $fillable = ['id','obra_social'];
+
+
+    public function paciente()
+    {
+        return $this->hasMany(Paciente::class, 'id');
+    }
+
 }
