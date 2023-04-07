@@ -48,20 +48,15 @@ Route::group([
 
 ], function ($router){
 
-    
-
-     //Route::resource('obras_sociales', 'ObraSocialController');
-
     // OBRAS SOCIALES RUTAS
     Route::get('obras_sociales', [ObraSocialController::class, 'index']);
     Route::post('obras_sociales', [ObraSocialController::class, 'store']);
     Route::delete('obras_sociales/{id}', [ObraSocialController::class, 'destroy']);
 
+    
+    //Route::resource('pacientes', 'AdminController')->only('index');
 
-
-    //Route::resource('pacientes', [AdministradorController::class, 'index']); // dejar la ruta con el nombre pacientes
-    Route::resource('pacientes', 'AdminController')->only('index');
-    Route::get('usuarios', [UserController::class, 'get_users']);
+    Route::get('pacientes', [AdminController::class, 'obtener_pacientes']);
 
    
 
@@ -78,7 +73,7 @@ Route::group([
 ], function ($router){
 
     
-    Route::get('datos', [PacienteController::class, 'obtener_datos']);
+  
 
 });
 
