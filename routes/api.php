@@ -59,6 +59,10 @@ Route::group([
     Route::get('pacientes', [AdminController::class, 'obtener_pacientes']);
 
    
+     // Buscar pacientes registrados
+     Route::get('usuarios/nombre/{first_name}', [AdminController::class, 'buscar_paciente_por_nombre']);
+     Route::get('usuarios/apellido/{last_name}', [AdminController::class, 'buscar_paciente_por_apellido']);
+     Route::get('usuarios/busqueda/{first_name}/{last_name}', [AdminController::class, 'buscar_paciente']);
 
 });
 

@@ -30,7 +30,7 @@ class AdminController extends Controller
     }
     
 
-    
+
     public function update_user(Request $request, $id)
     {
        
@@ -56,6 +56,36 @@ class AdminController extends Controller
              ], 201);
 
         
+    }
+
+
+    public function buscar_paciente_por_nombre($first_name)
+    {
+        $users = User::where('first_name', 'LIKE', '%'.$first_name.'%')
+        ->where('first_name', 'LIKE', '%'.$first_name.'%')
+        ->get(); 
+
+        return response()->json($users);
+    }
+
+
+    public function buscar_paciente_por_apellido($last_name)
+    {
+        $users = User::where('last_name', 'LIKE', '%'.$last_name.'%')
+        ->where('last_name', 'LIKE', '%'.$last_name.'%')
+        ->get(); 
+
+        return response()->json($users);
+    }
+
+
+    public function buscar_paciente($first_name, $last_name)
+    {
+        $users = User::where('first_name', 'LIKE', '%'.$first_name.'%')
+                 ->where('last_name', 'LIKE', '%'.$last_name.'%')
+                 ->get();
+
+    return response()->json($users);
     }
 
     
