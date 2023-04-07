@@ -64,6 +64,7 @@ class User extends Authenticatable implements JWTSubject
     // relacion con pacientes
     public function paciente()
     {
-        return $this->hasOne(Paciente::class, 'id');
+        return $this->hasOne(Paciente::class, 'user_id');
     }
+
 }

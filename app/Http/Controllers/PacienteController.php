@@ -5,26 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Paciente;
+use App\Models\User;
 use App\Http\Resources\PacienteResource;
 use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
 {
 
-    public function obtener_datos()
-    {
-
-        //return PacienteResource::collection(Paciente::with('user', 'obra_social')->get());
-        $pacientes = DB::table('users')
-                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
-                    ->join('obra_sociales', 'obra_sociales.id' , '=', 'pacientes.obra_social_id')
-                    ->select('first_name', 'last_name', 'email', 'phone', 'obra_social')
-                    ->get();
-
-        return $pacientes;
-        
-    }
-    
     public function datos_pacientes(Request $request)
     {
         // creo una validacion de datos
@@ -65,11 +52,29 @@ class PacienteController extends Controller
 
     
     
-
-    
-    public function update(Request $request, $id)
+    public function editar_email(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'email' => 'string|email|unique:users|min:10'
+
+        ]);
+
+            $modificar_email = [
+
+                'email' => $request->email
+            ];
+
+             User::whereId($id)->update($modificar_email);
+
+
+             return response()->json([
+
+                 'message' => '¡Email modificado!, revisa tu bandeja de entrada',
+                 'email' => $modificar_email
+    
+             ], 201);
+
     }
 
    

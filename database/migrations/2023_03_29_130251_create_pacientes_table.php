@@ -14,11 +14,14 @@ class CreatePacientesTable extends Migration
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
+             
+            $table->id();
+            
              //haciendo relacion con users
              $table->unsignedBigInteger('user_id');
              $table->foreign('user_id')->references('id')->on('users');
 
-             $table->string('phone')->unique();
+            $table->string('phone')->unique();
 
 
             // haciendo relacion con obra social
@@ -26,6 +29,8 @@ class CreatePacientesTable extends Migration
             $table->foreign('obra_social_id')->references('id')->on('obra_sociales');
 
             $table->timestamps();
+
+            
         });
     }
 

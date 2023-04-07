@@ -27,13 +27,15 @@ Route::group([
 
 ], function ($router) {
 
-    // Route::post('login', [AuthController::class, 'login']);
-    // Route::post('logout', [AuthController::class, 'logout']);
-    // Route::post('refresh', [AuthController::class, 'refresh']);
-    // Route::post('me', [AuthController::class, 'me']);
-    // Route::post('register', [AuthController::class, 'register']);
 
     Route::post('register', [RegisterController::class, 'register']);
+
+    Route::post('login',[LoginPacienteController::class, 'login']);
+
+    Route::post('logout', [LogoutController::class, 'logout']);
+
+    Route::post('login_admin',[LoginAdminController::class, 'login']);
+
 
 });
 
@@ -46,7 +48,7 @@ Route::group([
 
 ], function ($router){
 
-    Route::post('login_admin',[LoginAdminController::class, 'login']);
+    
 
      //Route::resource('obras_sociales', 'ObraSocialController');
 
@@ -75,8 +77,7 @@ Route::group([
 
 ], function ($router){
 
-    Route::post('login',[LoginPacienteController::class, 'login']);
-    Route::post('sign_up', [PacienteController::class, 'registro']);
+    
     Route::get('datos', [PacienteController::class, 'obtener_datos']);
 
 });
@@ -91,8 +92,22 @@ Route::group([
 
 
     Route::post('profile', [UserController::class, 'me']);
-    Route::post('logout', [LogoutController::class, 'logout']);
     Route::put('modificar_clave/{id}', [UserController::class, 'update_password']);
     Route::put('modificar_usuario/{id}', [AdminController::class, 'update_user']);
+
+});
+
+
+// PROBANDO RUTAS PARA LA DOC
+Route::group([
+
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'doc'
+
+], function ($router){
+
+
+    Route::get('lista', [TurnoController::class, 'pacientes_index']);
+   
 
 });
