@@ -76,7 +76,8 @@ Route::group([
 
 ], function ($router){
 
-    
+    Route::put('modificar_email/{id}', [PacienteController::class, 'update_email']);
+    Route::put('modificar_telefono/{id}', [PacienteController::class, 'update_phone']);
   
 
 });
@@ -93,6 +94,7 @@ Route::group([
     Route::post('profile', [UserController::class, 'me']);
     Route::put('modificar_clave/{id}', [UserController::class, 'update_password']);
     Route::put('modificar_usuario/{id}', [AdminController::class, 'update_user']);
+   
 
 });
 

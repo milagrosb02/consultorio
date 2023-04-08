@@ -52,11 +52,11 @@ class PacienteController extends Controller
 
     
     
-    public function editar_email(Request $request, $id)
+    public function update_email(Request $request, $id)
     {
         $this->validate($request, [
 
-            'email' => 'string|email|unique:users|min:10'
+            'email' => 'string|email|unique:users|min:6'
 
         ]);
 
