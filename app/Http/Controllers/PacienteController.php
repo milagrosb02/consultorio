@@ -77,6 +77,32 @@ class PacienteController extends Controller
 
     }
 
+
+    public function update_phone(Request $request, $id)
+    {
+        $this->validate($request, [
+
+            'phone' => 'required|numeric'
+
+        ]);
+
+            $modificar_telefono = [
+
+                'phone' => $request->phone
+            ];
+
+             Paciente::whereId($id)->update($modificar_telefono);
+
+
+             return response()->json([
+
+                 'message' => '¡Telefono modificado!',
+                 'phone' => $modificar_telefono
+    
+             ], 201);
+
+    }
+
    
     
 }

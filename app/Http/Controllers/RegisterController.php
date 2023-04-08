@@ -62,7 +62,7 @@ class RegisterController extends Controller
 
             'password_confirmation' => 'required|same:password|min:5',
 
-            'phone' => 'required',
+            'phone' => 'required|numeric|unique:users',
 
             'obra_social_id' => 'required'
 
