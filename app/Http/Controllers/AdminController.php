@@ -61,31 +61,45 @@ class AdminController extends Controller
 
     public function buscar_paciente_por_nombre($first_name)
     {
-        $users = User::where('first_name', 'LIKE', '%'.$first_name.'%')
-        ->where('first_name', 'LIKE', '%'.$first_name.'%')
-        ->get(); 
 
-        return response()->json($users);
+        $pacientes = DB::table('users')
+                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+                    ->join('obra_sociales', 'obra_sociales.id' , '=', 'pacientes.obra_social_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido', 'email', 'phone AS telefono', 'obra_social')
+                    ->where('first_name', 'LIKE', '%'.$first_name.'%')
+                    ->get();
+
+
+        return response()->json($pacientes);
     }
 
+   
 
     public function buscar_paciente_por_apellido($last_name)
     {
-        $users = User::where('last_name', 'LIKE', '%'.$last_name.'%')
-        ->where('last_name', 'LIKE', '%'.$last_name.'%')
-        ->get(); 
+        $pacientes = DB::table('users')
+                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+                    ->join('obra_sociales', 'obra_sociales.id' , '=', 'pacientes.obra_social_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido', 'email', 'phone AS telefono', 'obra_social')
+                    ->where('last_name', 'LIKE', '%'.$last_name.'%')
+                    ->get(); 
 
-        return response()->json($users);
+        return response()->json($pacientes);
     }
+
 
 
     public function buscar_paciente($first_name, $last_name)
     {
-        $users = User::where('first_name', 'LIKE', '%'.$first_name.'%')
-                 ->where('last_name', 'LIKE', '%'.$last_name.'%')
-                 ->get();
+        $pacientes = DB::table('users')
+                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+                    ->join('obra_sociales', 'obra_sociales.id' , '=', 'pacientes.obra_social_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido', 'email', 'phone AS telefono', 'obra_social')
+                    ->where('first_name', 'LIKE', '%'.$first_name)
+                    ->where('last_name', 'LIKE', '%'.$last_name)
+                    ->get(); 
 
-    return response()->json($users);
+        return response()->json($pacientes);
     }
 
     
