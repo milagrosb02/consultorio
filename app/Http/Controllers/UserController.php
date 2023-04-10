@@ -33,7 +33,7 @@ class UserController extends Controller
 
 
     
-    public function update_password(Request $request, $id)
+    public function editar_clave(Request $request, $id)
     {
         $this->validate($request, [
 

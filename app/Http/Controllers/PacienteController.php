@@ -52,7 +52,7 @@ class PacienteController extends Controller
 
     
     
-    public function update_email(Request $request, $id)
+    public function editar_email(Request $request, $id)
     {
         $this->validate($request, [
 
@@ -78,7 +78,7 @@ class PacienteController extends Controller
     }
 
 
-    public function update_phone(Request $request, $id)
+    public function editar_telefono(Request $request, $id)
     {
         $this->validate($request, [
 

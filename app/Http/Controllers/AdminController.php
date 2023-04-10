@@ -31,31 +31,30 @@ class AdminController extends Controller
     
 
 
-    public function update_user(Request $request, $id)
+    public function editar_usuario(Request $request, $id)
     {
        
-        $this->validate($request, [
+            $this->validate($request, [
 
-            'user' => 'min:3'
+                'user' => 'min:3'
 
-        ]);
+            ]);
 
             $modificar_usu = [
-
                 'user' => $request->user
             ];
 
-             User::whereId($id)->update($modificar_usu);
+            $user = User::where('id', $id)->firstOrFail();
 
+            $user->update($modificar_usu);
 
-             return response()->json([
+            return response()->json([
 
-                 'message' => '¡Usuario modificado!',
-                 'user' => $modificar_usu
-    
-             ], 201);
+                'message' => '¡Usuario modificado!',
+                'user' => $user
 
-        
+            ], 201);
+            
     }
 
 

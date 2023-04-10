@@ -64,6 +64,8 @@ Route::group([
      Route::get('usuarios/apellido/{last_name}', [AdminController::class, 'buscar_paciente_por_apellido']);
      Route::get('usuarios/busqueda/{first_name}/{last_name}', [AdminController::class, 'buscar_paciente']);
 
+     Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
+
 });
 
 
@@ -76,8 +78,8 @@ Route::group([
 
 ], function ($router){
 
-    Route::put('modificar_email/{id}', [PacienteController::class, 'update_email']);
-    Route::put('modificar_telefono/{id}', [PacienteController::class, 'update_phone']);
+    Route::put('email/{id}', [PacienteController::class, 'editar_email']);
+    Route::put('telefono/{id}', [PacienteController::class, 'editar_telefono']);
   
 
 });
@@ -92,8 +94,8 @@ Route::group([
 
 
     Route::post('profile', [UserController::class, 'me']);
-    Route::put('modificar_clave/{id}', [UserController::class, 'update_password']);
-    Route::put('modificar_usuario/{id}', [AdminController::class, 'update_user']);
+    Route::put('clave/{id}', [UserController::class, 'editar_clave']);
+    
    
 
 });
