@@ -22,7 +22,7 @@ class PacienteController extends Controller
 
             //'user_id' => 'required',
 
-            'phone' => 'required|integer',
+            'phone' => 'required|numeric',
 
             'obra_social_id' => 'required'
 
