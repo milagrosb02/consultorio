@@ -67,4 +67,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Paciente::class, 'user_id');
     }
 
+
+    // relacion con especialidades
+    public function especialidades()
+    {
+        return $this->belongsToMany(Especialidad::class, 'profesional_especialidades', 'user_id', 'especialidad_id');
+    }
+
 }

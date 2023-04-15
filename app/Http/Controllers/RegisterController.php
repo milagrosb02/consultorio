@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PacienteController;
+use App\Http\Requests\PacienteRequest;
 use App\Models\ObraSociale;
 use App\Models\Paciente;
 use App\Models\User;
@@ -44,36 +45,74 @@ class RegisterController extends Controller
     }
 
 
+
+
     public function register(Request $request)
     {
+
+
+        // Creo las reglas
+        $rules = [
+
+                    'first_name' => ['required', 'max:25'],
+
+                    'last_name' => ['required', 'max:25'],
+
+                    'email' => ['required', 'unique:users', 'email', 'min:10'],
+
+                    'password' => ['required', 'min:5', 'confirmed'],
+
+                    'password_confirmation' => ['required', 'same:password', 'min:5'],
+
+                    'phone' => ['required', 'max: 20'],
+
+                    'obra_social_id' => ['required']
+                ];
+
+
+        
+        // Creo los mensajes
+        $messages = [
+
+            'first_name.required' => 'El nombre es obligatorio. ',
+
+            'first_name.max' => 'Nombre demasiado largo. ',
+
+            'last_name.required' => 'El apellido es obligatorio. ',
+
+            'last_name.max' => 'Apellido demasiado largo. ',
+
+            'email.required' => 'El email es obligatorio. ',
+
+            'email.unique' => 'Este email ya está en uso. Ingresa otro. ',
+
+            'email.email' => 'El email debe ser válido. Ingresa otro. ',
+
+            'password.required' => 'La contraseña es obligatoria. ',
+
+            'password.min' => 'La contraseña es muy corta. ',
+
+            'password_confirmation.same' => 'Las contraseñas no coinciden. ',
+
+            'phone.required' => 'El teléfono es obligatorio. ',
+
+            'phone.max' => 'El teléfono no es válido. ',
+
+            'obra_social_id.required' => 'La obra social es obligatoria. '
+
+        ];
+
+
         // creo una validacion de datos
         // con $request->all() tomo todos los datos que ingreso
-        $validateUser = Validator::make($request->all(), [
-
-            'first_name' => 'required|string|max:25',
-
-            'last_name' => 'required|string|max:25',
-
-            'user' => 'string|min:5',
-
-            'email' => 'required|string|email|unique:users|min:10',
-
-            'password' => 'required|string|min:5|confirmed',
-
-            'password_confirmation' => 'required|same:password|min:5',
-
-            'phone' => 'required|numeric|unique:pacientes',
-
-            'obra_social_id' => 'required'
-
-        ]);
+        $validateUser = Validator::make($request->all(), $rules, $messages);
 
 
         // si la solicitud no es valida
-        if ($validateUser->fails()) {
+        // if ($validateUser->fails()) {
 
-            return response()->json($validateUser->errors()->toJson(), 400);
-        }
+        //     return response()->json($validateUser->errors()->toJson(), 400);
+        // }
 
         
         // si la solicitud es valida, creo el nuevo usuario
@@ -99,7 +138,7 @@ class RegisterController extends Controller
         
 
         return response()->json([
-            'message' => '¡Usuario creado!',
+            'message' => '¡Paciente creado!',
             'user' => $user
         ], 201);
     }
