@@ -6,55 +6,84 @@ use App\Models\ObraSociale;
 use Illuminate\Http\Request;
 use App\Http\Resources\ObraSocialResource;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\Rules\Uppercase;
 
 class ObraSocialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         return ObraSocialResource::collection(ObraSociale::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+   
     public function store(Request $request)
     {
+
+        $rules = [
+
+            'obra_social' => ['required', 'string', 'min:3','unique:obra_sociales', new Uppercase]
+
+        ];
+
+        $messages = 
+        [
+
+            'obra_social.required' => 'La obra social es obligatoria. ',
+
+            'obra_social.string' => 'La obra social no es válida. Ingresa nuevamente. ',
+
+            'obra_social.min' => 'La obra social no es válida. Ingresa nuevamente. ',
+
+            'obra_social.unique' => 'Esta obra social ya está registrada. Ingresa otra. '
+
+        ];
+
+
+        $obra_socialValidate = Validator::make($request->only('obra_social'), $rules, $messages);
+
+        $obra_Social = ObraSociale::create(array_merge($obra_socialValidate->validate()));
+
+        return response()->json([
+
+                'message' => '¡Obra Social creada!',
+                'obra_social' => $obra_Social
+    
+             ], 201);
+
+
+
+        // $validarObraSocial = $request->validate
+        // ([
+
+        //     'obra_social' => ['required', 'string','min:3', 'unique:obra_sociales',
+
+        //         Rule::unique('obra_sociales')->where(function ($query) 
+                
+        //         {
+        //             return $query->where('obra_social', strtoupper(request()->input('obra_social')));
+        //         }),
+
+
+        //         'uppercase', // esta es la regla de validación que se encarga de validar que el campo esté en mayúsculas
+        //     ],
+        // ]);
+
         
+        //  $obra_social = ObraSociale::create( $messages, $validarObraSocial, ['obra_social']);
 
-        $validateObraSocial = Validator::make($request->all(), [
+        //  return response()->json([
 
-            'obra_social' => 'required|min:3'
-        ]);
+        //     'message' => '¡Obra Social creada!',
+        //     'obra_social' => $obra_social
 
-        // si la solicitud no es valida
-        if($validateObraSocial->fails()){
-
-            return response()->json($validateObraSocial->errors()->toJson(), 400);
-
-        }
-
-        return new ObraSocialResource(ObraSociale::create($request->all()));
+        // ], 201);
+       
         
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     //
-    // }
 
     
 
@@ -75,7 +104,7 @@ class ObraSocialController extends Controller
 
         return response()->json([
 
-         'message' => '¡ Cobertura medica borrada!'
+         'message' => '¡Cobertura medica borrada!'
         
         ], 201);
     }
