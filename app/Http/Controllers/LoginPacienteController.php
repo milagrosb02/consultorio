@@ -31,11 +31,17 @@ class LoginPacienteController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        $verifyPass = $request->only('password');
+
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        if(! $token = auth() ->attempt($verifyPass)){
+            return response()->json(['error' => 'La contraseña es incorrecta. '], 401);
+        }
+
+        return response()->json(['error' => 'No se pudo iniciar la sesión. '], 401);
     }
 
 
