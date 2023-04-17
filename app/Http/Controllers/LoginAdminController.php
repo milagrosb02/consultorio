@@ -31,9 +31,16 @@ class LoginAdminController extends Controller
     {
         $credentials = $request->only('user', 'password');
 
+        $verifyPass = $request->only('password');
+
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
+
+        if(! $token = auth() ->attempt($verifyPass)){
+            return response()->json(['error' => 'La contraseña es incorrecta. '], 401);
+        }
+
 
         return response()->json(['error' => 'Unauthorized'], 401);
     }

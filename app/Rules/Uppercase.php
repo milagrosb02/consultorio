@@ -26,7 +26,7 @@ class Uppercase implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        return strtoupper($value) === $value;
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
@@ -53,6 +53,6 @@ class Uppercase implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'El campo debe estar en MAYÚSCULAS.';
     }
 }

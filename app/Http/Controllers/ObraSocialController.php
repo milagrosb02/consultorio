@@ -6,7 +6,6 @@ use App\Models\ObraSociale;
 use Illuminate\Http\Request;
 use App\Http\Resources\ObraSocialResource;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use App\Rules\Uppercase;
 
 class ObraSocialController extends Controller
@@ -53,34 +52,6 @@ class ObraSocialController extends Controller
                 'obra_social' => $obra_Social
     
              ], 201);
-
-
-
-        // $validarObraSocial = $request->validate
-        // ([
-
-        //     'obra_social' => ['required', 'string','min:3', 'unique:obra_sociales',
-
-        //         Rule::unique('obra_sociales')->where(function ($query) 
-                
-        //         {
-        //             return $query->where('obra_social', strtoupper(request()->input('obra_social')));
-        //         }),
-
-
-        //         'uppercase', // esta es la regla de validación que se encarga de validar que el campo esté en mayúsculas
-        //     ],
-        // ]);
-
-        
-        //  $obra_social = ObraSociale::create( $messages, $validarObraSocial, ['obra_social']);
-
-        //  return response()->json([
-
-        //     'message' => '¡Obra Social creada!',
-        //     'obra_social' => $obra_social
-
-        // ], 201);
        
         
     }
