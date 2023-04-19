@@ -11,6 +11,7 @@ use App\Models\ObraSociale;
 use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
 
 
 class RegisterController extends Controller
@@ -107,6 +108,8 @@ class RegisterController extends Controller
         // con $request->all() tomo todos los datos que ingreso
         $validateUser = Validator::make($request->all(), $rules, $messages);
 
+        
+
 
         // si la solicitud no es valida
         // if ($validateUser->fails()) {
@@ -126,6 +129,8 @@ class RegisterController extends Controller
             ['password' => bcrypt($request->password)]
         ))->assignRole('paciente');
 
+        
+
         Paciente::create([
             'user_id' => $user->id,
             'phone' => $request->input('phone'),
@@ -135,6 +140,9 @@ class RegisterController extends Controller
       
     
         $user->load('paciente');
+
+        event(new Registered($user));
+        
         
 
         return response()->json([

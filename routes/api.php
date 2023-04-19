@@ -11,12 +11,21 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PacienteController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+
 
 
 Route::group([
@@ -110,7 +119,7 @@ Route::group([
 ], function ($router){
 
 
-    Route::get('lista', [TurnoController::class, 'pacientes_index']);
+   // Route::get('lista', [TurnoController::class, 'pacientes_index']);
    
 
 });
