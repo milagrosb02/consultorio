@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProfesionalEspecialidade;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfesionalSeeder::class);
 
         $this->call(EspecialidadSeeder::class);
+
+        $this->call(ProfesionalEspecialidadSeeder::class);
     }
 }

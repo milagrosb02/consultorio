@@ -16,21 +16,16 @@ class ProfesionalEspecialidadSeeder extends Seeder
      */
     public function run()
     {
-
-        //Llamo a los seeders con los que voy a trabajar
-      //  $this->call([EspecialidadSeeder::class, ProfesionalSeeder::class]);
-
-        $profesionales = User::whereHas("roles", function($q)
-                            {$q->where("name", "profesional");})->get();
+        // ESPECIALIDADES QUE PERTENECEN A LA PROFESIONAL NUMERO 1
+        $profesional1 = User::findOrFail(2);
+        $especialidades1 = Especialidad::find([1,2]);
+        $profesional1->especialidades()->attach($especialidades1);
 
 
-        foreach ($profesionales as $profesional) 
-        {
-            $especialidades = Especialidad::class;
-
-            $profesional->especialidades()->attach($especialidades, []);
-
-        }
-
+        // ESPECIALIDADES QUE PERTENECEN A LA PROFESIONAL NUMERO 2
+        $profesional2 = User::findOrFail(3);
+        $especialidades2 = Especialidad::find([1,3]);
+        $profesional2->especialidades()->attach($especialidades2);
+       
     }
 }

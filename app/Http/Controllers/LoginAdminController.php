@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class LoginAdminController extends Controller
 {
@@ -31,10 +33,20 @@ class LoginAdminController extends Controller
     {
         $credentials = $request->only('user', 'password');
 
-        $verifyPass = $request->only('password');
 
-        $verifyUser = $request->only('user');
+        $request->validate([
+            'user' => 'required',
+            'password' => 'required',
+        ]);
 
+       $user = User::where('user', $request->user)->first();
+
+       if (!$user || !Hash::check($request->password, $user->password)) 
+        {
+            throw ValidationException::withMessages([
+                'user' => ['Las credenciales son incorrectas.'],
+            ]);
+        }
 
 
         if ($token = $this->guard()->attempt($credentials)) {
@@ -42,16 +54,7 @@ class LoginAdminController extends Controller
         }
         
 
-        // Validacion de clave incorrecta
-        if(! $token = auth() ->attempt($verifyPass)){
-            return response()->json(['error' => 'La contraseña es incorrecta. '], 401);
-        }
-
-
-        // Validacion de usuario incorrecto
-        if(! $token = auth() ->attempt($verifyUser)){
-            return response()->json(['error' => 'El usuario es incorrecto. '], 401);
-        }
+       
 
 
         return response()->json(['error' => 'Unauthorized'], 401);
