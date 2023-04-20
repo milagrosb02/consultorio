@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class LoginPacienteController extends Controller
 {
@@ -31,15 +33,30 @@ class LoginPacienteController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        $verifyPass = $request->only('password');
 
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+       $user = User::where('email', $request->email)->first();
+
+       if (!$user || !Hash::check($request->password, $user->password)) 
+        {
+            throw ValidationException::withMessages([
+                'email' => ['Las credenciales son incorrectas.'],
+            ]);
+        }
+
+
+
+
+       
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
 
-        if(! $token = auth() ->attempt($verifyPass)){
-            return response()->json(['error' => 'La contraseña es incorrecta. '], 401);
-        }
+        
 
         return response()->json(['error' => 'No se pudo iniciar la sesión. '], 401);
     }
