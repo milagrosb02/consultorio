@@ -27,8 +27,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function me()
+    // hacer un if o un controlador diferente
     {
-        return response()->json($this->guard()->user());
+        return response()->json($this->guard()->user()->load('paciente'));
     }
 
 
