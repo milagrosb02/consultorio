@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EspecialidadSeeder::class);
 
         $this->call(ProfesionalEspecialidadSeeder::class);
+
+        $this->call(PiezaSeeder::class);
     }
 }
