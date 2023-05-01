@@ -16,24 +16,23 @@ class CreateTurnosTable extends Migration
         Schema::create('turnos', function (Blueprint $table) {
             $table->id();
             
-             // hago relacion con pacientes
-             $table->unsignedBigInteger('paciente_id');
-             $table->foreign('paciente_id')->references('id')->on('pacientes');
+            // hago relacion con la doctora
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users'); 
+
+            // hago relacion con especialidades
+            $table->unsignedBigInteger('especialidad_id')->nullable()->constrained();
+            $table->foreign('especialidad_id')->references('id')->on('especialidades'); 
+
+            $table->string('motivo_consulta')->nullable();
 
              $table->date('fecha');
 
              $table->time('hora');
 
-             $table->string('motivo_consulta')->nullable();
-
-             // hago relacion con especialidades
-             $table->unsignedBigInteger('especialidad_id')->nullable()->constrained();
-             $table->foreign('especialidad_id')->references('id')->on('especialidades'); 
-
-
-             // hago relacion con la doctora
-             $table->unsignedBigInteger('user_id');
-             $table->foreign('user_id')->references('id')->on('users'); 
+            // hago relacion con pacientes
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
 
 
              // hago uso de soft delete

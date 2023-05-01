@@ -77,4 +77,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->belongsToMany(Especialidad::class, 'profesional_especialidades', 'user_id', 'especialidad_id');
     }
 
+    // relacion con turno
+    public function turno()
+    {
+        return $this->hasOne(Turno::class, 'user_id');
+    }
+
 }

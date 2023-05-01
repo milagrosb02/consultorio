@@ -20,4 +20,9 @@ class Especialidad extends Model
     }
 
 
+    public function turno()
+    {
+        return $this->hasOne(Turno::class);
+    }
+
 }

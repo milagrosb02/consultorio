@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AnomaliaColor;
 use App\Models\ProfesionalEspecialidade;
 use Illuminate\Database\Seeder;
 
@@ -25,5 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfesionalEspecialidadSeeder::class);
 
         $this->call(PiezaSeeder::class);
+
+        //$this->call(AnomaliaColorSeeder::class);
+       
     }
 }

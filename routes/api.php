@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\TurnoController;
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -73,6 +74,7 @@ Route::group([
      Route::get('usuarios/apellido/{last_name}', [AdminController::class, 'buscar_paciente_por_apellido']);
      Route::get('usuarios/busqueda/{first_name}/{last_name}', [AdminController::class, 'buscar_paciente']);
 
+
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
 });
@@ -89,7 +91,7 @@ Route::group([
 
     Route::put('email/{id}', [PacienteController::class, 'editar_email']);
     Route::put('telefono/{id}', [PacienteController::class, 'editar_telefono']);
-  
+    Route::post('turnos/create', [TurnoController::class, 'store']);
 
 });
 
