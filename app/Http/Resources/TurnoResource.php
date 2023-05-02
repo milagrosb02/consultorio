@@ -14,6 +14,22 @@ class TurnoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'id' => $this->id,
+
+            'paciente' => $this->paciente->user->first_name .' '. $this->paciente->user->last_name, 
+
+            'profesional' => $this->user->first_name .' '. $this->user->last_name,
+
+            'motivo_consulta' => $this->motivo_consulta ?? 'No se selecciono un motivo de consulta. ',
+
+            'especialidad' => $this->especialidad ?? 'No se selecciono una especialidad. ',
+
+            'fecha' => $this->fecha,
+
+            'hora' => $this->hora
+
+        ];
     }
 }

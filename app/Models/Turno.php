@@ -22,6 +22,14 @@ class Turno extends Model
     }
 
 
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class, 'paciente_id');
+    }
+
+
+
+
     // relacion con especialidad
     public function especialidad()
     {

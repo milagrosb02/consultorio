@@ -14,6 +14,22 @@ class TurnoCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'data' => $this->collection,
+
+            'paciente_id' => $this->paciente_id, 
+
+            'user_id' => $this->user_id,
+
+            'motivo_consulta' => $this->motivo_consulta,
+
+            'especialidad_id' => $this->especialidad_id,
+
+            'fecha' => $this->fecha,
+
+            'hora' => $this->hora
+
+        ];
     }
 }

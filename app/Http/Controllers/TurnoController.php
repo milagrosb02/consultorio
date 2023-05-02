@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Turno;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Resources\TurnoResource;
 
 class TurnoController extends Controller
 {
@@ -16,7 +16,9 @@ class TurnoController extends Controller
      */
     public function index()
     {
-        //
+        //return TurnoResource::collection(Turno::all());
+
+        return TurnoResource::collection(Turno::with('user', 'especialidad')->get());
     }
 
     /**
@@ -98,7 +100,33 @@ class TurnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $modificar_turno = 
+        [
+
+            'user_id' => $request->user_id, // profesional id
+
+            'especialidad_id' => $request->especialidad_id,
+
+            'motivo_consulta' => $request->motivo_consulta,
+
+            'fecha' => $request->fecha,
+
+            'hora' => $request->hora
+
+        ];
+
+        $turno = Turno::where('id', $id)->firstOrFail();
+
+
+        $turno->update($modificar_turno);
+
+            return response()->json([
+
+                'message' => '¡Turno modificado!',
+                'turno' => $turno
+
+            ], 201);
+            
     }
 
     /**

@@ -77,6 +77,8 @@ Route::group([
 
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
+     Route::get('turnos/list', [TurnoController::class, 'index']);
+
 });
 
 
@@ -90,8 +92,12 @@ Route::group([
 ], function ($router){
 
     Route::put('email/{id}', [PacienteController::class, 'editar_email']);
+
     Route::put('telefono/{id}', [PacienteController::class, 'editar_telefono']);
+
     Route::post('turnos/create', [TurnoController::class, 'store']);
+
+    Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
 
 });
 
