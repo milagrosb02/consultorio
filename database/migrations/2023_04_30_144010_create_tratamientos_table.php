@@ -15,7 +15,7 @@ class CreateTratamientosTable extends Migration
     {
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->id();
-            $table->string('tratamiento');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

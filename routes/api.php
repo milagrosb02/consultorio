@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\TurnoController;
+use App\Http\Controllers\TratamientoController;
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -78,6 +79,11 @@ Route::group([
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
      Route::get('turnos/list', [TurnoController::class, 'index']);
+
+    Route::post('tratamientos/create', [TratamientoController::class, 'store']);
+    Route::get('tratamientos/list', [TratamientoController::class, 'index']);
+    Route::put('tratamientos/update', [TratamientoController::class, 'update']);
+
 
 });
 
