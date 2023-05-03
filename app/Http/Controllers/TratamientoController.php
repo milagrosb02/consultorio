@@ -86,7 +86,32 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'nombre' => 'string|max:70'
+
+        ]);
+
+
+        $modificar_tratamiento = 
+        [
+
+            'nombre' => $request->nombre
+
+        ];
+
+
+        $tratamiento = Tratamiento::where('id', $id)->firstOrFail();
+
+        $tratamiento->update($modificar_tratamiento);
+
+        return response()->json([
+
+            'message' => '¡Tratamiento modificado!',
+            'tratamiento' => $tratamiento
+
+        ], 201);
+        
     }
 
    
