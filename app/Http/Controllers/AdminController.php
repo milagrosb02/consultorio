@@ -101,5 +101,18 @@ class AdminController extends Controller
         return response()->json($pacientes);
     }
 
+
+    public function buscar_paciente_por_obra_social($obra_social)
+    {
+        $pacientes = DB::table('pacientes')
+                    ->join('obra_sociales', 'pacientes.obra_social_id' , '=' , 'obra_sociales.id')
+                    ->join('users', 'users.id' , '=' , 'pacientes.user_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido')
+                    ->where('obra_social', 'LIKE', '%'.$obra_social.'%')
+                    ->get();
+
+        return response()->json($pacientes);
+    }
+
     
 }

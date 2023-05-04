@@ -74,7 +74,7 @@ Route::group([
      Route::get('usuarios/nombre/{first_name}', [AdminController::class, 'buscar_paciente_por_nombre']);
      Route::get('usuarios/apellido/{last_name}', [AdminController::class, 'buscar_paciente_por_apellido']);
      Route::get('usuarios/busqueda/{first_name}/{last_name}', [AdminController::class, 'buscar_paciente']);
-
+     Route::get('usuarios/obras_sociales/{obra_social}', [AdminController::class, 'buscar_paciente_por_obra_social']);
 
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
