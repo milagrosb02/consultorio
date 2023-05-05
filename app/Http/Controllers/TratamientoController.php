@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\TratamientoResource;
 use App\Models\Tratamiento;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class TratamientoController extends Controller
 {
@@ -112,6 +113,19 @@ class TratamientoController extends Controller
 
         ], 201);
         
+    }
+
+
+
+    public function buscar_tratamiento($tratamiento)
+    {
+        $tratamientos = DB::table('tratamientos')
+                    ->select('nombre AS tratamiento')
+                    ->where('nombre', 'LIKE', '%'.$tratamiento.'%')
+                    ->get();
+
+        return response()->json($tratamientos);
+
     }
 
    
