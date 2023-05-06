@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ObraSocialResource;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Uppercase;
+use Illuminate\Support\Facades\DB;
 
 class ObraSocialController extends Controller
 {
@@ -79,4 +80,17 @@ class ObraSocialController extends Controller
         
         ], 201);
     }
+
+
+
+    public function buscar_obra_social($obra_social)
+    {
+        $obras_sociales = DB::table('obra_sociales')
+                    ->select('obra_social AS obra social')
+                    ->where('obra_social', 'LIKE', '%'.$obra_social.'%')
+                    ->get();
+
+        return response()->json($obras_sociales);
+    }
+
 }

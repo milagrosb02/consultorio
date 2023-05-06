@@ -63,7 +63,7 @@ Route::group([
     Route::get('obras_sociales', [ObraSocialController::class, 'index']);
     Route::post('obras_sociales', [ObraSocialController::class, 'store']);
     Route::delete('obras_sociales/{id}', [ObraSocialController::class, 'destroy']);
-
+    Route::get('usuarios/obra_social/search/{obra_social}', [ObraSocialController::class, 'buscar_obra_social']);
     
     //Route::resource('pacientes', 'AdminController')->only('index');
 
@@ -75,6 +75,8 @@ Route::group([
      Route::get('usuarios/apellido/{last_name}', [AdminController::class, 'buscar_paciente_por_apellido']);
      Route::get('usuarios/busqueda/{first_name}/{last_name}', [AdminController::class, 'buscar_paciente']);
      Route::get('usuarios/obras_sociales/{obra_social}', [AdminController::class, 'buscar_paciente_por_obra_social']);
+        
+
 
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
