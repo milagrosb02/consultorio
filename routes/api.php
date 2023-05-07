@@ -14,6 +14,7 @@ use App\Http\Controllers\PacienteController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\TurnoController;
 use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\ProfesionalController;
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -81,6 +82,9 @@ Route::group([
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
      Route::get('turnos/list', [TurnoController::class, 'index']);
+     Route::get('pacientes/filtrar-turnos-mes/{mes}' , [TurnoController::class, 'filtrar_turno_por_mes']);
+     Route::get('pacientes/filtrar-turnos-dia/{fecha}' , [TurnoController::class, 'filtrar_turno_por_dia']);
+
 
     Route::post('tratamientos/create', [TratamientoController::class, 'store']);
     Route::get('tratamientos/list', [TratamientoController::class, 'index']);
@@ -135,7 +139,8 @@ Route::group([
 ], function ($router){
 
 
-   // Route::get('lista', [TurnoController::class, 'pacientes_index']);
+    Route::get('pacientes/turnos/Galmarini', [ProfesionalController::class, 'ver_pacientesGalmarini']);
+    Route::get('pacientes/turnos/Padros', [ProfesionalController::class, 'ver_pacientesPadros']);
    
 
 });

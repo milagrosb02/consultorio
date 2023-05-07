@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Turno;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\TurnoResource;
+use Illuminate\Support\Facades\DB;
 
 class TurnoController extends Controller
 {
@@ -139,4 +140,40 @@ class TurnoController extends Controller
     {
         //
     }
+
+
+    public function filtrar_turno_por_mes($mes)
+    {
+        $pacientes = DB::table('users')
+                    ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')
+                    ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido')
+                    ->whereMonth('fecha', $mes)
+                    ->get();
+
+        return response()->json($pacientes);
+    }
+
+
+    // esta funcion me puede llegar de servir para el legajo
+    public function filtrar_turno_por_dia($fecha)
+    {
+        $pacientes = DB::table('users')
+        ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')
+        ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
+        ->select('first_name AS nombre', 'last_name AS apellido')
+        ->whereDate('fecha', $fecha)
+        ->get();
+
+        return response()->json($pacientes);
+    }
+
+
+
+    public function ver_turno_admin($profesional)
+    {
+        
+    }
+
+
 }
