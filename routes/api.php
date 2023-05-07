@@ -84,6 +84,7 @@ Route::group([
      Route::get('turnos/list', [TurnoController::class, 'index']);
      Route::get('pacientes/filtrar-turnos-mes/{mes}' , [TurnoController::class, 'filtrar_turno_por_mes']);
      Route::get('pacientes/filtrar-turnos-dia/{fecha}' , [TurnoController::class, 'filtrar_turno_por_dia']);
+     Route::get('turnos/pacientes/profesional/{profesional_id}', [TurnoController::class, 'ver_turno_admin']);
 
 
     Route::post('tratamientos/create', [TratamientoController::class, 'store']);

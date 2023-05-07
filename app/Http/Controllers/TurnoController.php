@@ -170,9 +170,16 @@ class TurnoController extends Controller
 
 
 
-    public function ver_turno_admin($profesional)
+    public function ver_turno_admin($profesional_id)
     {
-        
+        $turnos = DB::table('users')
+                    ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')
+                    ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido')
+                    ->where('turnos.user_id', 'LIKE', '%'.$profesional_id.'%')
+                    ->get();
+
+        return response()->json($turnos);
     }
 
 
