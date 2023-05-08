@@ -130,15 +130,21 @@ class TurnoController extends Controller
             
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+   
+    public function cancelar_turno($id)
     {
-        //
+        $turno = Turno::find($id);
+
+        $turno->delete();
+
+        return response()->json([
+
+            'message' => '¡El turno se ha cancelado correctamente!',
+            'turno' => $turno
+
+        ], 201);
+        
+
     }
 
 

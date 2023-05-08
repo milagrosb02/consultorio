@@ -112,6 +112,8 @@ Route::group([
 
     Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
 
+    Route::get('turnos/cancelar/{id}', [TurnoController::class, 'cancelar_turno']);
+
 });
 
 
