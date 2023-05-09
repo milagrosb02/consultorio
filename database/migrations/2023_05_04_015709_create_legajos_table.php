@@ -15,6 +15,19 @@ class CreateLegajosTable extends Migration
     {
         Schema::create('legajos', function (Blueprint $table) {
             $table->id();
+
+            // hago relacion con pacientes
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
+
+            $table->string('descripcion');
+
+            // hago relacion con tratamiento
+            $table->unsignedBigInteger('tratamiento_id');
+            $table->foreign('tratamiento_id')->references('id')->on('tratamientos');
+
+            $table->date('fecha');
+
             $table->timestamps();
         });
     }

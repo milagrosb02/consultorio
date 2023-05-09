@@ -87,9 +87,10 @@ class TurnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_turno)
     {
-        //
+        //El paciente puede ver su propio turno 
+        // a traves del turno puedo sacar el paciente
     }
 
     /**
