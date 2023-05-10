@@ -22,7 +22,7 @@ class LegajoResource extends JsonResource
 
             'observacion' => $this->descripcion,
 
-            'tratamiento' => $this->tratamientos ?? 'No se realizo un tratamiento. ',
+            'tratamiento' => $this->tratamiento ?? 'No se realizo un tratamiento. ',
 
             'fecha' => $this->fecha
 

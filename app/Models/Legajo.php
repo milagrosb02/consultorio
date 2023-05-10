@@ -14,7 +14,7 @@ class Legajo extends Model
 
     public function tratamientos()
     {
-        return $this->hasMany(Tratamiento::class);
+        return $this->hasMany(Tratamiento::class, 'id');
     }
 
     public function paciente()

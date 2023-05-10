@@ -12,7 +12,7 @@ class LegajoController extends Controller
     
     public function index()
     {
-        return LegajoResource::collection(Legajo::with('paciente', 'tratamiento')->get());
+        return LegajoResource::collection(Legajo::with('paciente', 'tratamientos')->get());
     }
     
 
