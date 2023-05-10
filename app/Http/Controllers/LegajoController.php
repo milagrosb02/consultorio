@@ -74,7 +74,29 @@ class LegajoController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $modificar_legajo = 
+        [
+
+            'descripcion' => $request->descripcion,
+
+            'tratamiento_id' => $request->tratamiento_id,
+
+            'fecha' => $request->fecha
+
+        ];
+
+
+        $legajo = Legajo::where('id', $id)->firstOrFail();
+
+        $legajo->update($modificar_legajo);
+
+        return response()->json([
+
+            'message' => '¡Historial Clinico modificado!',
+            'legajo' => $legajo
+
+        ], 201);
+        
     }
 
     

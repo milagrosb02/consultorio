@@ -96,6 +96,8 @@ Route::group([
 
     Route::post('legajo/create', [LegajoController::class, 'store']);
     Route::get('legajo/list', [LegajoController::class, 'index']);
+    Route::put('legajo/update/{id}', [LegajoController::class, 'update']);
+
 
 });
 
@@ -149,6 +151,6 @@ Route::group([
 
     Route::get('pacientes/turnos/Galmarini', [ProfesionalController::class, 'ver_pacientesGalmarini']);
     Route::get('pacientes/turnos/Padros', [ProfesionalController::class, 'ver_pacientesPadros']);
-   
+    Route::get('legajo/list', [LegajoController::class, 'index']);
 
 });
