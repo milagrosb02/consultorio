@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class TurnoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         //return TurnoResource::collection(Turno::all());
@@ -22,12 +18,7 @@ class TurnoController extends Controller
         return TurnoResource::collection(Turno::with('user', 'especialidad')->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //reglas
@@ -81,25 +72,25 @@ class TurnoController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id_turno)
+   
+
+    public function show($id)
     {
         //El paciente puede ver su propio turno 
         // a traves del turno puedo sacar el paciente
+        $turno = Turno::findOrFail($id);
+
+        return response()->json([
+
+            'message' => '¡Aqui esta tu turno!',
+            'turno' => $turno
+
+        ], 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
+
+
     public function update(Request $request, $id)
     {
         $modificar_turno = 

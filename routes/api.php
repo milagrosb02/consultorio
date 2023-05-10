@@ -117,6 +117,8 @@ Route::group([
 
     Route::post('turnos/create', [TurnoController::class, 'store']);
 
+    Route::get('turnos/show/{id}', [TurnoController::class, 'show']);
+
     Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
 
     Route::get('turnos/cancelar/{id}', [TurnoController::class, 'cancelar_turno']);
