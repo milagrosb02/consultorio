@@ -14,6 +14,17 @@ class LegajoCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'data' => $this->collection,
+
+            'paciente_id' => $this->paciente_id, 
+
+            'descripcion' => $this->descripcion,
+
+            'tratamiento_id' => $this->tratamiento_id,
+
+            'fecha' => $this->fecha
+        ];
     }
 }

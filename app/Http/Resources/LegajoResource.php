@@ -14,6 +14,19 @@ class LegajoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'id' => $this->id,
+
+            'paciente' => $this->paciente->user->first_name .' '. $this->paciente->user->last_name, 
+
+            'observacion' => $this->descripcion,
+
+            'tratamiento' => $this->tratamientos ?? 'No se realizo un tratamiento. ',
+
+            'fecha' => $this->fecha
+
+
+        ];
     }
 }

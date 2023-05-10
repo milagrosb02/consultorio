@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\TurnoController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\ProfesionalController;
+use App\Http\Controllers\LegajoController;
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -91,6 +92,10 @@ Route::group([
     Route::get('tratamientos/list', [TratamientoController::class, 'index']);
     Route::put('tratamientos/update/{id}', [TratamientoController::class, 'update']);
     Route::get('tratamientos/search/{tratamiento}', [TratamientoController::class, 'buscar_tratamiento']);
+
+
+    Route::post('legajo/create', [LegajoController::class, 'store']);
+    Route::get('legajo/list', [LegajoController::class, 'index']);
 
 });
 

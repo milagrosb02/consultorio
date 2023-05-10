@@ -23,7 +23,7 @@ class CreateLegajosTable extends Migration
             $table->string('descripcion');
 
             // hago relacion con tratamiento
-            $table->unsignedBigInteger('tratamiento_id');
+            $table->unsignedBigInteger('tratamiento_id')->nullable()->constrained();
             $table->foreign('tratamiento_id')->references('id')->on('tratamientos');
 
             $table->date('fecha');

@@ -22,5 +22,9 @@ class Paciente extends Model
     }
 
 
+    public function legajo()
+    {
+        return $this->belongsTo(Legajo::class);
+    }
 
 }

@@ -10,4 +10,12 @@ class Tratamiento extends Model
     use HasFactory;
 
     protected $fillable = ['nombre'];
+
+
+    public function legajo()
+    {
+        return $this->belongsTo(Legajo::class);
+    }
+
+
 }
