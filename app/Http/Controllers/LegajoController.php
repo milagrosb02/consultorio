@@ -67,7 +67,14 @@ class LegajoController extends Controller
 
     public function show($id)
     {
-        //
+        $legajo = Legajo::findOrFail($id);
+
+        return response()->json([
+
+            //'message' => '¡Aqui esta tu legajo!',
+            'legajo' => $legajo
+
+        ], 201);
     }
 
     

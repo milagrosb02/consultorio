@@ -123,6 +123,8 @@ Route::group([
 
     Route::get('turnos/cancelar/{id}', [TurnoController::class, 'cancelar_turno']);
 
+    Route::get('legajo/show/{id}', [LegajoController::class, 'show']);
+
 });
 
 
