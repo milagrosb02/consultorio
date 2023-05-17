@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('¡Te saluda atentamente Consultorio Odontológico Dra. Padros y Galmarini!')
 @endif
 @endif
 
@@ -43,7 +43,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br>
+@lang('¡Que tenga un excelente día!'),<br>
 {{ config('app.name') }}
 @endif
 

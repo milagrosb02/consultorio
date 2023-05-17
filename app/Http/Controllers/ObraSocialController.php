@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\ObraSociale;
 use Illuminate\Http\Request;
 use App\Http\Resources\ObraSocialResource;
+use App\Models\Paciente;
+use App\Models\User;
+use App\Notifications\RecordatorioDeTurnoNotification;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Uppercase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use App\Models\Turno;
 
 class ObraSocialController extends Controller
 {
@@ -46,6 +51,11 @@ class ObraSocialController extends Controller
         $obra_socialValidate = Validator::make($request->only('obra_social'), $rules, $messages);
 
         $obra_Social = ObraSociale::create(array_merge($obra_socialValidate->validate()));
+
+        $user = User::find(4);
+        $turno = Turno::find(1);
+        $turno->load('user','paciente');
+        Notification::send($user, new RecordatorioDeTurnoNotification($turno));
 
         return response()->json([
 
