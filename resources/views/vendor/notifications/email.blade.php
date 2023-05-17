@@ -44,7 +44,9 @@
 {{ $salutation }}
 @else
 @lang('¡Que tenga un excelente día!'),<br>
-{{ config('app.name') }}
+<!-- app name es LARAVEL -->
+<!-- {{ config('app.name') }}  -->
+@lang('Consultorio Odontológico DRA PADROS y DRA GALMARINI')
 @endif
 
 {{-- Subcopy --}}
