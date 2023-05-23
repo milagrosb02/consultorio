@@ -54,13 +54,7 @@ class ObraSocialController extends Controller
         $obra_Social = ObraSociale::create(array_merge($obra_socialValidate->validate()));
 
 
-        // NOTIFICACION
-        $user = User::find(4);
-        $turno = Turno::find(1);
-        $turno->load('user','paciente');
-        Notification::send($user, new RecordatorioDeTurnoNotification($turno));
-
-
+       
         
 
         return response()->json([

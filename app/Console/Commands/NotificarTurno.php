@@ -3,7 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Turno;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Console\Command;
+use App\Notifications\RecordatorioDeTurnoNotification;
+use Illuminate\Support\Facades\DB;
 
 class NotificarTurno extends Command
 {
@@ -38,8 +42,25 @@ class NotificarTurno extends Command
      */
     public function handle()
     {
-        // el turno se cancela hasta 48 hs antes
-        $date = now()->subHours(48);
+         // el turno se cancela hasta 48 hs antes
+         $date = now()->addDays(2);
+       
+
+         // NOTIFICACION
+         // filtro del turno
+         $pacientes = User::join('pacientes', 'users.id', '=', 'pacientes.user_id')
+                ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
+                ->select('first_name AS nombre', 'last_name AS apellido', 'email', 'phone AS telefono', 'fecha')
+                ->whereDate('fecha', '=', $date)
+                ->get();
+                
+
+        // cambiar first por get para poder recorrer el listado de los turnos
+         $turno = Turno::whereDate('fecha', '=', $date)->first();
+         $turno->load('user','paciente');
+         Notification::send($pacientes, new RecordatorioDeTurnoNotification($turno));
+ 
+ 
 
         
     }

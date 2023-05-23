@@ -23,9 +23,6 @@ class CreatePacientesTable extends Migration
 
             $table->string('phone')->unique();
 
-            $table->string('domicilio');
-
-
             // haciendo relacion con obra social
             $table->unsignedBigInteger('obra_social_id');
             $table->foreign('obra_social_id')->references('id')->on('obra_sociales');
