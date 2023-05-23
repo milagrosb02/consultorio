@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('paciente:notificate')->everyMinute();
+         $schedule->command('paciente:notificate')->dailyAt('06.00');
          //$schedule->call(new NotificarTurno)->daily();
     }
 
