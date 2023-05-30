@@ -158,3 +158,6 @@ Route::group([
     Route::get('legajo/list', [LegajoController::class, 'index']);
 
 });
+
+// esta ruta 
+Route::get('fechas', [TurnoController::class, 'fechashorasDisponibles']);

@@ -30,6 +30,13 @@ class UserController extends Controller
     // hacer un if o un controlador diferente
     {
         return response()->json($this->guard()->user()->load('paciente'));
+
+        //ejemplo
+        // if ($user == "administrador" || $user == "profesional") {
+        //     return response()->json($this->guard()->user());
+        // }else if ($user == "paciente"){
+        //     return response()->json($this->guard()->user()->load('paciente'));
+        // }
     }
 
 

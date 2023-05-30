@@ -13,6 +13,8 @@ class HorariosAtencionSeeder extends Seeder
      * @return void
      */
     public function run()
+
+    // cantidad maxima permitida de pacientes en ese horario o turno 
     {
         $horarios = [
             [

@@ -7,6 +7,7 @@ use App\Models\Turno;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\TurnoResource;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TurnoController extends Controller
 {
@@ -167,6 +168,12 @@ class TurnoController extends Controller
     }
 
 
+    public function ver_turno_del_dia()
+    {
+        
+    }
+
+
 
     public function ver_turno_admin($profesional_id)
     {
@@ -180,5 +187,27 @@ class TurnoController extends Controller
         return response()->json($turnos);
     }
 
+
+    
+    // el parametro fecha viene del datepicker, se reemplaza por el now()
+    public function fechashorasDisponibles($fecha)
+    {
+        $horarios = [];
+
+        $fechas = Carbon::parse(now()->format('Y-m-d') . ' 8 am')
+                    ->toPeriod(now()->format('Y-m-d') . ' 12 pm', 30, 'minutes');
+
+        
+        $turnos = Turno::whereDate('fecha', now())->get();
+
+        
+        foreach ($fechas as $fecha) {
+            
+            $horarios[$fecha->format('h:i A')] = !$turnos->contains('fecha', $fecha);
+
+        }
+
+        dd($horarios);            
+    }
 
 }
