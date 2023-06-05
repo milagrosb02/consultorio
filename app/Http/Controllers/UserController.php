@@ -26,10 +26,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    //public function me()
     // hacer un if o un controlador diferente
-    {
-        return response()->json($this->guard()->user()->load('paciente'));
+    //{
+        //return response()->json($this->guard()->user()->load('paciente'));
 
         //ejemplo
         // if ($user == "administrador" || $user == "profesional") {
@@ -37,7 +37,7 @@ class UserController extends Controller
         // }else if ($user == "paciente"){
         //     return response()->json($this->guard()->user()->load('paciente'));
         // }
-    }
+    //}
 
 
     

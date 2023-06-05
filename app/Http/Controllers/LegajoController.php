@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Legajo;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\LegajoResource;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LegajoController extends Controller
 {
@@ -107,9 +108,16 @@ class LegajoController extends Controller
     }
 
     
-
-    public function destroy($id)
+    public function generarPDF()
     {
-        //
+
+        $legajos = Legajo::all();
+
+        $pdf = Pdf::loadView('prueba1', compact('legajos'));
+
+        return $pdf->stream('paciente_legajo.pdf');
+
     }
+
+
 }

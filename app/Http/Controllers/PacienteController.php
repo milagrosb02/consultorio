@@ -8,6 +8,7 @@ use App\Models\Paciente;
 use App\Models\User;
 use App\Http\Resources\PacienteResource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
 {
@@ -101,6 +102,23 @@ class PacienteController extends Controller
     
              ], 201);
 
+    }
+
+
+    
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\Guard
+     */
+    public function guard()
+    {
+        return Auth::guard();
+    }
+
+    public function paciente_perfil()
+    {
+        return response()->json($this->guard()->user()->load('paciente'));
     }
 
    

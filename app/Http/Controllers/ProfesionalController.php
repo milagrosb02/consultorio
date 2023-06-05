@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProfesionalController extends Controller
 {
@@ -47,6 +48,23 @@ class ProfesionalController extends Controller
     public function ver_turnosGalmarini()
     {
 
+    }
+
+
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\Guard
+     */
+    public function guard()
+    {
+        return Auth::guard();
+    }
+
+    public function profesional_perfil()
+    {
+        return response()->json($this->guard()->user());
     }
 
 }

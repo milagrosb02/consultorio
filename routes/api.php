@@ -98,6 +98,8 @@ Route::group([
     Route::get('legajo/list', [LegajoController::class, 'index']);
     Route::put('legajo/update/{id}', [LegajoController::class, 'update']);
 
+    Route::post('profile', [AdminController::class, 'admin_perfil']);
+
 
 });
 
@@ -119,11 +121,13 @@ Route::group([
 
     Route::get('turnos/show/{id}', [TurnoController::class, 'show']);
 
-    Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
+    //Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
 
     Route::get('turnos/cancelar/{id}', [TurnoController::class, 'cancelar_turno']);
 
     Route::get('legajo/show/{id}', [LegajoController::class, 'show']);
+
+    Route::post('profile', [PacienteController::class, 'paciente_perfil']);
 
 });
 
@@ -136,7 +140,7 @@ Route::group([
 ], function ($router){
 
 
-    Route::post('profile', [UserController::class, 'me']);
+    //Route::post('profile', [UserController::class, 'me']);
     Route::put('clave/{id}', [UserController::class, 'editar_clave']);
     
    
@@ -156,6 +160,7 @@ Route::group([
     Route::get('pacientes/turnos/Galmarini', [ProfesionalController::class, 'ver_pacientesGalmarini']);
     Route::get('pacientes/turnos/Padros', [ProfesionalController::class, 'ver_pacientesPadros']);
     Route::get('legajo/list', [LegajoController::class, 'index']);
+    Route::post('profile', [ProfesionalController::class, 'profesional_perfil']);
 
 });
 
