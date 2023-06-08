@@ -83,4 +83,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasOne(Turno::class, 'user_id');
     }
 
+
+   
+
+
 }

@@ -7,6 +7,8 @@ use App\Models\Legajo;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\LegajoResource;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\User;
+
 
 class LegajoController extends Controller
 {
@@ -111,9 +113,11 @@ class LegajoController extends Controller
     public function generarPDF()
     {
 
-        $legajos = Legajo::all();
+        $legajos = Legajo::with('paciente', 'profesional', 'tratamientos')->get();
 
-        $pdf = Pdf::loadView('prueba1', compact('legajos'));
+        $pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a4', 'landscape');
+
+        //dd($legajos);
 
         return $pdf->stream('paciente_legajo.pdf');
 

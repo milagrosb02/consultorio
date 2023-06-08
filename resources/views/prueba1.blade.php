@@ -14,38 +14,70 @@
 
     <h1>HISTORIAL CLÍNICO</h1>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-            <th scope="col">Nro de Ficha</th>
-            <th scope="col">Nombre y Apellido</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Obra Social</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Profesional a cargo</th>
-            <th scope="col">Motivo de Consulta</th>
-            <th scope="col">Tratamientos Realizados</th>
-            <th scope="col">Descripcion</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($legajos as $legajo)
-                <tr>
-                <th scope="col">{{ $legajo->id }}</th>
-                <!-- <td>{{ $legajo->user->first_name .' '. $legajo->user->last_name }}</td> -->
-                <td>{{ $legajo->fecha }}</td>
-                <!-- <td>{{ $legajo->paciente->obra_social}}</td>
-                <td>{{ $legajo->paciente->telefono }}</td> -->
-                <!-- <td>{{ $legajo->turno->user_id }}</td> -->
-                <td>{{ $legajo->tratamiento_id }}</td>
-                <!-- <td>{{ $legajo->turno->user_id }}</td> -->
-                </tr>
-            @endforeach    
+      <div class="">
 
-           
-        </tbody>
-    </table>
+          <div class="">
+      
+              <div class="">
+                <div class="">
+
+
+                <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                      <tr class="table-info">
+                      <th style="width:5%;">Nro de Ficha</th>
+                      <th style="width:15%;">Nombre y Apellido</th>
+                      <th style="width:10%;">Fecha</th>
+                      <th style="width:5%;">Obra Social</th>
+                      <th style="width:10%;">Teléfono</th>
+                      <th style="width:15%;">Profesional a cargo</th>
+                    {{-- <th scope="col">Motivo de Consulta</th>  --}} 
+                      <th style="width:20%;">Tratamientos Realizados</th>
+                      <th style="width:10%;">Descripcion</th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @foreach ($legajos as $legajo)
+                          <tr>
+                          <th scope="col">{{ $legajo->id }}</th>
+
+                              <td>{{ $legajo->paciente?->user?->first_name .' '. $legajo->paciente?->user?->last_name }}</td>
+                              <td>{{ $legajo->fecha }}</td>
+                              <td>{{ $legajo->paciente?->obra_social?->obra_social}}</td>  
+                              <td>{{ $legajo->paciente?->phone }}</td>                     
+                              <td>{{ $legajo->profesional?->first_name .' '. $legajo->profesional?->last_name}}</td>
+                              {{-- <td>{{ $legajo->turno->motivo_consulta }}</td> --}} 
+
+                              <td>
+                                @foreach ($legajo->tratamientos as $tratamiento)
+                                  {{ $tratamiento->nombre }}
+                                @endforeach
+                              </td>
+                                
+                              <td> {{$legajo->descripcion}}</td>    
+                          
+                          </tr>
+                      @endforeach    
+
+                    
+                  </tbody>
+              </table>
+                </div>
+
+                
+
+
+                </div>
+                
+            </div>
+          </div>
+       </div>
+
+
+    
 
 
     

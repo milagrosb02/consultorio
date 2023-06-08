@@ -22,4 +22,11 @@ class Legajo extends Model
         return $this->hasOne(Paciente::class, 'id');
     }
 
+
+    
+     public function profesional()
+     {
+         return $this->belongsTo(User::class, 'user_id');
+     }
+
 }
