@@ -16,18 +16,26 @@ use App\Http\Controllers\TurnoController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\ProfesionalController;
 use App\Http\Controllers\LegajoController;
-
+use App\Http\Controllers\ForgotPasswordController;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
+
+// ruta para enviar emails
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+
+
+// ruta para resetear la contraseña
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
 
 
 
@@ -48,6 +56,11 @@ Route::group([
     Route::post('logout', [LogoutController::class, 'logout']);
 
     Route::post('login_admin',[LoginAdminController::class, 'login']);
+
+
+    // para restablecer la clave
+    Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+    Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
 
 
 });

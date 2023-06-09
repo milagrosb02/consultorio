@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use App\Notifications\ResetPasswordNotification;
 
 
 
@@ -84,7 +86,14 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
 
-   
+    public function sendPasswordResetNotification($token)
+    {
+
+        // url del front-end
+        $url = 'https://spa.test/reset-password?token=' . $token;
+
+        $this->notify(new ResetPasswordNotification($url));
+    }
 
 
 }
