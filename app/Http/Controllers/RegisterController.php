@@ -112,10 +112,10 @@ class RegisterController extends Controller
 
 
         // si la solicitud no es valida
-        // if ($validateUser->fails()) {
+        if ($validateUser->fails()) {
 
-        //     return response()->json($validateUser->errors()->toJson(), 400);
-        // }
+             return response()->json($validateUser->errors()->toJson(), 422);
+         }
 
         
         // si la solicitud es valida, creo el nuevo usuario
