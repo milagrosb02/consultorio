@@ -23,6 +23,11 @@ use App\Http\Controllers\ForgotPasswordController;
 // });
 
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
 // ruta para enviar emails
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();

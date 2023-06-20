@@ -12,14 +12,14 @@ class Legajo extends Model
     protected $fillable = ['paciente_id', 'descripcion', 'tratamiento_id', 'fecha'];
 
 
-    public function tratamientos()
+    public function tratamiento()
     {
-        return $this->hasMany(Tratamiento::class, 'id');
+        return $this->belongsTo(Tratamiento::class, 'tratamiento_id');
     }
 
     public function paciente()
     {
-        return $this->hasOne(Paciente::class, 'id');
+        return $this->belongsTo(Paciente::class, 'paciente_id');
     }
 
 

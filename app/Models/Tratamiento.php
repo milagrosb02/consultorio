@@ -14,7 +14,7 @@ class Tratamiento extends Model
 
     public function legajo()
     {
-        return $this->belongsTo(Legajo::class, 'tratamiento_id');
+        return $this->hasMany(Legajo::class, 'id');
     }
 
 

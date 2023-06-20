@@ -20,7 +20,14 @@ Route::get('/', function () {
 
 
 Route::get('/legajos/reportPDF', [App\Http\Controllers\LegajoController::class, 'generarPDF'])->name('prueba1');
+Route::get('/legajos/reportPDFPaciente/{paciente_id}', [App\Http\Controllers\LegajoController::class, 'generarPDFPaciente'])->name('prueba2');
+
+
+
   
-//Route::view('legajo', 'users.legajo');
+Route::get('/login', function () {
+    return view('login');
+});
+
 
 

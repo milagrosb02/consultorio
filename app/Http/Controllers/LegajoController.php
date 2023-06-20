@@ -113,14 +113,31 @@ class LegajoController extends Controller
     public function generarPDF()
     {
 
-        $legajos = Legajo::with('paciente', 'profesional', 'tratamientos')->get();
+        $legajos = Legajo::with('paciente', 'profesional', 'tratamiento')->get();
 
-        $pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a4', 'landscape');
 
         //dd($legajos);
+        $pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a4', 'landscape');
+
+        
 
         return $pdf->stream('paciente_legajo.pdf');
 
+    }
+
+
+
+    public function generarPDFPaciente($paciente_id)
+    {
+        $legajos = Legajo::with('paciente', 'profesional', 'tratamiento')->where("paciente_id",$paciente_id)->get();
+
+
+        //dd($legajos);
+        $pdf = Pdf::loadView('prueba2', compact('legajos'))->setPaper('a4', 'landscape');
+
+        
+
+        return $pdf->stream('paciente_legajo_unico.pdf');
     }
 
 
