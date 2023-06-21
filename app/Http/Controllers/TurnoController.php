@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\TurnoResource;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TurnoController extends Controller
 {
@@ -92,36 +93,36 @@ class TurnoController extends Controller
    
 
 
-    public function update(Request $request, $id)
-    {
-        $modificar_turno = 
-        [
+    // public function update(Request $request, $id)
+    // {
+    //     $modificar_turno = 
+    //     [
 
-            'user_id' => $request->user_id, // profesional id
+    //         'user_id' => $request->user_id, // profesional id
 
-            'especialidad_id' => $request->especialidad_id,
+    //         'especialidad_id' => $request->especialidad_id,
 
-            'motivo_consulta' => $request->motivo_consulta,
+    //         'motivo_consulta' => $request->motivo_consulta,
 
-            'fecha' => $request->fecha,
+    //         'fecha' => $request->fecha,
 
-            'hora' => $request->hora
+    //         'hora' => $request->hora
 
-        ];
+    //     ];
 
-        $turno = Turno::where('id', $id)->firstOrFail();
+    //     $turno = Turno::where('id', $id)->firstOrFail();
 
 
-        $turno->update($modificar_turno);
+    //     $turno->update($modificar_turno);
 
-            return response()->json([
+    //         return response()->json([
 
-                'message' => '¡Turno modificado!',
-                'turno' => $turno
+    //             'message' => '¡Turno modificado!',
+    //             'turno' => $turno
 
-            ], 201);
+    //         ], 201);
             
-    }
+    // }
 
    
     public function cancelar_turno($id)
@@ -209,5 +210,40 @@ class TurnoController extends Controller
 
         dd($horarios);            
     }
+
+
+
+
+    public function generarTurnoPDF()
+    {
+
+        $turnos = Turno::with('user', 'paciente', 'especialidad')->get();
+
+
+        //dd($legajos);
+        $pdf = Pdf::loadView('turno', compact('turnos'))->setPaper('a4', 'landscape');
+
+        
+
+        return $pdf->stream('turnos_admin.pdf');
+
+    }
+
+
+
+    public function generarPDFPaciente($paciente_id)
+    {
+
+        $turnos = Turno::with('user', 'paciente', 'especialidad')->where("paciente_id",$paciente_id)->get();
+
+
+        //dd($legajos);
+        $pdf = Pdf::loadView('turno_paciente', compact('turnos'))->setPaper('a4', 'landscape');
+
+        
+
+        return $pdf->stream('turno_paciente.pdf');
+    }
+
 
 }

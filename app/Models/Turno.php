@@ -28,6 +28,11 @@ class Turno extends Model
     }
 
 
+    public function profesional()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 
 
     // relacion con especialidad

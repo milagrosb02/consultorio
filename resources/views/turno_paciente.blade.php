@@ -12,7 +12,7 @@
   </head>
   <body>
 
-    <h1>HISTORIAL CLÍNICO</h1>
+    <h1>TURNO DEL PACIENTE</h1>
 
 
       <div class="">
@@ -27,37 +27,27 @@
                 <table class="table table-bordered">
                   <thead>
                       <tr class="table-info">
-                      <th style="width:5%;">Nro de Ficha</th>
                       <th style="width:15%;">Nombre y Apellido</th>
-                      <th style="width:10%;">Fecha</th>
-                      <th style="width:5%;">Obra Social</th>
-                      <th style="width:10%;">Teléfono</th>
                       <th style="width:15%;">Profesional a cargo</th>
-                   
-                      <th style="width:20%;">Tratamientos Realizados</th>
-                      <th style="width:10%;">Descripcion</th>
+                      <th style="width:10%;">Motivo de Consulta</th>
+                      <th style="width:10%;">Especialidad</th>
+                      <th style="width:20%;">Fecha</th>
+                      <th style="width:10%;">Hora</th>
 
                       </tr>
                   </thead>
                   <tbody>
-                      @foreach ($legajos as $legajo)
+                      @foreach ($turnos as $turno)
                           <tr>
-                          <th scope="col">{{ $legajo->id }}</th>
                               
-                              <td>{{ $legajo->paciente?->user?->first_name .' '. $legajo->paciente?->user?->last_name }}</td>
-                              <td>{{ $legajo->fecha }}</td>
-                              <td>{{ $legajo->paciente?->obra_social?->obra_social}}</td>  
-                              <td>{{ $legajo->paciente?->phone }}</td>                     
-                              <td>{{ $legajo->profesional?->first_name .' '. $legajo->profesional?->last_name}}</td>
+                              <td>{{ $turno->paciente?->user?->first_name .' '. $turno->paciente?->user?->last_name }}</td>
+                              <td>{{ $turno->profesional?->first_name .' '. $turno->profesional?->last_name}}</td>
+                              <td>{{ $turno->motivo_consulta ?? 'No se selecciono un motivo de consulta. ' }}</td>
+                              <td>{{ $turno->especialidad?->especialidad ?? 'No se selecciono una especialidad. '}}</td>  
+                              <td>{{ $turno->fecha }}</td>
+                              <td>{{ $turno->hora }}</td>                     
                               
-
-                              <td>
                               
-                                {{ $legajo->tratamiento->nombre }}
-                              
-                              </td>
-                                
-                              <td> {{$legajo->descripcion}}</td>    
                           
                           </tr>
                       @endforeach    

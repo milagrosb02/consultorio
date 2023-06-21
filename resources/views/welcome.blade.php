@@ -23,8 +23,11 @@
     <body class="antialiased">
 
 
-    <!-- boton para generar legajo en pdf -->
-    <a href="{{ route('prueba1')}}" class="btn btn-danger mt-2 mb-2">LEGAJO</a>
+        <!-- boton para generar legajo en pdf -->
+        <a href="{{ route('prueba1')}}" class="btn btn-danger mt-2 mb-2">LEGAJO</a>
+
+        <!-- boton para generar turno en pdf -->
+        <a href="{{ route('turno')}}" class="btn btn-danger mt-2 mb-2">TURNO</a>
 
 
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -134,5 +137,8 @@
                 </div>
             </div>
         </div>
+
+        
     </body>
+
 </html>

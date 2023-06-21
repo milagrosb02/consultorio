@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LegajoController;
+use App\Http\Controllers\TurnoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,14 @@ Route::get('/', function () {
 });
 
 
+// HISTORIAL CLINICO EN PDF
 Route::get('/legajos/reportPDF', [App\Http\Controllers\LegajoController::class, 'generarPDF'])->name('prueba1');
 Route::get('/legajos/reportPDFPaciente/{paciente_id}', [App\Http\Controllers\LegajoController::class, 'generarPDFPaciente'])->name('prueba2');
+
+
+// TURNOS EN PDF
+Route::get('/turnos/reportTurnosPDF', [App\Http\Controllers\TurnoController::class, 'generarTurnoPDF'])->name('turno1');
+Route::get('/turnos/reportPDFPaciente/{paciente_id}', [App\Http\Controllers\TurnoController::class, 'generarPDFPaciente'])->name('turno2');
 
 
 
