@@ -9,6 +9,7 @@ use App\Http\Resources\TurnoResource;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Rules\UniqueAppointment;
 
 class TurnoController extends Controller
 {
@@ -23,7 +24,7 @@ class TurnoController extends Controller
     
     public function store(Request $request)
     {
-        //reglas
+        //reglas de validacion
 
         $rules = 
         [
@@ -35,7 +36,7 @@ class TurnoController extends Controller
 
             'fecha' => ['required'],
 
-            'hora' => ['required'],
+            'hora' => ['required', new UniqueAppointment($request->input('fecha'), $request->input('hora'))],
 
             'paciente_id' => ['required']
 
@@ -88,6 +89,9 @@ class TurnoController extends Controller
             'turno' => $turno
 
         ], 201);
+
+
+        
     }
 
    
@@ -238,7 +242,7 @@ class TurnoController extends Controller
 
 
         //dd($legajos);
-        $pdf = Pdf::loadView('turno_paciente', compact('turnos'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('turno_prueba_paciente', compact('turnos'))->setPaper('a4', 'landscape');
 
         
 
