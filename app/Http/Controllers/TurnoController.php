@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Rules\UniqueAppointment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Paciente;
 
 class TurnoController extends Controller
 {
@@ -59,9 +60,22 @@ class TurnoController extends Controller
 
         ];
 
+        
+
 
         // creo la validación de datos
         $validateConsulta = Validator::make($request->all(), $rules, $messages);
+
+        // busco el id del paciente
+        $paciente = Paciente::findOrFail($request->paciente_id);
+
+        // verifico si ya tiene un turno anterior
+        if (!$paciente->registrarTurno()) 
+        {
+            return response()->json([
+                'message' => 'Ya tenes un turno pendiente.',
+            ], 400);
+        }
 
 
         $turno = Turno::create(array_merge($validateConsulta->validate()));
