@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Rules\UniqueAppointment;
+use Illuminate\Support\Facades\Auth;
 
 class TurnoController extends Controller
 {
@@ -77,56 +78,43 @@ class TurnoController extends Controller
 
    
 
-    public function show($id)
+    public function show($paciente_id)
     {
-        //El paciente puede ver su propio turno 
-        // a traves del turno puedo sacar el paciente
-        $turno = Turno::findOrFail($id);
+       
+        // $turno = Turno::findOrFail($id);
+
+        // return response()->json([
+
+        //     'message' => '¡Aqui esta tu turno!',
+        //     'turno' => $turno
+
+        // ], 201);
+
+        $turno = Turno::find($paciente_id);
+
+        if ($turno) 
+    {
 
         return response()->json([
 
-            'message' => '¡Aqui esta tu turno!',
+            'message' => '¡Aquí está tu turno!',
             'turno' => $turno
 
         ], 201);
+
+    } else {
+
+        return response()->json([
+
+            'message' => 'Aún no posees un turno.'
+
+        ], 404);
+    }
 
 
         
     }
 
-   
-
-
-    // public function update(Request $request, $id)
-    // {
-    //     $modificar_turno = 
-    //     [
-
-    //         'user_id' => $request->user_id, // profesional id
-
-    //         'especialidad_id' => $request->especialidad_id,
-
-    //         'motivo_consulta' => $request->motivo_consulta,
-
-    //         'fecha' => $request->fecha,
-
-    //         'hora' => $request->hora
-
-    //     ];
-
-    //     $turno = Turno::where('id', $id)->firstOrFail();
-
-
-    //     $turno->update($modificar_turno);
-
-    //         return response()->json([
-
-    //             'message' => '¡Turno modificado!',
-    //             'turno' => $turno
-
-    //         ], 201);
-            
-    // }
 
    
     public function cancelar_turno($id)

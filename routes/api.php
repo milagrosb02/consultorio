@@ -137,7 +137,7 @@ Route::group([
 
     Route::post('turnos/create', [TurnoController::class, 'store']);
 
-    Route::get('turnos/show/{id}', [TurnoController::class, 'show']);
+    Route::get('turnos/show/{paciente_id}', [TurnoController::class, 'show']);
 
     //Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
 
