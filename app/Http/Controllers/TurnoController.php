@@ -94,17 +94,8 @@ class TurnoController extends Controller
 
     public function show($paciente_id)
     {
-       
-        // $turno = Turno::findOrFail($id);
 
-        // return response()->json([
-
-        //     'message' => '¡Aqui esta tu turno!',
-        //     'turno' => $turno
-
-        // ], 201);
-
-        $turno = Turno::find($paciente_id);
+        $turno = Turno::where('paciente_id', $paciente_id)->get();
 
         if ($turno) 
     {
