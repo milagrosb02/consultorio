@@ -14,6 +14,10 @@
 
     <h1>HISTORIAL CLÍNICO</h1>
 
+    <strong>NOMBRE Y APELLIDO: </strong><span>{{ $legajo->paciente?->user?->first_name .' '. $legajo->paciente?->user?->last_name }}</span><br>
+    <strong>OBRA SOCIAL: </strong><span>{{ $legajo->paciente?->obra_social?->obra_social}}</span>  <br>
+    <strong>TELEFONO: </strong><span>{{ $legajo->paciente?->phone }}</span>
+
 
       <div class="">
 
@@ -28,12 +32,8 @@
                   <thead>
                       <tr class="table-info">
                       <th style="width:5%;">Nro de Ficha</th>
-                      <th style="width:15%;">Nombre y Apellido</th>
                       <th style="width:10%;">Fecha</th>
-                      <th style="width:5%;">Obra Social</th>
-                      <th style="width:10%;">Teléfono</th>
                       <th style="width:15%;">Profesional a cargo</th>
-                    {{-- <th scope="col">Motivo de Consulta</th>  --}} 
                       <th style="width:20%;">Tratamientos Realizados</th>
                       <th style="width:10%;">Descripcion</th>
 
@@ -44,16 +44,15 @@
                           <tr>
                           <th scope="col">{{ $legajo->id }}</th>
                               
-                              <td>{{ $legajo->paciente?->user?->first_name .' '. $legajo->paciente?->user?->last_name }}</td>
-                              <td>{{ $legajo->fecha }}</td>
-                              <td>{{ $legajo->paciente?->obra_social?->obra_social}}</td>  
-                              <td>{{ $legajo->paciente?->phone }}</td>                     
+                              
+                              <td>{{ $legajo->fecha->format('d-m-Y') }}</td>
+                                                   
                               <td>{{ $legajo->profesional?->first_name .' '. $legajo->profesional?->last_name}}</td>
                               
 
                               <td>
                               
-                                {{ $legajo->tratamiento->nombre }}
+                                {{ $legajo->tratamiento->nombre ?? 'No se realizo un tratamiento. '}}
                               
                               </td>
                                 

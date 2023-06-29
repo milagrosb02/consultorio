@@ -11,6 +11,7 @@ class Legajo extends Model
 
     protected $fillable = ['paciente_id', 'descripcion', 'tratamiento_id', 'fecha'];
 
+    protected $dates = ['fecha'];
 
     public function tratamiento()
     {
