@@ -13,7 +13,7 @@ class Turno extends Model
 
     protected $fillable = ['user_id','fecha', 'hora', 'motivo_consulta', 'especialidad_id', 'paciente_id',];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'fecha', 'hora'];
 
     // relacion con usuarios
     public function user()

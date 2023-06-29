@@ -27,9 +27,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PiezaSeeder::class);
 
-        //$this->call(AnomaliaColorSeeder::class);
+        $this->call(AnomaliaColorSeeder::class);
 
         $this->call(HorariosAtencionSeeder::class);
+
+        $this->call(CarasOdontogramaSeeder::class);
        
     }
 }

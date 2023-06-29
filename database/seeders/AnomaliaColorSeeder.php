@@ -14,6 +14,16 @@ class AnomaliaColorSeeder extends Seeder
      */
     public function run()
     {
-        
+        // CREO COLORES
+        AnomaliaColor::create(['color' => 'Rojo']);
+
+        AnomaliaColor::create(['color' => 'Azul']);
+
+        AnomaliaColor::create(['color' => 'Verde']);
+
+        AnomaliaColor::create(['color' => 'Amarillo']);
+
+        AnomaliaColor::create(['color' => 'Negro']);
+
     }
 }
