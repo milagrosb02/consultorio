@@ -36,9 +36,9 @@ class TurnoController extends Controller
 
             'motivo_consulta' => ['string', 'max: 100', 'nullable'],
 
-            'fecha' => ['required'],
+            'fecha' => ['required', 'after:today'],
 
-            'hora' => ['required', new UniqueAppointment($request->input('fecha'), $request->input('hora'))],
+            'hora' => ['required', new UniqueAppointment($request->input('fecha'), $request->input('hora'), $request->input('user_id'))],
 
             'paciente_id' => ['required']
 
@@ -55,6 +55,8 @@ class TurnoController extends Controller
             'motivo_consulta.max' => 'El campo excedio la cantidad de caracteres. ',
 
             'fecha' => 'Debe escoger una fecha disponible. ',
+
+            'fecha.after' => 'No puede seleccionar una fecha pasada. ',
 
             'hora' => 'Debe escoger un horario disponible. '
 
