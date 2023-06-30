@@ -15,7 +15,7 @@ class LegajoController extends Controller
     
     public function index()
     {
-        return LegajoResource::collection(Legajo::with('paciente', 'tratamientos')->get());
+        return LegajoResource::collection(Legajo::with('paciente', 'tratamientos', 'profesional')->get());
     }
     
 
@@ -32,6 +32,8 @@ class LegajoController extends Controller
 
             'tratamiento_id' => ['nullable'],
 
+            'user_id' => ['required'],
+
             'fecha' => ['required']
 
         ];
@@ -43,6 +45,8 @@ class LegajoController extends Controller
             'descripcion.string' => 'El campo debe ser rellenado con caracteres alfanuméricos. ',
 
             'descripcion.max' => 'El campo excedio la cantidad de caracteres. ',
+
+            'user_id.required' => ['Debe estar el nombre de la profesional a cargo. '],
 
             'fecha' => 'La fecha es obligatoria. '
 
@@ -70,14 +74,36 @@ class LegajoController extends Controller
 
     public function show($id)
     {
-        $legajo = Legajo::findOrFail($id);
+        // $legajo = Legajo::findOrFail($id);
+
+        // return response()->json([
+
+        //     //'message' => '¡Aqui esta tu legajo!',
+        //     'legajo' => $legajo
+
+        // ], 201);
+        
+        $legajo = Legajo::where('paciente_id', $id)->get();
+
+        if ($legajo) 
+    {
 
         return response()->json([
 
-            //'message' => '¡Aqui esta tu legajo!',
+            'message' => '¡Aquí está tu historial clinico!',
             'legajo' => $legajo
 
         ], 201);
+
+    } else {
+
+        return response()->json([
+
+            'message' => 'Aún no posees un historial clinico.'
+
+        ], 404);
+    }
+
     }
 
     
@@ -133,7 +159,7 @@ class LegajoController extends Controller
 
         $legajo = Legajo::with('paciente')->where("paciente_id",$paciente_id)->latest()->first();
 
-        $pdf = Pdf::loadView('prueba2', compact('legajos', 'legajo'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('legajo_paciente', compact('legajos', 'legajo'))->setPaper('a4', 'landscape');
 
         return $pdf->stream('paciente_legajo_unico.pdf');
     }

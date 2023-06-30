@@ -9,7 +9,7 @@ class Legajo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['paciente_id', 'descripcion', 'tratamiento_id', 'fecha'];
+    protected $fillable = ['paciente_id', 'descripcion', 'tratamiento_id', 'fecha', 'user_id'];
 
     protected $dates = ['fecha'];
 
