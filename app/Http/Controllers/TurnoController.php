@@ -237,11 +237,11 @@ class TurnoController extends Controller
 
 
         //dd($legajos);
-        $pdf = Pdf::loadView('turno_prueba_paciente', compact('turnos'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('turno_paciente', compact('turnos'))->setPaper('a4', 'landscape');
 
         
 
-        return $pdf->stream('turno_paciente.pdf');
+        return $pdf->stream('turno_paciente_consultorio.pdf');
     }
 
 
