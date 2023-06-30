@@ -16,7 +16,6 @@ class CreateAnomaliasColoresTable extends Migration
         Schema::create('anomalias_colores', function (Blueprint $table) {
             $table->id();
             $table->string('color');
-            $table->string('descripcion');
             $table->timestamps();
         });
     }

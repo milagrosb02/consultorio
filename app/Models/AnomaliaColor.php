@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AnomaliaColor extends Model
 {
     use HasFactory;
+
+    public $table = "anomalias_colores";
 }

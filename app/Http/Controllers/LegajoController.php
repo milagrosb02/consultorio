@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\LegajoResource;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
-
+use Illuminate\Support\Facades\DB;
 
 class LegajoController extends Controller
 {
@@ -139,4 +139,16 @@ class LegajoController extends Controller
     }
 
 
+    // SELECT PARA CARGAR EL PACIENTE
+    public function obtener_pacientes_por_nombres()
+    {
+
+        $pacientes = DB::table('users')
+                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+                    ->select('first_name AS nombre', 'last_name AS apellido')
+                    ->get();
+
+        return $pacientes;
+        
+    }
 }

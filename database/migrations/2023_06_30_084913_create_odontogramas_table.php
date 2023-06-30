@@ -16,13 +16,16 @@ class CreateOdontogramasTable extends Migration
         Schema::create('odontogramas', function (Blueprint $table) {
 
             $table->id();
-            $table->string('diagnostico');
-            
-            $table->integer('cuadrante');
 
-            // hago relacion con el tratamiento
-            $table->unsignedBigInteger('tratamiento_id')->nullable()->constrained();
+             // hago relacion con pieza
+             $table->unsignedBigInteger('pieza_id')->constrained();
+             $table->foreign('pieza_id')->references('id')->on('piezas');
+
+              // hago relacion con el tratamiento
+            $table->unsignedBigInteger('tratamiento_id')->constrained();
             $table->foreign('tratamiento_id')->references('id')->on('tratamientos');
+
+            $table->string('diagnostico');
 
             // hago relacion con los colores
             $table->unsignedBigInteger('anomalia_color_id')->constrained();
@@ -32,9 +35,7 @@ class CreateOdontogramasTable extends Migration
             $table->unsignedBigInteger('legajo_id')->constrained();
             $table->foreign('legajo_id')->references('id')->on('legajos');
 
-            // hago relacion con pieza
-            $table->unsignedBigInteger('pieza_id')->constrained();
-            $table->foreign('pieza_id')->references('id')->on('piezas');
+           
             
             // hago relacion con caras dentales
             $table->unsignedBigInteger('cara_odontograma_id')->constrained();
@@ -42,6 +43,9 @@ class CreateOdontogramasTable extends Migration
  
 
             //campo fecha y hora para que se guarden al momento de registrar el dato
+            $table->date('fecha');
+            $table->time('hora');
+
             $table->timestamps();
 
 

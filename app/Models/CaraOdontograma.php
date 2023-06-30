@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CaraOdontograma extends Model
 {
     use HasFactory;
+
+    public $table = "caras_odontograma";
 }
