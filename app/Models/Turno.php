@@ -40,4 +40,14 @@ class Turno extends Model
     {
         return $this->belongsTo(Especialidad::class, 'especialidad_id');
     }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['fecha'] = Carbon::parse($this->fecha)->format('Y-m-d');
+        $array['hora'] = Carbon::parse($this->hora)->format('H:i');
+
+        return $array;
+    }
 }

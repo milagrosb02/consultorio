@@ -68,6 +68,11 @@ class TurnoController extends Controller
         // creo la validación de datos
         $validateConsulta = Validator::make($request->all(), $rules, $messages);
 
+
+        $fecha = Carbon::createFromFormat('Y-m-d', $request->input('fecha'));
+        $hora = Carbon::createFromFormat('H:i', $request->input('hora'));
+
+
         // busco el id del paciente
         $paciente = Paciente::findOrFail($request->paciente_id);
 
@@ -80,7 +85,10 @@ class TurnoController extends Controller
         }
 
 
-        $turno = Turno::create(array_merge($validateConsulta->validate()));
+        $turno = Turno::create(array_merge($validateConsulta->validate(), [
+            'fecha' => $fecha->format('Y-m-d'),
+            'hora' => $hora->format('H:i'),
+        ]));
 
 
         return response()->json([
