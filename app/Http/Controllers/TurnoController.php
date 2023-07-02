@@ -99,24 +99,29 @@ class TurnoController extends Controller
 
         $turno = Turno::where('paciente_id', $paciente_id)->get();
 
-        if ($turno) 
-    {
+    
 
-        return response()->json([
+        if ($turno->isEmpty()) 
+        {
+            return response()->json
+            ([
 
-            'message' => '¡Aquí está tu turno!',
-            'turno' => $turno
+                'message' => 'Aún no posees un turno.'
 
-        ], 201);
+            ], 404);
 
-    } else {
+        } 
+        else 
+        {
+            return response()->json
+            ([
 
-        return response()->json([
+                'message' => '¡Aquí está tu turno!',
 
-            'message' => 'Aún no posees un turno.'
+                'turno' => $turno
 
-        ], 404);
-    }
+            ], 201);
+        }
 
 
         
@@ -124,18 +129,33 @@ class TurnoController extends Controller
 
 
    
-    public function cancelar_turno($id)
+    public function cancelar_turno($turno_id)
     {
-        $turno = Turno::find($id);
 
-        $turno->delete();
+        $turno = Turno::find($turno_id);
 
-        return response()->json([
+        if ($turno) 
+        {
 
-            'message' => '¡El turno se ha cancelado correctamente!',
-            'turno' => $turno
+            $turno->delete();
+    
+            return response()->json([
 
-        ], 201);
+                'message' => '¡El turno se ha cancelado correctamente!',
+
+                'turno' => $turno
+
+            ], 201);
+
+        } else 
+        
+        {
+            return response()->json([
+
+                'message' => 'No se encontró el turno a cancelar.'
+
+            ], 404);
+        }
         
 
     }
