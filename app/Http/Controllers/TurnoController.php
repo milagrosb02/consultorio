@@ -273,4 +273,17 @@ class TurnoController extends Controller
     }
 
 
+    public function listar_especialidades($profesional_id)
+    {
+        $especialidades = DB::table('especialidades AS e')
+                            ->select('e.especialidad')
+                            ->join('profesional_especialidades AS p', 'e.id', '=', 'p.especialidad_id')
+                            ->join('users AS u', 'u.id', '=', 'p.user_id')
+                            ->where('p.user_id', '=', $profesional_id)
+                            ->get();
+
+        return $especialidades;
+    }
+
+
 }

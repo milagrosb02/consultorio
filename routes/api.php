@@ -150,6 +150,9 @@ Route::group([
     Route::post('profile', [PacienteController::class, 'paciente_perfil']);
 
     Route::get('obras_sociales', [RegisterController::class, 'listar_obras_sociales']);
+
+    Route::get('turno/especialidad/{profesional_id}', [TurnoController::class, 'listar_especialidades']);
+
 });
 
 
