@@ -48,7 +48,9 @@ class LoginPacienteController extends Controller
             ]);
         }
 
-
+        $credentials['email'] = $user->email;
+        $credentials['first_name'] = $user->first_name;
+        $credentials['last_name'] = $user->last_name;
 
 
        
@@ -73,11 +75,21 @@ class LoginPacienteController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
+        // return response()->json([
+        //     'access_token' => $token,
+        //     'token_type' => 'bearer',
+        //     'expires_in' => $this->guard()->factory()->getTTL() * 60
+        // ]);
+        $user = auth()->user(); // Obtener el usuario autenticado
+        $data = [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60
-        ]);
+            'expires_in' => $this->guard()->factory()->getTTL() * 60,
+            'email' => $user->email,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name
+        ];
+        return response()->json($data);
     }
 
 
