@@ -62,6 +62,8 @@ Route::group([
 
     Route::post('login_admin',[LoginAdminController::class, 'login']);
 
+    
+
 
     // para restablecer la clave
     Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
@@ -141,12 +143,13 @@ Route::group([
 
     //Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
 
-    Route::get('turnos/cancelar/{id}', [TurnoController::class, 'cancelar_turno']);
+    Route::get('turnos/cancelar/{turno_id}', [TurnoController::class, 'cancelar_turno']);
 
     Route::get('legajo/show/{id}', [LegajoController::class, 'show']);
 
     Route::post('profile', [PacienteController::class, 'paciente_perfil']);
 
+    Route::get('obras_sociales', [RegisterController::class, 'listar_obras_sociales']);
 });
 
 

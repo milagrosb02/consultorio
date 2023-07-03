@@ -12,6 +12,7 @@ use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\DB;
 
 
 class RegisterController extends Controller
@@ -150,4 +151,16 @@ class RegisterController extends Controller
             'user' => $user
         ], 201);
     }
+
+
+
+    public function listar_obras_sociales()
+    {
+        $obras_sociales = DB::table('obra_sociales')
+                            ->select('obra_social')
+                            ->get();
+
+        return $obras_sociales;
+    }
+
 }

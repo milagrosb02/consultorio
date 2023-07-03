@@ -34,7 +34,7 @@ class TurnoController extends Controller
 
             'especialidad_id' => ['nullable'],
 
-            'motivo_consulta' => ['string', 'max: 100', 'nullable'],
+            'motivo_consulta' => ['nullable', 'string', 'max:100'],
 
             'fecha' => ['required', 'after:today'],
 
@@ -54,19 +54,19 @@ class TurnoController extends Controller
 
             'motivo_consulta.max' => 'El campo excedio la cantidad de caracteres. ',
 
-            'fecha' => 'Debe escoger una fecha disponible. ',
+            'fecha.required' => 'Debe escoger una fecha disponible. ',
 
             'fecha.after' => 'No puede seleccionar una fecha pasada. ',
 
-            'hora' => 'Debe escoger un horario disponible. '
+            'hora.required' => 'Debe escoger un horario disponible. '
 
         ];
 
-        
 
 
         // creo la validación de datos
         $validateConsulta = Validator::make($request->all(), $rules, $messages);
+
 
 
         $fecha = Carbon::createFromFormat('Y-m-d', $request->input('fecha'));
