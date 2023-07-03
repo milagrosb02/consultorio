@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 
 
+
 class RegisterController extends Controller
 {
 
@@ -156,11 +157,7 @@ class RegisterController extends Controller
 
     public function listar_obras_sociales()
     {
-        $obras_sociales = DB::table('obra_sociales')
-                            ->select('obra_social')
-                            ->get();
-
-        return $obras_sociales;
+        ObraSociale::select('id', 'obra_social')->get();
     }
 
 }
