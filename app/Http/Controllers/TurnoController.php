@@ -28,8 +28,30 @@ class TurnoController extends Controller
     
     public function store(Request $request)
     {
-        //reglas de validacion
 
+       // Verificar si ninguno o ambos campos están registrados
+        if ($request->filled('motivo_consulta') && $request->filled('especialidad_id')) 
+        {
+            return response()->json([
+
+                'message' => 'No se pueden registrar ambos campos: motivo_consulta y especialidad.',
+
+            ], 400);
+        }
+
+
+        if (!$request->filled('motivo_consulta') && !$request->filled('especialidad_id')) 
+        {
+            return response()->json([
+
+                'message' => 'Debe registrar al menos uno de los campos: motivo_consulta o especialidad.',
+
+            ], 400);
+        }
+
+
+
+        //reglas de validacion
         $rules = 
         [
             'user_id' => ['required'],
@@ -68,6 +90,16 @@ class TurnoController extends Controller
 
         // creo la validación de datos
         $validateConsulta = Validator::make($request->all(), $rules, $messages);
+
+         // Verificar si la validación falla
+        if ($validateConsulta->fails()) 
+            {
+                return response()->json
+                ([
+                    'message' => 'Error en los datos enviados.',
+                    'errors' => $validateConsulta->errors(),
+                ], 400);
+            }
 
 
 
@@ -277,21 +309,16 @@ class TurnoController extends Controller
 
     public function listar_especialidades($profesional_id)
     {
-        // $especialidades = DB::table('especialidades AS e')
-        //                     ->select('e.especialidad')
-        //                     ->join('profesional_especialidades AS p', 'e.id', '=', 'p.especialidad_id')
-        //                     ->join('users AS u', 'u.id', '=', 'p.user_id')
-        //                     ->where('p.user_id', '=', $profesional_id)
-        //                     ->get();
-
-        // return $especialidades;
-
         $especialidades = Especialidad::select('especialidades.especialidad')
-        ->join('profesional_especialidades', 'especialidades.id', '=', 'profesional_especialidades.especialidad_id')
-        ->where('profesional_especialidades.user_id', $profesional_id)
-        ->get();
+
+                            ->join('profesional_especialidades', 'especialidades.id', '=', 'profesional_especialidades.especialidad_id')
+
+                            ->where('profesional_especialidades.user_id', $profesional_id)
+
+                            ->get();
 
         return $especialidades;
+        
     }
 
 
