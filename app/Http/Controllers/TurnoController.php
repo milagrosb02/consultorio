@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Rules\UniqueAppointment;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Paciente;
 use App\Models\Especialidad;
 

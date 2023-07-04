@@ -22,76 +22,44 @@ class LoginPacienteController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    /**
-     * Get a JWT token via given credentials.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    $credentials = $request->only('email', 'password');
 
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+    $user = User::where('email', $request->email)->first();
+
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['Las credenciales son incorrectas.'],
         ]);
-
-       $user = User::where('email', $request->email)->first();
-
-       if (!$user || !Hash::check($request->password, $user->password)) 
-        {
-            throw ValidationException::withMessages([
-                'email' => ['Las credenciales son incorrectas.'],
-            ]);
-        }
-
-        $credentials['email'] = $user->email;
-        $credentials['first_name'] = $user->first_name;
-        $credentials['last_name'] = $user->last_name;
-
-
-       
-        if ($token = $this->guard()->attempt($credentials)) {
-            return $this->respondWithToken($token);
-        }
-
-        
-
-        return response()->json(['error' => 'No se pudo iniciar la sesión. '], 401);
     }
 
+    $credentials['email'] = $user->email;
+    $credentials['first_name'] = $user->first_name;
+    $credentials['last_name'] = $user->last_name;
 
-
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        // return response()->json([
-        //     'access_token' => $token,
-        //     'token_type' => 'bearer',
-        //     'expires_in' => $this->guard()->factory()->getTTL() * 60
-        // ]);
-        $user = auth()->user(); // Obtener el usuario autenticado
+    if ($token = $this->guard()->attempt($credentials)) {
+        $paciente = $user->paciente; // Obtener el paciente asociado al usuario
         $data = [
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $this->guard()->factory()->getTTL() * 60,
+            'user_id' => $user->id,
             'email' => $user->email,
             'first_name' => $user->first_name,
-            'last_name' => $user->last_name
+            'last_name' => $user->last_name,
+            'paciente_id' => $paciente ? $paciente->id : null, // Agregar el paciente_id
         ];
         return response()->json($data);
     }
 
+    return response()->json(['error' => 'No se pudo iniciar la sesión.'], 401);
+}
 
      /**
      * Get the guard to be used during authentication.

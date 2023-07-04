@@ -98,11 +98,11 @@ ini_set('max_execution_time', 120);
 		table.inventory { clear: both; width: 100%; }
 		table.inventory th { font-weight: bold; text-align: center; }
 
-		table.inventory td:nth-child(1) { width: 26%; }
-		table.inventory td:nth-child(2) { width: 38%; }
-		table.inventory td:nth-child(3) { text-align: left; width: 12%; }
-		table.inventory td:nth-child(4) { text-align: left; width: 12%; }
-		table.inventory td:nth-child(5) { text-align: left; width: 12%; }
+		table.inventory td:nth-child(1) { width: 13%; }
+		table.inventory td:nth-child(2) { width: 13%; }
+		table.inventory td:nth-child(3) { text-align: left; width: 25%; }
+		table.inventory td:nth-child(4) { text-align: left; width: 36%; }
+		table.inventory td:nth-child(5) { text-align: left; width: 36%; }
 
 		/* table balance */
 
