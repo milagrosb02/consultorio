@@ -72,37 +72,35 @@ class LegajoController extends Controller
 
     
 
-    public function show($id)
-    {
-        // $legajo = Legajo::findOrFail($id);
-
-        // return response()->json([
-
-        //     //'message' => '¡Aqui esta tu legajo!',
-        //     'legajo' => $legajo
-
-        // ], 201);
-        
-        $legajo = Legajo::where('paciente_id', $id)->get();
-
-        if ($legajo) 
+    public function show($paciente_id)
     {
 
-        return response()->json([
+        $legajo = Legajo::where('paciente_id', $paciente_id)->get();
 
-            'message' => '¡Aquí está tu historial clinico!',
-            'legajo' => $legajo
 
-        ], 201);
+        if ($legajo->isEmpty()) 
+        {
+            return response()->json
+            ([
 
-    } else {
+                'message' => 'Aún no posees un historial clinico.'
 
-        return response()->json([
+            ], 404);
 
-            'message' => 'Aún no posees un historial clinico.'
+        } 
+        else 
+        {
+            return response()->json
+            ([
 
-        ], 404);
-    }
+                'message' => '¡Aquí está tu historial clinico!',
+
+                'legajo' => $legajo
+
+            ], 201);
+        }
+
+
 
     }
 
