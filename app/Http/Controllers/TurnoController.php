@@ -118,6 +118,18 @@ class TurnoController extends Controller
         }
 
 
+        // Verificar si hay cupo disponible para la fecha y hora del turno
+        $cuposDisponibles = Turno::where('fecha', $fecha->format('Y-m-d'))
+            ->whereNull('deleted_at')
+            ->count();
+
+        if ($cuposDisponibles >= 9) {
+            return response()->json([
+            'message' => 'No hay cupo disponible para turnos en esta fecha.',
+        ], 400);
+}
+
+
         $turno = Turno::create(array_merge($validateConsulta->validate(), [
             'fecha' => $fecha->format('Y-m-d'),
             'hora' => $hora->format('H:i'),
