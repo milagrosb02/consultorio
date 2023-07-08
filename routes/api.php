@@ -141,11 +141,9 @@ Route::group([
 
     Route::get('turnos/show/{paciente_id}', [TurnoController::class, 'show']);
 
-    //Route::put('turnos/edit/{id}', [TurnoController::class, 'update']);
-
     Route::get('turnos/cancelar/{turno_id}', [TurnoController::class, 'cancelar_turno']);
 
-    Route::get('legajo/show/{id}', [LegajoController::class, 'show']);
+    Route::get('legajo/show/{paciente_id}', [LegajoController::class, 'show']);
 
     Route::post('profile', [PacienteController::class, 'paciente_perfil']);
 

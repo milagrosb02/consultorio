@@ -30,4 +30,14 @@ class Legajo extends Model
          return $this->belongsTo(User::class, 'user_id');
      }
 
+
+     public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['fecha'] = $this->fecha->format('Y-m-d');
+
+        return $array;
+    }
+
 }

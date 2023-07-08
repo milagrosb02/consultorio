@@ -9,6 +9,7 @@ use App\Http\Resources\LegajoResource;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class LegajoController extends Controller
 {
@@ -32,9 +33,8 @@ class LegajoController extends Controller
 
             'tratamiento_id' => ['nullable'],
 
-            'user_id' => ['required'],
+            'user_id' => ['required']
 
-            'fecha' => ['required']
 
         ];
 
@@ -46,9 +46,7 @@ class LegajoController extends Controller
 
             'descripcion.max' => 'El campo excedio la cantidad de caracteres. ',
 
-            'user_id.required' => ['Debe estar el nombre de la profesional a cargo. '],
-
-            'fecha' => 'La fecha es obligatoria. '
+            'user_id.required' => ['Debe estar el nombre de la profesional a cargo. ']
 
         ];
 
@@ -56,8 +54,23 @@ class LegajoController extends Controller
          // creo la validación de datos
          $validateLegajo = Validator::make($request->all(), $rules, $messages);
 
+           // Verificar si la validación falla
+        if ($validateLegajo->fails()) 
+        {
+            return response()->json
+            ([
+                'message' => 'Error en los datos enviados.',
+                'errors' => $validateLegajo->errors(),
+            ], 400);
+        }
 
-         $legajo = Legajo::create(array_merge($validateLegajo->validate()));
+
+
+         $legajo = Legajo::create(array_merge($validateLegajo->validate(), [
+
+            'fecha' => Carbon::now()->format('Y-m-d') 
+
+         ]));
 
 
          return response()->json([
