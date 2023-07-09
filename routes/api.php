@@ -179,8 +179,7 @@ Route::group([
 ], function ($router){
 
 
-    Route::get('pacientes/turnos/Galmarini', [ProfesionalController::class, 'ver_pacientesGalmarini']);
-    Route::get('pacientes/turnos/Padros', [ProfesionalController::class, 'ver_pacientesPadros']);
+    Route::get('pacientes/turnos/{profesional_id}', [ProfesionalController::class, 'ver_pacientes']);
     Route::get('legajo/list', [LegajoController::class, 'index']);
     Route::post('profile', [ProfesionalController::class, 'profesional_perfil']);
 
