@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 
 
@@ -132,6 +133,10 @@ class RegisterController extends Controller
         ))->assignRole('paciente');
 
         
+         // Obtener el ID del rol "paciente"
+        $pacienteRoleId = Role::where('name', 'paciente')->value('id');   
+
+
 
         Paciente::create([
             'user_id' => $user->id,
@@ -149,7 +154,8 @@ class RegisterController extends Controller
 
         return response()->json([
             'message' => '¡Paciente creado!',
-            'user' => $user
+            'user' => $user,
+            'rol_id' => $pacienteRoleId
         ], 201);
     }
 
