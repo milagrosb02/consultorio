@@ -145,7 +145,7 @@ Route::group([
 
     Route::get('legajo/show/{paciente_id}', [LegajoController::class, 'show']);
 
-    Route::post('profile', [PacienteController::class, 'paciente_perfil']);
+    Route::get('profile', [PacienteController::class, 'paciente_perfil']);
 
     Route::get('obras_sociales', [RegisterController::class, 'listar_obras_sociales']);
 

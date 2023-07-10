@@ -116,9 +116,20 @@ class PacienteController extends Controller
         return Auth::guard();
     }
 
-    public function paciente_perfil()
+    public function paciente_perfil($paciente_id)
     {
-        return response()->json($this->guard()->user()->load('paciente'));
+        //return response()->json($this->guard()->user()->load('paciente'));
+
+        $pacientes = DB::table('users')
+        ->leftJoin('pacientes', 'users.id', '=' , 'pacientes.user_id')
+        ->leftJoin('obra_sociales', 'pacientes.obra_social_id', '=' , 'obra_sociales.id')
+        ->select('first_name AS nombre', 'last_name AS apellido', 'phone AS telefono', 'obra_social AS obra social')
+        //->where('pacientes.user_id', '=' , $paciente_id)
+        ->where('pacientes.user_id', '=' , $paciente_id) // mandar el id del paciente en react
+        ->get();
+
+        return response()->json($pacientes);
+
     }
 
    
