@@ -243,7 +243,14 @@ class TurnoController extends Controller
 
     public function ver_turno_del_dia()
     {
-        
+        $pacientes = DB::table('users')
+        ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')
+        ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
+        ->select('first_name AS nombre', 'last_name AS apellido')
+        ->whereDate('fecha', now())
+        ->get();
+
+        return response()->json($pacientes);
     }
 
 

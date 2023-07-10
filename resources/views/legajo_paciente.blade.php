@@ -166,14 +166,14 @@ ini_set('max_execution_time', 120);
 	<body>
 		<header>
 			<h1>LEGAJO</h1>
-            @foreach ($legajos as $legajo)
+            
 			<address contenteditable>
 
         <p>NOMBRE DEL PACIENTE: {{ $legajo->paciente?->user?->first_name .' '. $legajo->paciente?->user?->last_name }}</p>
         <p>OBRA SOCIAL: {{ $legajo->paciente?->obra_social?->obra_social}}</p>
         <p>TELEFONO: {{ $legajo->paciente?->phone }}</p> <br><br>
         <p>{{ \Carbon\Carbon::now()->format('d-m-Y H:i:s') }}</p>
-
+		
 			</address>
 			<span><img alt="" src="{{ public_path('imagenes/logo.png')}}" /></span>
 		</header>
@@ -193,6 +193,7 @@ ini_set('max_execution_time', 120);
 					</tr>
 				</thead>
 				<tbody>
+					@foreach($legajos as $legajo)
 					<tr>
 						<td><span>{{ $legajo->id }}</span></td>
 						<td><span>{{ $legajo->fecha->format('d-m-Y') }}</span></td>
@@ -200,11 +201,12 @@ ini_set('max_execution_time', 120);
             <td><span>{{ $legajo->tratamiento->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>
             <td><span>{{ $legajo->descripcion }}</span></td>
 					</tr>
+					@endforeach
 				</tbody>
 			</table>
 			
 			
 		</article>
-        @endforeach  
+       
 	</body>
 </html>
