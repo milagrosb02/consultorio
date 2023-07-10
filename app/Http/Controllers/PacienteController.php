@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Resources\PacienteResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ObraSociale;
 
 class PacienteController extends Controller
 {
@@ -133,5 +134,9 @@ class PacienteController extends Controller
     }
 
    
+    public function listar_obras_sociales()
+    {
+       return ObraSociale::select('id', 'obra_social')->get();
+    }
     
 }

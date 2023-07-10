@@ -161,9 +161,6 @@ class RegisterController extends Controller
 
 
 
-    public function listar_obras_sociales()
-    {
-       return ObraSociale::select('id', 'obra_social')->get();
-    }
+   
 
 }

@@ -43,7 +43,7 @@ Route::get('/forgot-password', function () {
 })->middleware('guest')->name('password.request');
 
 
-
+Route::get('obras_sociales', [PacienteController::class, 'listar_obras_sociales']);
 
 Route::group([
 
@@ -147,7 +147,7 @@ Route::group([
 
     Route::get('profile', [PacienteController::class, 'paciente_perfil']);
 
-    Route::get('obras_sociales', [RegisterController::class, 'listar_obras_sociales']);
+   
 
     Route::get('turno/especialidad/{profesional_id}', [TurnoController::class, 'listar_especialidades']);
 
