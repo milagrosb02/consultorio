@@ -14,6 +14,22 @@ class OdontogramaCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+
+            'data' => $this->collection,
+
+            'pieza_id' => $this->pieza_id,
+
+            'legajo_id' => $this->legajo_id,
+
+            'tratamiento_id' => $this->tratamiento_id,
+
+            'diagnostico' => $this->diagnostico,
+
+            'anomalia_color_id' => $this->anomalia_color_id,
+
+            'created_at' => $this->created_at
+
+        ];
     }
 }

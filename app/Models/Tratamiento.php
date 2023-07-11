@@ -18,8 +18,9 @@ class Tratamiento extends Model
     }
 
 
-    public function odontograma()
+    public function odontogramas()
     {
-        return $this->belongsTo(Odontograma::class);
+        return $this->hasMany(Odontograma::class, 'tratamiento_id');
     }
+
 }

@@ -9,12 +9,14 @@ class AnomaliaColor extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id', 'color'];
+
     public $table = "anomalias_colores";
 
 
     public function odontograma()
     {
-        return $this->belongsTo(Odontograma::class);
+        return $this->belongsTo(Odontograma::class, 'id');
     }
 
 

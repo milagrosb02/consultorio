@@ -19,7 +19,7 @@ class OdontogramaController extends Controller
      */
     public function index()
     {
-        //
+        return OdontogramaResource::collection(Odontograma::with('pieza', 'tratamiento', 'anomalias_colores', 'legajo', 'cara_odontograma')->get());
     }
 
     /**

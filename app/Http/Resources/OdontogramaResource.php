@@ -14,6 +14,22 @@ class OdontogramaResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return[
+
+            'id' => $this->id,
+
+            'pieza nro' => $this->pieza->pieza,   
+
+            "paciente" => $this->legajo->paciente->user->first_name .' '. $this->legajo->paciente->user->last_name,
+
+            "tratamiento" => $this->tratamiento->tratamiento ?? 'No se realizo un tratamiento. ',
+
+            "diagnostico de la pieza" => $this->diagnostico,
+
+            "color de la pieza" => $this->anomalias_colores->first()->color,
+
+            "fecha y hora" => $this->created_at
+
+        ];
     }
 }

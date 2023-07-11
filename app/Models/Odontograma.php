@@ -9,38 +9,42 @@ class Odontograma extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pieza_id', 'tratamiento_id', 'diagnostico', 'anomalia_color_id', 'legajo_id', 'cara_odontograma_id'];
+    protected $fillable = ['pieza_id', 'tratamiento_id', 'diagnostico', 'anomalia_color_id', 'legajo_id', 'cara_odontograma_id', 'created_at'];
 
     protected $date =['created_at'];
 
 
-    public function piezas()
+    public function pieza()
     {
-        return $this->hasMany(Pieza::class, 'pieza_id');
+        return $this->belongsTo(Pieza::class, 'pieza_id');
     }
+    
 
 
-    public function tratamientos()
+    public function tratamiento()
     {
-        return $this->hasMany(Tratamiento::class, 'tratamiento_id');
+        return $this->belongsTo(Tratamiento::class, 'tratamiento_id');
     }
 
 
     public function anomalias_colores()
     {
-        return $this->hasMany(AnomaliaColor::class, 'anomalia_color_id');   
+        return $this->hasMany(AnomaliaColor::class, 'id');   
     }
 
 
     public function legajo()
     {
-        return $this->hasOne(Legajo::class, 'legajo_id');
+        return $this->belongsTo(Legajo::class, 'legajo_id');
     }
+
 
 
     public function cara_odontograma()
     {
-        return $this->hasMany(CaraOdontograma::class, 'cara_odontograma_id'); 
+        return $this->hasMany(CaraOdontograma::class, 'id'); 
     }
+
+
 
 }

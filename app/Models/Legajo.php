@@ -41,9 +41,10 @@ class Legajo extends Model
     }
 
 
-    public function odontograma()
+    public function odontogramas()
     {
-        return $this->belongsTo(Odontograma::class);
+        return $this->hasOne(Odontograma::class, 'legajo_id');
     }
+
 
 }

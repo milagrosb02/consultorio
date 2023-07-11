@@ -9,11 +9,13 @@ class CaraOdontograma extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id', 'nombre'];
+
     public $table = "caras_odontograma";
     
 
     public function odontograma()
     {
-        return $this->belongsTo(Odontograma::class);
+        return $this->belongsTo(Odontograma::class, 'id');
     }
 }

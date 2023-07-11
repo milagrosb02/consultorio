@@ -12,8 +12,9 @@ class Pieza extends Model
     protected $fillable = ['id', 'pieza'];
 
 
-    public function odontograma()
+    public function odontogramas()
     {
-        return $this->belongsTo(Odontograma::class);
+        return $this->hasMany(Odontograma::class, 'pieza_id');
     }
+
 }
