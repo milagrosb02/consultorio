@@ -17,6 +17,7 @@ use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\ProfesionalController;
 use App\Http\Controllers\LegajoController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\OdontogramaController;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -119,6 +120,10 @@ Route::group([
     Route::put('legajo/update/{id}', [LegajoController::class, 'update']);
 
     Route::post('profile', [AdminController::class, 'admin_perfil']);
+
+
+    // odontograma
+    Route::post('odontograma/create', [OdontogramaController::class, 'store']);
 
 
 });

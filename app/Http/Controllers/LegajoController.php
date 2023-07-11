@@ -7,7 +7,6 @@ use App\Models\Legajo;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\LegajoResource;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 

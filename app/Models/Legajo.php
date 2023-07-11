@@ -40,4 +40,10 @@ class Legajo extends Model
         return $array;
     }
 
+
+    public function odontograma()
+    {
+        return $this->belongsTo(Odontograma::class);
+    }
+
 }

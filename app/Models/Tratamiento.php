@@ -18,4 +18,8 @@ class Tratamiento extends Model
     }
 
 
+    public function odontograma()
+    {
+        return $this->belongsTo(Odontograma::class);
+    }
 }

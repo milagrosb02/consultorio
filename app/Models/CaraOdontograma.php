@@ -10,4 +10,10 @@ class CaraOdontograma extends Model
     use HasFactory;
 
     public $table = "caras_odontograma";
+    
+
+    public function odontograma()
+    {
+        return $this->belongsTo(Odontograma::class);
+    }
 }

@@ -12,15 +12,6 @@ class ProfesionalController extends Controller
    
     public function ver_pacientes($profesional_id)
     {
-        // $pacientes = DB::table('users')
-        //             ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')
-        //             ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
-        //             ->select('first_name AS nombre', 'last_name AS apellido')
-        //             ->where('turnos.user_id', '=' , $profesional_id)
-        //             ->distinct()
-        //             ->get();
-
-        // return response()->json($pacientes);
 
         $pacientes = DB::table('users')
         ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')

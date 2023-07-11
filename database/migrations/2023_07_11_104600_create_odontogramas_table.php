@@ -22,7 +22,7 @@ class CreateOdontogramasTable extends Migration
              $table->foreign('pieza_id')->references('id')->on('piezas');
 
               // hago relacion con el tratamiento
-            $table->unsignedBigInteger('tratamiento_id')->constrained();
+            $table->unsignedBigInteger('tratamiento_id')->nullable()->constrained();
             $table->foreign('tratamiento_id')->references('id')->on('tratamientos');
 
             $table->string('diagnostico');
@@ -43,9 +43,6 @@ class CreateOdontogramasTable extends Migration
  
 
             //campo fecha y hora para que se guarden al momento de registrar el dato
-            $table->date('fecha');
-            $table->time('hora');
-
             $table->timestamps();
 
 

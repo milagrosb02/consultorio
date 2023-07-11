@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Odontograma;
+use Carbon\Carbon;
+use App\Http\Resources\OdontogramaResource;
+
 
 class OdontogramaController extends Controller
 {
@@ -29,9 +35,9 @@ class OdontogramaController extends Controller
         [
             'pieza_id' => ['required'],
 
-            'tratamiento_id' => ['string', 'max: 100'],
+            'tratamiento_id' => ['nullable'],
 
-            'diagnostico' => ['nullable'],
+            'diagnostico' => ['string', 'required'],
 
             'anomalia_color_id' => ['required'],
 
@@ -40,6 +46,51 @@ class OdontogramaController extends Controller
             'cara_odontograma_id' => ['required'],
 
         ];
+
+
+        $messages = 
+        [
+            'pieza_id.required' => ['Debe seleccionar una pieza dental. '],
+
+            'diagnostico.required' => ['Debes escribir un diagnostico sobre el estado de este diente. '],
+
+            'anomalia_color_id.required' => ['Selecciona un color de referencia. '],
+
+            'legajo_id.required' => ['Selecciona al legajo que pertenece este odontograma. '],
+
+            'cara_odontograma_id.required' => ['Debe seleccionar la cara a la que pertenecese esta pieza. ']
+
+        ];
+
+
+        $validateOdontograma = Validator::make($request->all(), $rules, $messages);
+
+          // Verificar si la validación falla
+          if ($validateOdontograma->fails()) 
+          {
+              return response()->json
+              ([
+                  'message' => 'Error en los datos enviados. Repita el proceso. ',
+                  'errors' => $validateOdontograma->errors(),
+              ], 400);
+          }
+
+
+          // si el estatus es 200, se crea el odonto
+          $odontograma = Odontograma::create(array_merge($validateOdontograma->validate(), [
+
+           // 'fecha' => Carbon::now()->format('Y-m-d') 
+
+         ]));
+
+         return response()->json([
+ 
+            'message' => '¡Odontograma creado!',
+            'odontograma' => $odontograma
+
+        ], 201);
+
+
     }
 
     /**
