@@ -18,6 +18,7 @@ use App\Http\Controllers\ProfesionalController;
 use App\Http\Controllers\LegajoController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\OdontogramaController;
+use App\Models\Odontograma;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -153,9 +154,10 @@ Route::group([
 
     Route::get('profile', [PacienteController::class, 'paciente_perfil']);
 
-   
-
     Route::get('turno/especialidad/{profesional_id}', [TurnoController::class, 'listar_especialidades']);
+
+    Route::get('odontograma/show/{paciente_id}', [OdontogramaController::class, 'show']);
+
 
 });
 

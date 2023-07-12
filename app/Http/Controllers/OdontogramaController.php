@@ -99,9 +99,34 @@ class OdontogramaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($paciente_id)
     {
-        //
+        
+        $odontograma = Odontograma::join('legajos', 'odontogramas.legajo_id', '=', 'legajos.id')
+
+                    ->join('pacientes', 'legajos.paciente_id', '=', 'pacientes.id')
+                    ->where('pacientes.id', $paciente_id)
+                    ->select('odontogramas.*')
+                    ->get();
+
+        if ($odontograma->isEmpty()) 
+        {
+            return response()->json
+            ([
+                'message' => 'Aún no posees un odontograma.'
+            ], 404);
+
+
+        } 
+        else 
+        {
+
+            return response()->json([
+                'message' => '¡Aquí está tu odontograma!',
+                'odontograma' => $odontograma
+            ], 201);
+        }
+
     }
 
     /**
