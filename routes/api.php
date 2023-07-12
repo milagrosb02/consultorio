@@ -126,6 +126,7 @@ Route::group([
     // odontograma
     Route::post('odontograma/create', [OdontogramaController::class, 'store']);
     Route::get('odontograma/list', [OdontogramaController::class, 'index']);
+    Route::put('odontograma/update/{paciente_id}', [OdontogramaController::class, 'update']);
 
 
 });

@@ -8,6 +8,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Odontograma;
 use Carbon\Carbon;
 use App\Http\Resources\OdontogramaResource;
+use App\Models\Legajo;
 
 
 class OdontogramaController extends Controller
@@ -118,10 +119,12 @@ class OdontogramaController extends Controller
         {
 
             // Personalizar el formato de la hora en cada objeto Odontograma
-        $odontograma->map(function ($item) {
-            $item->created_at = Carbon::parse($item->created_at)->format('Y-m-d H:i');
-            return $item;
-        });
+            $odontograma->map(function ($item) 
+            {
+                $item->created_at = Carbon::parse($item->created_at)->format('Y-m-d H:i');
+                return $item;
+
+            });
 
             return response()->json([
                 'message' => '¡Aquí está tu odontograma!',
@@ -138,9 +141,31 @@ class OdontogramaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $paciente_id)
     {
-        //
+        $modificar_odontograma = $request->only([
+            'pieza_id',
+            'tratamiento_id',
+            'diagnostico',
+            'anomalia_color_id',
+            'cara_odontograma_id'
+        ]);
+    
+        $legajo = Legajo::where('paciente_id', $paciente_id)->firstOrFail();
+        $odontograma = $legajo->odontogramas;
+    
+        if (!$odontograma) {
+            return response()->json([
+                'message' => 'No se encontró un odontograma para el paciente.'
+            ], 404);
+        }
+    
+        $odontograma->update($modificar_odontograma);
+    
+        return response()->json([
+            'message' => '¡Odontograma modificado!',
+            'odontograma' => $odontograma
+        ], 201);
     }
 
   
