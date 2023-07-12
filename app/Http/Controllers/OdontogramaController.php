@@ -77,11 +77,7 @@ class OdontogramaController extends Controller
 
 
           // si el estatus es 200, se crea el odonto
-          $odontograma = Odontograma::create(array_merge($validateOdontograma->validate(), [
-
-           // 'fecha' => Carbon::now()->format('Y-m-d') 
-
-         ]));
+          $odontograma = Odontograma::create(array_merge($validateOdontograma->validate()));
 
          return response()->json([
  
@@ -120,6 +116,12 @@ class OdontogramaController extends Controller
         } 
         else 
         {
+
+            // Personalizar el formato de la hora en cada objeto Odontograma
+        $odontograma->map(function ($item) {
+            $item->created_at = Carbon::parse($item->created_at)->format('Y-m-d H:i');
+            return $item;
+        });
 
             return response()->json([
                 'message' => '¡Aquí está tu odontograma!',
