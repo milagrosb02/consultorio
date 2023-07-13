@@ -9,6 +9,7 @@ use App\Models\Odontograma;
 use Carbon\Carbon;
 use App\Http\Resources\OdontogramaResource;
 use App\Models\Legajo;
+use App\Models\Paciente;
 
 
 class OdontogramaController extends Controller
@@ -166,6 +167,24 @@ class OdontogramaController extends Controller
             'message' => '¡Odontograma modificado!',
             'odontograma' => $odontograma
         ], 201);
+    }
+
+
+
+    public function generarPDFPaciente($paciente_id)
+    {
+        $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalias_colores', 'legajo', 'cara_odontograma')
+        ->whereHas('legajo', function ($query) use ($paciente_id) {
+            $query->where('paciente_id', $paciente_id);
+        })
+        ->get();
+
+        $paciente = Paciente::with('legajo')->find($paciente_id);
+
+        $pdf = Pdf::loadView('odonto_paciente', compact('odontogramas', 'paciente'))
+            ->setPaper('a4', 'landscape');
+    
+        return $pdf->stream('paciente_odontograma_unico.pdf');
     }
 
   

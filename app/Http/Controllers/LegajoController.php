@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Legajo;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\LegajoResource;
+use App\Models\Tratamiento;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -187,4 +188,13 @@ class LegajoController extends Controller
         return $pacientes;
         
     }
+
+
+    // SELECT PARA TRAER LOS TRATAMIENTOS
+    public function listar_tratamientos()
+    {
+        return Tratamiento::select('id', 'nombre')->get();
+    }
+
+    
 }

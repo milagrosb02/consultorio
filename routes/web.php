@@ -30,6 +30,9 @@ Route::get('/turnos/reportTurnosPDF', [App\Http\Controllers\TurnoController::cla
 Route::get('/turnos/reportPDFPaciente/{paciente_id}', [App\Http\Controllers\TurnoController::class, 'generarPDFPaciente'])->name('turno2');
 
 
+// ODONTOGRAMA EN PDF
+Route::get('/turnos/reportPDFPaciente/{paciente_id}', [App\Http\Controllers\OdontogramaController::class, 'generarPDFPaciente'])->name('odonto1');
+
 
   
 Route::get('/login', function () {

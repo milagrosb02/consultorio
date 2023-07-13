@@ -114,7 +114,7 @@ Route::group([
     Route::get('tratamientos/list', [TratamientoController::class, 'index']);
     Route::put('tratamientos/update/{id}', [TratamientoController::class, 'update']);
     Route::get('tratamientos/search/{tratamiento}', [TratamientoController::class, 'buscar_tratamiento']);
-
+    Route::get('tratamientos/select', [LegajoController::class, 'listar_tratamientos']);
 
     Route::post('legajo/create', [LegajoController::class, 'store']);
     Route::get('legajo/list', [LegajoController::class, 'index']);
