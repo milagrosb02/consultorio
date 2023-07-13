@@ -155,7 +155,7 @@ Route::group([
 
     Route::get('legajo/show/{paciente_id}', [LegajoController::class, 'show']);
 
-    Route::get('profile', [PacienteController::class, 'paciente_perfil']);
+    Route::get('profile/{paciente_id}', [PacienteController::class, 'paciente_perfil']);
 
     Route::get('turno/especialidad/{profesional_id}', [TurnoController::class, 'listar_especialidades']);
 

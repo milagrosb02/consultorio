@@ -124,7 +124,7 @@ class PacienteController extends Controller
         $pacientes = DB::table('users')
         ->leftJoin('pacientes', 'users.id', '=' , 'pacientes.user_id')
         ->leftJoin('obra_sociales', 'pacientes.obra_social_id', '=' , 'obra_sociales.id')
-        ->select('first_name AS nombre', 'last_name AS apellido', 'phone AS telefono', 'obra_social AS obra social')
+        ->select('first_name AS nombre', 'last_name AS apellido', 'phone AS telefono', 'obra_social AS obra_social')
         //->where('pacientes.user_id', '=' , $paciente_id)
         ->where('pacientes.user_id', '=' , $paciente_id) // mandar el id del paciente en react
         ->get();
