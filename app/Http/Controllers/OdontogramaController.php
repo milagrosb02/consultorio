@@ -8,9 +8,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Odontograma;
 use Carbon\Carbon;
 use App\Http\Resources\OdontogramaResource;
+use App\Models\AnomaliaColor;
+use App\Models\CaraOdontograma;
 use App\Models\Legajo;
 use App\Models\Paciente;
-
+use App\Models\Pieza;
 
 class OdontogramaController extends Controller
 {
@@ -188,4 +190,21 @@ class OdontogramaController extends Controller
     }
 
   
+    public function listar_piezas_dentales()
+    {
+        return Pieza::select('id', 'pieza')->get();
+    }
+
+
+    public function listar_caras_dentales()
+    {
+        return CaraOdontograma::select('id', 'nombre')->get();
+    }
+
+
+    public function listar_colores_anomalias()
+    {
+        return AnomaliaColor::select('id', 'color')->get();
+    }
+
 }
