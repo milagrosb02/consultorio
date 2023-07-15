@@ -20,7 +20,7 @@ class OdontogramaResource extends JsonResource
 
             'pieza nro' => $this->pieza->pieza,   
 
-            "paciente" => $this->legajo->paciente->user->first_name .' '. $this->legajo->paciente->user->last_name,
+            "paciente" => $this->legajo->paciente?->user?->first_name .' '. $this->legajo->paciente?->user?->last_name,
 
             "tratamiento" => $this->tratamiento->tratamiento ?? 'No se realizo un tratamiento. ',
 

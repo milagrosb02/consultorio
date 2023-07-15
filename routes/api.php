@@ -112,7 +112,7 @@ Route::group([
 
     Route::post('tratamientos/create', [TratamientoController::class, 'store']);
     Route::get('tratamientos/list', [TratamientoController::class, 'index']);
-    Route::put('tratamientos/update/{id}', [TratamientoController::class, 'update']);
+    Route::delete('tratamientos/delete/{id}', [TratamientoController::class, 'destroy']);
     Route::get('tratamientos/search/{tratamiento}', [TratamientoController::class, 'buscar_tratamiento']);
     Route::get('tratamientos/select', [LegajoController::class, 'listar_tratamientos']);
 

@@ -16,6 +16,7 @@ class TratamientoResource extends JsonResource
     {
         return[
 
+            'id' => $this->id,
             'tratamiento' => $this->nombre
         ];
     }

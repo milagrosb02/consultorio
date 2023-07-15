@@ -67,53 +67,26 @@ class TratamientoController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+   
+
+    public function destroy(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-
-            'nombre' => 'string|max:70'
-
-        ]);
-
-
-        $modificar_tratamiento = 
+        $borrar_tratamiento = 
         [
-
             'nombre' => $request->nombre
-
         ];
 
-
-        $tratamiento = Tratamiento::where('id', $id)->firstOrFail();
-
-        $tratamiento->update($modificar_tratamiento);
+        Tratamiento::whereId($id)->delete($borrar_tratamiento);
 
         return response()->json([
 
-            'message' => '¡Tratamiento modificado!',
-            'tratamiento' => $tratamiento
-
-        ], 201);
+         'message' => '¡Tratamiento borrado!'
         
+        ], 201);
     }
+
+
+    
 
 
 

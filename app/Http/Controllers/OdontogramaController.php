@@ -173,7 +173,7 @@ class OdontogramaController extends Controller
 
 
 
-    public function generarPDFPaciente($paciente_id)
+    public function generarOdontogramaPDF($paciente_id)
     {
         $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalias_colores', 'legajo', 'cara_odontograma')
         ->whereHas('legajo', function ($query) use ($paciente_id) {

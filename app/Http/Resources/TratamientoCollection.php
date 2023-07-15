@@ -18,6 +18,8 @@ class TratamientoCollection extends ResourceCollection
 
             'data' => $this->collection,
 
+            'id' => $this->id,
+
             'nombre' => $this->nombre
 
         ];
