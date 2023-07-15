@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
+
 
 class LoginPacienteController extends Controller
 {
@@ -43,6 +45,13 @@ class LoginPacienteController extends Controller
     $credentials['first_name'] = $user->first_name;
     $credentials['last_name'] = $user->last_name;
 
+
+    if ($user->hasRole('paciente')) {
+        $data['rol'] = 'paciente';
+    }
+
+
+
     if ($token = $this->guard()->attempt($credentials)) {
         $paciente = $user->paciente; // Obtener el paciente asociado al usuario
         $data = [
@@ -54,6 +63,7 @@ class LoginPacienteController extends Controller
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'paciente_id' => $paciente ? $paciente->id : null, // Agregar el paciente_id
+            'rol' => isset($data['rol']) ? $data['rol'] : null // Agregar la clave 'rol'
         ];
         return response()->json($data);
     }

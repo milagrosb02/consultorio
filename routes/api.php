@@ -161,6 +161,8 @@ Route::group([
 
     Route::get('odontograma/show/{paciente_id}', [OdontogramaController::class, 'show']);
 
+    Route::get('obra_social/select', [PacienteController::class, 'listar_obras_sociales']);
+
 
 });
 
