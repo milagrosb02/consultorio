@@ -17,6 +17,12 @@ class CreateOdontogramasTable extends Migration
 
             $table->id();
 
+
+            // cambio relacion a pacientes
+            $table->unsignedBigInteger('paciente_id')->constrained();
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
+           
+
              // hago relacion con pieza
              $table->unsignedBigInteger('pieza_id')->constrained();
              $table->foreign('pieza_id')->references('id')->on('piezas');
@@ -25,22 +31,18 @@ class CreateOdontogramasTable extends Migration
             $table->unsignedBigInteger('tratamiento_id')->nullable()->constrained();
             $table->foreign('tratamiento_id')->references('id')->on('tratamientos');
 
-            $table->string('diagnostico');
 
             // hago relacion con los colores
             $table->unsignedBigInteger('anomalia_color_id')->constrained();
             $table->foreign('anomalia_color_id')->references('id')->on('anomalias_colores');
 
-            // hago relacion con historial clinico
-            $table->unsignedBigInteger('legajo_id')->constrained();
-            $table->foreign('legajo_id')->references('id')->on('legajos');
-
-           
             
             // hago relacion con caras dentales
             $table->unsignedBigInteger('cara_odontograma_id')->constrained();
             $table->foreign('cara_odontograma_id')->references('id')->on('caras_odontograma');
- 
+            
+
+            $table->string('diagnostico');
 
             //campo fecha y hora para que se guarden al momento de registrar el dato
             $table->timestamps();

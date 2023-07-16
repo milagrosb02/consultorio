@@ -52,7 +52,7 @@ class Paciente extends Model
 
     public function odontograma()
     {
-        return $this->belongsTo(Odontograma::class);
+        return $this->hasOne(Odontograma::class);
     }
 
 }

@@ -37,23 +37,28 @@ class OdontogramaController extends Controller
         // reglas
         $rules = 
         [
+
+            'paciente_id' => ['required'],
+
             'pieza_id' => ['required'],
 
             'tratamiento_id' => ['nullable'],
 
-            'diagnostico' => ['string', 'required'],
-
             'anomalia_color_id' => ['required'],
-
-            'legajo_id' => ['required'],
 
             'cara_odontograma_id' => ['required'],
 
+            'diagnostico' => ['string', 'required'],
+
+            
         ];
 
 
         $messages = 
         [
+
+            'paciente_id.required' => ['Debe seleccionar el paciente. '],
+
             'pieza_id.required' => ['Debe seleccionar una pieza dental. '],
 
             'diagnostico.required' => ['Debes escribir un diagnostico sobre el estado de este diente. '],
@@ -102,38 +107,31 @@ class OdontogramaController extends Controller
     public function show($paciente_id)
     {
         
-        $odontograma = Odontograma::join('legajos', 'odontogramas.legajo_id', '=', 'legajos.id')
+        $odontograma = Odontograma::where('paciente_id', $paciente_id)->get();
 
-                    ->join('pacientes', 'legajos.paciente_id', '=', 'pacientes.id')
-                    ->where('pacientes.id', $paciente_id)
-                    ->select('odontogramas.*')
-                    ->get();
 
         if ($odontograma->isEmpty()) 
         {
             return response()->json
             ([
-                'message' => 'Aún no posees un odontograma.'
-            ], 404);
 
+                'message' => 'Aún no posees un odontograma.'
+
+            ], 404);
 
         } 
         else 
         {
+            return response()->json
+            ([
 
-            // Personalizar el formato de la hora en cada objeto Odontograma
-            $odontograma->map(function ($item) 
-            {
-                $item->created_at = Carbon::parse($item->created_at)->format('Y-m-d H:i');
-                return $item;
-
-            });
-
-            return response()->json([
                 'message' => '¡Aquí está tu odontograma!',
+
                 'odontograma' => $odontograma
+
             ], 201);
         }
+
 
     }
 

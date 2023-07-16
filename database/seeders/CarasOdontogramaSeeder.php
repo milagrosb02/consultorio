@@ -17,8 +17,6 @@ class CarasOdontogramaSeeder extends Seeder
          // CREO LAS CARAS DEL ODONTO
          CaraOdontograma::create(['nombre' => 'Vestibular']);
 
-         CaraOdontograma::create(['nombre' => 'Linguar']);
-
          CaraOdontograma::create(['nombre' => 'Palatino']);
 
          CaraOdontograma::create(['nombre' => 'Mesial']);

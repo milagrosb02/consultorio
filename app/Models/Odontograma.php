@@ -10,7 +10,7 @@ class Odontograma extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pieza_id', 'tratamiento_id', 'diagnostico', 'anomalia_color_id', 'legajo_id', 'cara_odontograma_id', 'created_at'];
+    protected $fillable = ['paciente_id','pieza_id', 'tratamiento_id', 'diagnostico', 'anomalia_color_id', 'legajo_id', 'cara_odontograma_id', 'created_at'];
 
     
     public function toArray()
@@ -39,9 +39,9 @@ class Odontograma extends Model
     }
 
 
-    public function legajo()
+    public function paciente()
     {
-        return $this->belongsTo(Legajo::class, 'legajo_id');
+        return $this->belongsTo(Paciente::class, 'paciente_id');
     }
 
 
