@@ -98,11 +98,13 @@ ini_set('max_execution_time', 120);
 		table.inventory { clear: both; width: 100%; }
 		table.inventory th { font-weight: bold; text-align: center; }
 
-		table.inventory td:nth-child(1) { width: 13%; }
-		table.inventory td:nth-child(2) { width: 13%; }
+		table.inventory td:nth-child(1) { width: 19%; }
+		table.inventory td:nth-child(2) { width: 19%; }
 		table.inventory td:nth-child(3) { text-align: left; width: 25%; }
 		table.inventory td:nth-child(4) { text-align: left; width: 36%; }
 		table.inventory td:nth-child(5) { text-align: left; width: 36%; }
+		table.inventory td:nth-child(6) { text-align: left; width: 40%; }
+		table.inventory td:nth-child(7) { text-align: left; width: 45%; }
 
 		/* table balance */
 
@@ -166,6 +168,7 @@ ini_set('max_execution_time', 120);
 	<body>
 		<header>
 			<h1>ODONTOGRAMA</h1>
+			@foreach($odontogramas as $odontograma)	
             
 			<address contenteditable>
 
@@ -176,8 +179,27 @@ ini_set('max_execution_time', 120);
 			</address>
 			<span><img alt="" src="{{ public_path('imagenes/logo.png')}}" /></span>
 		</header>
-		<h1 class="text-center">Detalles del Historial Clinico</h1>
+		<h1 class="text-center">Detalles del Odontograma</h1>
 		<article>
+
+		<table class="meta">
+				<tr>
+					<th><span>COLOR</span></th>
+					<td>
+            			@foreach($odontograma->anomalias_colores as $anomaliaColor)
+                		<span>{{ $anomaliaColor->color }}</span><br>
+            			@endforeach
+        			</td>
+				</tr>
+				<tr>
+					<th><span>REFERENCIA</span></th>
+					<td>
+            			@foreach($odontograma->anomalias_colores as $anomaliaColor)
+                		<span>{{ $anomaliaColor->descripcion }}</span><br>
+           			 	@endforeach
+        			</td>
+				</tr>
+		</table>
 			
 			<table class="inventory">
 				<thead>
@@ -188,19 +210,19 @@ ini_set('max_execution_time', 120);
                         <th><span>PIEZA</span></th>
                         <th><span>COLOR</span></th>
                         <th><span>CARA DENTAL</span></th>
-                        <th><span>TRATAMIENTO(S) REALIZADOS</span></th>
+                       {{-- <th><span>TRATAMIENTO(S) REALIZADOS</span></th> --}} 
                         <th><span>DIAGNOSTICO</span></th>
 						
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($odontogramas as $odontograma)
+					
 					<tr>
 						<td><span>{{ $odontograma->id }}</span></td>
 						<td><span>{{ $odontograma->created_at->format('d-m-Y') }}</span></td>
 						<td><span>{{ $odontograma->pieza?->pieza }}</span></td>
                         <td><span>{{ $odontograma->anomalias_colores->first()?->color }}</span></td>
-                        {{-- <td><span>{{ $odontograma->cara_odontograma?->nombre }}</span></td> --}} 
+                    	{{-- <td><span>{{ $odontograma->cara_odontograma?->nombre }}</span></td> --}}  
                         <td><span>{{ $odontograma->tratamiento->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>
                         <td><span>{{ $odontograma->diagnostico }}</span></td>
 					</tr>

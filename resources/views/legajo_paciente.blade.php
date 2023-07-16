@@ -198,8 +198,8 @@ ini_set('max_execution_time', 120);
 						<td><span>{{ $legajo->id }}</span></td>
 						<td><span>{{ $legajo->fecha->format('d-m-Y') }}</span></td>
 						<td><span>{{ $legajo->profesional?->first_name .' '. $legajo->profesional?->last_name }}</span></td>
-            <td><span>{{ $legajo->tratamiento->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>
-            <td><span>{{ $legajo->descripcion }}</span></td>
+            			<td><span>{{ $legajo->tratamiento->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>
+            			<td><span>{{ $legajo->descripcion }}</span></td>
 					</tr>
 					@endforeach
 				</tbody>
