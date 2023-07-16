@@ -15,15 +15,17 @@ class AnomaliaColorSeeder extends Seeder
     public function run()
     {
         // CREO COLORES
-        AnomaliaColor::create(['color' => 'Rojo']);
 
-        AnomaliaColor::create(['color' => 'Azul']);
+        AnomaliaColor::create(['color' => 'Rojo', 'descripcion' => 'Patologia o lesión. ']);
 
-        AnomaliaColor::create(['color' => 'Verde']);
+        AnomaliaColor::create(['color' => 'Azul', 'descripcion' => 'Tratamiento que el paciente tiene hecho. ']);
 
-        AnomaliaColor::create(['color' => 'Amarillo']);
+        AnomaliaColor::create(['color' => 'Verde', 'descripcion' => 'Caries radiográficas. ']);
 
-        AnomaliaColor::create(['color' => 'Negro']);
+        AnomaliaColor::create(['color' => 'Amarillo', 'descripcion' => 'Sellado de fosas y fisuras. ']);
+
+        AnomaliaColor::create(['color' => 'Negro', 'descripcion' => 'Ausencias naturales. ']);
+        
 
     }
 }
