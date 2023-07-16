@@ -32,7 +32,7 @@ class TratamientoController extends Controller
         $rules = 
         [
 
-            'nombre' => ['required', 'string', 'max: 70']
+            'nombre' => ['required', 'string', 'max: 70', 'unique:tratamientos,nombre']
 
         ];
 
@@ -45,8 +45,9 @@ class TratamientoController extends Controller
 
             'nombre.string' => 'El nombre del tratamiento deben ser caracteres alfanuméricos. ',
 
-            'nombre.max' => 'El nombre del tratamiento es demasiado largo. '
+            'nombre.max' => 'El nombre del tratamiento es demasiado largo. ',
 
+            'nombre.unique' => 'Este tratamiento ya se encuentra en la lista.'
         ];
 
 
