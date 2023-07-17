@@ -173,15 +173,13 @@ class OdontogramaController extends Controller
 
     public function generarOdontogramaPDF($paciente_id)
     {
-        $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalias_colores', 'legajo', 'cara_odontograma')
-        ->whereHas('legajo', function ($query) use ($paciente_id) {
-            $query->where('paciente_id', $paciente_id);
-        })
-        ->get();
+        
+        $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma');
 
-        $paciente = Paciente::with('legajo')->find($paciente_id);
+        $odontograma = Odontograma::with('paciente')->where("paciente_id",$paciente_id)->latest()->first();
+        
 
-        $pdf = Pdf::loadView('odonto_paciente', compact('odontogramas', 'paciente'))
+        $pdf = Pdf::loadView('odonto_paciente', compact('odontogramas', 'odontograma'))
             ->setPaper('a4', 'landscape');
     
         return $pdf->stream('paciente_odontograma_unico.pdf');

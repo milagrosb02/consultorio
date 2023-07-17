@@ -20,13 +20,15 @@ class OdontogramaResource extends JsonResource
 
             'pieza nro' => $this->pieza->pieza,   
 
-            "paciente" => $this->legajo->paciente?->user?->first_name .' '. $this->legajo->paciente?->user?->last_name,
+            "paciente" => $this->paciente?->user?->first_name .' '. $this->paciente?->user?->last_name,
 
             "tratamiento" => $this->tratamiento->tratamiento ?? 'No se realizo un tratamiento. ',
 
             "diagnostico de la pieza" => $this->diagnostico,
 
-            "color de la pieza" => $this->anomalias_colores->first()->color,
+            "color de la pieza" => $this->anomalias_colores->pluck('color'),
+
+            "descripcion de la pieza" => $this->anomalias_colores->pluck('descripcion'),
 
             "fecha y hora" => $this->created_at
 

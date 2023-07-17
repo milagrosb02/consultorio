@@ -90,7 +90,7 @@ ini_set('max_execution_time', 120);
 
 		/* table meta */
 
-		table.meta th { width: 40%; }
+		table.meta th { width: 70%; }
 		table.meta td { width: 60%; }
 
 		/* table items */
@@ -168,11 +168,11 @@ ini_set('max_execution_time', 120);
 	<body>
 		<header>
 			<h1>ODONTOGRAMA</h1>
-			@foreach($odontogramas as $odontograma)	
+			
             
 			<address contenteditable>
 
-        <p>NOMBRE DEL PACIENTE: {{ $paciente->user?->first_name .' '. $paciente->user?->last_name }}</p>
+        <p>NOMBRE DEL PACIENTE: {{ $odontograma->paciente?->user->first_name .' '. $odontograma->paciente?->user->last_name }}</p>
         
         <p>{{ \Carbon\Carbon::now()->format('d-m-Y H:i:s') }}</p>
 		
@@ -186,18 +186,23 @@ ini_set('max_execution_time', 120);
 				<tr>
 					<th><span>COLOR</span></th>
 					<td>
-            			@foreach($odontograma->anomalias_colores as $anomaliaColor)
-                		<span>{{ $anomaliaColor->color }}</span><br>
-            			@endforeach
+					
+                		<span>{{ $odontograma->anomalia_color->color }}</span><br>
+						
+					
+
         			</td>
+					
 				</tr>
 				<tr>
 					<th><span>REFERENCIA</span></th>
 					<td>
-            			@foreach($odontograma->anomalias_colores as $anomaliaColor)
-                		<span>{{ $anomaliaColor->descripcion }}</span><br>
-           			 	@endforeach
+					
+                		<span>{{ $odontograma->anomalia_color->descripcion }}</span><br>
+					 	
         			</td>
+					
+					
 				</tr>
 		</table>
 			
@@ -216,6 +221,7 @@ ini_set('max_execution_time', 120);
 					</tr>
 				</thead>
 				<tbody>
+				@foreach($odontogramas as $odontograma)	
 					
 					<tr>
 						<td><span>{{ $odontograma->id }}</span></td>

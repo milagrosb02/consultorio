@@ -10,7 +10,7 @@ class Odontograma extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['paciente_id','pieza_id', 'tratamiento_id', 'diagnostico', 'anomalia_color_id', 'legajo_id', 'cara_odontograma_id', 'created_at'];
+    protected $fillable = ['paciente_id','pieza_id', 'tratamiento_id', 'diagnostico', 'anomalia_color_id', 'cara_odontograma_id', 'created_at'];
 
     
     public function toArray()
@@ -33,9 +33,9 @@ class Odontograma extends Model
     }
 
 
-    public function anomalias_colores()
+    public function anomalia_color()
     {
-        return $this->hasMany(AnomaliaColor::class, 'id');   
+        return $this->belongsTo(AnomaliaColor::class, 'anomalia_color_id');   
     }
 
 
