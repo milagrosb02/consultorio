@@ -18,15 +18,17 @@ class OdontogramaCollection extends ResourceCollection
 
             'data' => $this->collection,
 
-            'pieza_id' => $this->pieza_id,
+            'paciente_id' => $this->paciente_id,
 
-            'legajo_id' => $this->legajo_id,
+            'pieza_id' => $this->pieza_id,
 
             'tratamiento_id' => $this->tratamiento_id,
 
             'diagnostico' => $this->diagnostico,
 
             'anomalia_color_id' => $this->anomalia_color_id,
+
+            'cara_odontograma_id' => $this->cara_odontograma_id,
 
             'created_at' => $this->created_at
 

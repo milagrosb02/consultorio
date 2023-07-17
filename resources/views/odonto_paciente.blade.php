@@ -185,6 +185,7 @@ ini_set('max_execution_time', 120);
 		<table class="meta">
 				<tr>
 					<th><span>COLOR</span></th>
+					
 					<td>
 					
                 		<span>{{ $odontograma->anomalia_color->color }}</span><br>
@@ -215,7 +216,7 @@ ini_set('max_execution_time', 120);
                         <th><span>PIEZA</span></th>
                         <th><span>COLOR</span></th>
                         <th><span>CARA DENTAL</span></th>
-                       {{-- <th><span>TRATAMIENTO(S) REALIZADOS</span></th> --}} 
+                        <th><span>TRATAMIENTO(S) REALIZADOS</span></th> 
                         <th><span>DIAGNOSTICO</span></th>
 						
 					</tr>
@@ -227,12 +228,17 @@ ini_set('max_execution_time', 120);
 						<td><span>{{ $odontograma->id }}</span></td>
 						<td><span>{{ $odontograma->created_at->format('d-m-Y') }}</span></td>
 						<td><span>{{ $odontograma->pieza?->pieza }}</span></td>
-                        <td><span>{{ $odontograma->anomalias_colores->first()?->color }}</span></td>
-                    	{{-- <td><span>{{ $odontograma->cara_odontograma?->nombre }}</span></td> --}}  
-                        <td><span>{{ $odontograma->tratamiento->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>
+						 <td><span>{{ $odontograma->anomalia_color?->color }}</span></td>
+                    	 {{-- <td><span>{{ $odontograma->cara_odontograma?->nombre }}</span></td>  --}}
+                        @if($odontograma->tratamiento)
+                			<span>{{ $odontograma->tratamiento->nombre }}</span>
+           				 @else
+                		<span>No se realizó un tratamiento.</span>
+           				 @endif
                         <td><span>{{ $odontograma->diagnostico }}</span></td>
 					</tr>
-					@endforeach
+
+				@endforeach
 				</tbody>
 			</table>
 			
