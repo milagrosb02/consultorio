@@ -20,11 +20,6 @@ class AnomaliaColorSeeder extends Seeder
 
         AnomaliaColor::create(['color' => 'Azul', 'descripcion' => 'Tratamiento que el paciente tiene hecho. ']);
 
-        AnomaliaColor::create(['color' => 'Verde', 'descripcion' => 'Caries radiográficas. ']);
-
-        AnomaliaColor::create(['color' => 'Amarillo', 'descripcion' => 'Sellado de fosas y fisuras. ']);
-
-        //AnomaliaColor::create(['color' => 'Negro', 'descripcion' => 'Ausencias naturales. ']);
         
 
     }
