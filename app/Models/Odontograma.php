@@ -48,7 +48,7 @@ class Odontograma extends Model
 
     public function cara_odontograma()
     {
-        return $this->hasMany(CaraOdontograma::class, 'id'); 
+        return $this->belongsTo(CaraOdontograma::class); 
     }
 
 
