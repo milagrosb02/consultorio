@@ -118,11 +118,10 @@ class LegajoController extends Controller
     }
 
     
-
+    // id legajo
     public function update(Request $request, $id)
     {
-        $modificar_legajo = 
-        [
+        $modificar_legajo = $request->only([
 
             'descripcion' => $request->descripcion,
 
@@ -130,7 +129,8 @@ class LegajoController extends Controller
 
             'fecha' => $request->fecha
 
-        ];
+        ]);
+        
 
 
         $legajo = Legajo::where('id', $id)->firstOrFail();

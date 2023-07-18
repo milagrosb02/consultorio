@@ -54,58 +54,38 @@ class PacienteController extends Controller
 
     
     
-    public function editar_email(Request $request, $id)
+    public function editar_datos_paciente(Request $request, $paciente_id)
     {
-        $this->validate($request, [
+        $paciente = Paciente::findOrFail($paciente_id);
 
-            'email' => 'string|email|unique:users|min:6'
-
-        ]);
-
-            $modificar_email = [
-
-                'email' => $request->email
-            ];
-
-             User::whereId($id)->update($modificar_email);
-
-
-             return response()->json([
-
-                 'message' => '¡Email modificado!, revisa tu bandeja de entrada',
-                 'email' => $modificar_email
+        // Verificar si se envió el campo "telefono" y actualizar si es necesario
+        if ($request->has('phone')) {
+            $this->validate($request, [
+                'phone' => 'required|numeric'
+            ]);
     
-             ], 201);
-
-    }
-
-
-    public function editar_telefono(Request $request, $id)
-    {
-        $this->validate($request, [
-
-            'phone' => 'required|numeric'
-
-        ]);
-
-            $modificar_telefono = [
-
-                'phone' => $request->phone
-            ];
-
-             Paciente::whereId($id)->update($modificar_telefono);
-
-
-             return response()->json([
-
-                 'message' => '¡Telefono modificado!',
-                 'phone' => $modificar_telefono
+            $paciente->phone = $request->phone;
+        }
     
-             ], 201);
-
+        // Verificar si se envió el campo "email" y actualizar si es necesario
+        if ($request->has('email')) {
+            $this->validate($request, [
+                'email' => 'string|email|unique:users|min:6'
+            ]);
+    
+            $paciente->user->email = $request->email;
+            $paciente->user->save();
+        }
+    
+        // Guardar los cambios
+        $paciente->save();
+    
+        return response()->json([
+            'message' => '¡Actualizado correctamente!',
+            'paciente' => $paciente
+        ], 200);
+    
     }
-
-
     
     /**
      * Get the guard to be used during authentication.

@@ -142,7 +142,7 @@ class OdontogramaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $paciente_id)
+    public function update(Request $request, $odontograma_id)
     {
         $modificar_odontograma = $request->only([
             'pieza_id',
@@ -151,21 +151,17 @@ class OdontogramaController extends Controller
             'anomalia_color_id',
             'cara_odontograma_id'
         ]);
+        
     
-        $legajo = Legajo::where('paciente_id', $paciente_id)->firstOrFail();
-        $odontograma = $legajo->odontogramas;
-    
-        if (!$odontograma) {
-            return response()->json([
-                'message' => 'No se encontró un odontograma para el paciente.'
-            ], 404);
-        }
-    
+        $odontograma = Odontograma::where('id', $odontograma_id)->firstOrFail();
+
         $odontograma->update($modificar_odontograma);
-    
+
         return response()->json([
+
             'message' => '¡Odontograma modificado!',
             'odontograma' => $odontograma
+
         ], 201);
     }
 
