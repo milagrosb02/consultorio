@@ -119,7 +119,7 @@ class LegajoController extends Controller
 
     
     // id legajo
-    public function update(Request $request, $id)
+    public function update(Request $request, $legajo_id)
     {
         $modificar_legajo = $request->only([
 
@@ -133,7 +133,7 @@ class LegajoController extends Controller
         
 
 
-        $legajo = Legajo::where('id', $id)->firstOrFail();
+        $legajo = Legajo::where('id', $legajo_id)->firstOrFail();
 
         $legajo->update($modificar_legajo);
 
