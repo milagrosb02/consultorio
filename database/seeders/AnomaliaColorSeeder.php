@@ -24,7 +24,7 @@ class AnomaliaColorSeeder extends Seeder
 
         AnomaliaColor::create(['color' => 'Amarillo', 'descripcion' => 'Sellado de fosas y fisuras. ']);
 
-        AnomaliaColor::create(['color' => 'Negro', 'descripcion' => 'Ausencias naturales. ']);
+        //AnomaliaColor::create(['color' => 'Negro', 'descripcion' => 'Ausencias naturales. ']);
         
 
     }
