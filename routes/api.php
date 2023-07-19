@@ -174,7 +174,7 @@ Route::group([
 
 
     //Route::post('profile', [UserController::class, 'me']);
-    Route::put('clave/{id}', [UserController::class, 'editar_clave']);
+    Route::put('clave/{user_id}', [UserController::class, 'editar_clave']);
     
    
 

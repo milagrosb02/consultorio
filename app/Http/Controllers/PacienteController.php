@@ -10,6 +10,8 @@ use App\Http\Resources\PacienteResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ObraSociale;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailConfirmation;
 
 class PacienteController extends Controller
 {
@@ -58,33 +60,35 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::findOrFail($paciente_id);
 
-        // Verificar si se envió el campo "telefono" y actualizar si es necesario
-        if ($request->has('phone')) {
-            $this->validate($request, [
-                'phone' => 'required|numeric'
-            ]);
-    
-            $paciente->phone = $request->phone;
-        }
-    
-        // Verificar si se envió el campo "email" y actualizar si es necesario
-        if ($request->has('email')) {
-            $this->validate($request, [
-                'email' => 'string|email|unique:users|min:6'
-            ]);
-    
-            $paciente->user->email = $request->email;
-            $paciente->user->save();
-        }
-    
-        // Guardar los cambios
-        $paciente->save();
-    
-        return response()->json([
-            'message' => '¡Actualizado correctamente!',
-            'paciente' => $paciente
-        ], 200);
-    
+    // Verificar si se envió el campo "telefono" y actualizar si es necesario
+    if ($request->has('phone')) {
+        $this->validate($request, [
+            'phone' => 'required|numeric'
+        ]);
+
+        $paciente->phone = $request->phone;
+    }
+
+    // Verificar si se envió el campo "email" y actualizar si es necesario
+    if ($request->has('email')) {
+        $this->validate($request, [
+            'email' => 'string|email|unique:users|min:6'
+        ]);
+
+        $paciente->user->email = $request->email;
+        $paciente->user->save();
+
+        // Enviar el correo de confirmación
+        //Mail::to($paciente->user->email)->send(new EmailConfirmation($paciente->user));
+    }
+
+    // Guardar los cambios
+    $paciente->save();
+
+    return response()->json([
+        'message' => '¡Actualizado correctamente!',
+        'paciente' => $paciente
+    ], 200);
     }
     
     /**

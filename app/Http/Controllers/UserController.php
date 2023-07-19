@@ -41,7 +41,7 @@ class UserController extends Controller
 
 
     
-    public function editar_clave(Request $request, $id)
+    public function editar_clave(Request $request, $user_id)
     {
         $this->validate($request, [
 
@@ -54,7 +54,7 @@ class UserController extends Controller
                 'password' => bcrypt($request->password)
             ];
 
-             User::whereId($id)->update($modificar_pass);
+             User::whereId($user_id)->update($modificar_pass);
 
 
              return response()->json([

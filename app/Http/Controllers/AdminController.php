@@ -21,12 +21,12 @@ class AdminController extends Controller
     {
 
         $pacientes = DB::table('users')
-                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
-                    ->join('obra_sociales', 'obra_sociales.id' , '=', 'pacientes.obra_social_id')
-                    ->select('first_name AS nombre', 'last_name AS apellido', 'email', 'phone AS telefono', 'obra_social')
-                    ->get();
+        ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+        ->join('obra_sociales', 'obra_sociales.id', '=', 'pacientes.obra_social_id')
+        ->select('pacientes.id as paciente_id', 'first_name AS nombre', 'last_name AS apellido', 'email', 'phone AS telefono', 'obra_sociales.id as obra_social_id', 'obra_sociales.obra_social')
+        ->get();
 
-        return $pacientes;
+    return $pacientes;
         
     }
     
