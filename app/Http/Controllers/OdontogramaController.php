@@ -40,7 +40,7 @@ class OdontogramaController extends Controller
 
             'paciente_id' => ['required'],
 
-            'pieza_id' => ['required'],
+            'pieza_id' => ['required', 'array'],
 
             'tratamiento_id' => ['nullable'],
 
@@ -85,15 +85,29 @@ class OdontogramaController extends Controller
           }
 
 
-          // si el estatus es 200, se crea el odonto
-          $odontograma = Odontograma::create(array_merge($validateOdontograma->validate()));
+          // Si el estatus es 200, se crea el odontograma para cada pieza seleccionada
+            $piezasSeleccionadas = $request->input('pieza_id');
+            $odontogramas = [];
 
-         return response()->json([
- 
-            'message' => '¡Odontograma creado!',
-            'odontograma' => $odontograma
 
-        ], 201);
+            foreach ($piezasSeleccionadas as $piezaId) {
+                $odontograma = Odontograma::create([
+                    'paciente_id' => $request->input('paciente_id'),
+                    'pieza_id' => $piezaId,
+                    'tratamiento_id' => $request->input('tratamiento_id'),
+                    'anomalia_color_id' => $request->input('anomalia_color_id'),
+                    'cara_odontograma_id' => $request->input('cara_odontograma_id'),
+                    'diagnostico' => $request->input('diagnostico'),
+                ]);
+    
+                $odontogramas[] = $odontograma;
+            }
+    
+            return response()->json([
+                'message' => '¡Odontograma creado!',
+                'odontogramas' => $odontogramas,
+            ], 201);
+        
 
 
     }
@@ -170,7 +184,8 @@ class OdontogramaController extends Controller
     public function generarOdontogramaPDF($paciente_id)
     {
         
-        $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')->where("paciente_id",$paciente_id)->get();
+        $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')
+                        ->where("paciente_id",$paciente_id)->get();
 
         $odontograma = Odontograma::with('paciente')->where("paciente_id",$paciente_id)->latest()->first();
         
