@@ -10,6 +10,7 @@ use App\Models\Tratamiento;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\User;
 
 class LegajoController extends Controller
 {
@@ -196,5 +197,12 @@ class LegajoController extends Controller
         return Tratamiento::select('id', 'nombre')->get();
     }
 
+
+    public function listar_dentistas()
+    {
+        $dentistas = User::select('id', 'first_name', 'last_name')->whereIn('id', [2, 3])->get();
+
+        return response()->json($dentistas);
+    }
     
 }

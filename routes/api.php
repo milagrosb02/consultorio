@@ -132,6 +132,9 @@ Route::group([
     Route::get('caras_dentales/select', [OdontogramaController::class, 'listar_caras_dentales']);
     Route::get('colores_anomalias/select', [OdontogramaController::class, 'listar_colores_anomalias']);
 
+    // listar dentistas select
+    Route::get('profesional/list', [LegajoController::class, 'listar_dentistas']);
+
 });
 
 
