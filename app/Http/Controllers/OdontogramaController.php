@@ -165,18 +165,19 @@ class OdontogramaController extends Controller
             'anomalia_color_id',
             'cara_odontograma_id'
         ]);
-        
     
-        $odontograma = Odontograma::where('id', $odontograma_id)->firstOrFail();
-
+        $odontograma = Odontograma::findOrFail($odontograma_id);
+    
+        // Actualizar el odontograma con los datos proporcionados
         $odontograma->update($modificar_odontograma);
-
+    
+        // Obtener el último registro actualizado del odontograma
+        $ultimo_odontograma = Odontograma::where('paciente_id', $odontograma->paciente_id)->latest()->first();
+    
         return response()->json([
-
             'message' => '¡Odontograma modificado!',
-            'odontograma' => $odontograma
-
-        ], 201);
+            'odontograma' => $ultimo_odontograma
+        ], 200);
     }
 
 

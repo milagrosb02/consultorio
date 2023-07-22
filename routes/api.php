@@ -68,9 +68,10 @@ Route::group([
 
 
     // para restablecer la clave
-    Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
-    Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
+    // Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
+    // Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
 
+    Route::post('password-action', [ForgotPasswordController::class, 'passwordAction']);
 
 });
 
