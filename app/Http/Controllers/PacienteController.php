@@ -56,7 +56,7 @@ class PacienteController extends Controller
 
     
     
-    public function editar_datos_paciente(Request $request, $paciente_id)
+    public function editar_telefono(Request $request, $paciente_id)
     {
         $paciente = Paciente::findOrFail($paciente_id);
 
@@ -69,24 +69,12 @@ class PacienteController extends Controller
         $paciente->phone = $request->phone;
     }
 
-    // Verificar si se envió el campo "email" y actualizar si es necesario
-    if ($request->has('email')) {
-        $this->validate($request, [
-            'email' => 'string|email|unique:users|min:6'
-        ]);
-
-        $paciente->user->email = $request->email;
-        $paciente->user->save();
-
-        // Enviar el correo de confirmación
-        //Mail::to($paciente->user->email)->send(new EmailConfirmation($paciente->user));
-    }
-
+    
     // Guardar los cambios
     $paciente->save();
 
     return response()->json([
-        'message' => '¡Actualizado correctamente!',
+        'message' => '¡Número de teléfono actualizado correctamente!',
         'paciente' => $paciente
     ], 200);
     }

@@ -143,7 +143,7 @@ Route::group([
 
 ], function ($router){
 
-    Route::put('datos/perfil/{paciente_id}', [PacienteController::class, 'editar_datos_paciente']);
+    Route::put('datos/perfil/{paciente_id}', [PacienteController::class, 'editar_telefono']);
 
     Route::post('turnos/create', [TurnoController::class, 'store']);
 
