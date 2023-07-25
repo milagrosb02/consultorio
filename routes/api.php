@@ -135,6 +135,8 @@ Route::group([
     // listar dentistas select
     Route::get('profesional/list', [LegajoController::class, 'listar_dentistas']);
 
+    Route::get('turnos/listado', [TurnoController::class, 'mostrar_turnos']);
+
 });
 
 

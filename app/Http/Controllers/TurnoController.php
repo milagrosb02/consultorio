@@ -29,6 +29,12 @@ class TurnoController extends Controller
     );
     }
 
+    public function mostrar_turnos()
+    {
+        return TurnoResource::collection(Turno::with('user', 'paciente', 'profesional', 'especialidad')->get());
+    }
+
+
     
     public function store(Request $request)
     {
