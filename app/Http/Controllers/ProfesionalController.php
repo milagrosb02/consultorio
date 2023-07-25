@@ -40,9 +40,17 @@ class ProfesionalController extends Controller
         return Auth::guard();
     }
 
-    public function profesional_perfil()
-    {
-        return response()->json($this->guard()->user());
-    }
+    // public function profesional_perfil()
+    // {
+    //     return response()->json($this->guard()->user());
+    // }
 
+
+    public function profesional_perfil($usuario_id)
+{
+    $usuario = User::select('first_name as nombre', 'last_name as apellido', 'user as usuario')
+        ->find($usuario_id);
+
+    return response()->json($usuario);
+}
 }

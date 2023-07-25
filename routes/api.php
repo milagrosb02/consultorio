@@ -105,7 +105,7 @@ Route::group([
 
      Route::put('usuario/{id}', [AdminController::class, 'editar_usuario']);
 
-     Route::get('turnos/list', [TurnoController::class, 'index']);
+     Route::get('turnos/list/{user_id}', [TurnoController::class, 'index']);
      Route::get('pacientes/filtrar-turnos-mes/{mes}' , [TurnoController::class, 'filtrar_turno_por_mes']);
      Route::get('pacientes/filtrar-turnos-dia/{fecha}' , [TurnoController::class, 'filtrar_turno_por_dia']);
      Route::get('turnos/pacientes/profesional/{profesional_id}', [TurnoController::class, 'ver_turno_admin']);
@@ -196,7 +196,8 @@ Route::group([
 
     Route::get('pacientes/turnos/{profesional_id}', [ProfesionalController::class, 'ver_pacientes']);
     Route::get('legajo/list', [LegajoController::class, 'index']);
-    Route::post('profile', [ProfesionalController::class, 'profesional_perfil']);
+    Route::get('profile/{usuario_id}', [ProfesionalController::class, 'profesional_perfil']);
+
 
 });
 

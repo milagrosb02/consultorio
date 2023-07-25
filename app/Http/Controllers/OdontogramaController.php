@@ -188,10 +188,14 @@ class OdontogramaController extends Controller
         $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')
                         ->where("paciente_id",$paciente_id)->get();
 
+        //dd($odontogramas);
+
+        $referencias_colores = AnomaliaColor::select('color', 'descripcion')->get();
+
         $odontograma = Odontograma::with('paciente')->where("paciente_id",$paciente_id)->latest()->first();
         
 
-        $pdf = Pdf::loadView('odonto_paciente', compact('odontogramas', 'odontograma'))
+        $pdf = Pdf::loadView('odonto_paciente', compact('odontogramas', 'odontograma', 'referencias_colores'))
             ->setPaper('a4', 'landscape');
     
         return $pdf->stream('paciente_odontograma_unico.pdf');

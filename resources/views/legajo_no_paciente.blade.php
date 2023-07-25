@@ -5,7 +5,7 @@ ini_set('max_execution_time', 120);
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Odontograma</title>
+		<title>Historial Clinico</title>
 		 <!-- <link rel="stylesheet" href="{{ asset('css/estilos.css')}}"> -->
 		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
 		<script src="script.js"></script>
@@ -90,7 +90,7 @@ ini_set('max_execution_time', 120);
 
 		/* table meta */
 
-		table.meta th { width: 70%; }
+		table.meta th { width: 40%; }
 		table.meta td { width: 60%; }
 
 		/* table items */
@@ -98,13 +98,11 @@ ini_set('max_execution_time', 120);
 		table.inventory { clear: both; width: 100%; }
 		table.inventory th { font-weight: bold; text-align: center; }
 
-		
-		table.inventory td:nth-child(1) { width: 30%; }
-		table.inventory td:nth-child(2) { text-align: left; width: 20%; }
-		table.inventory td:nth-child(3) { text-align: left; width: 20%; }
-		table.inventory td:nth-child(4) { text-align: left; width: 25%; }
-		table.inventory td:nth-child(5) { text-align: left; width: 45%; }
-		table.inventory td:nth-child(6) { text-align: left; width: 45%; }
+		table.inventory td:nth-child(1) { width: 13%; }
+		table.inventory td:nth-child(2) { width: 13%; }
+		table.inventory td:nth-child(3) { text-align: left; width: 25%; }
+		table.inventory td:nth-child(4) { text-align: left; width: 36%; }
+		table.inventory td:nth-child(5) { text-align: left; width: 36%; }
 
 		/* table balance */
 
@@ -167,79 +165,20 @@ ini_set('max_execution_time', 120);
 	</head>
 	<body>
 		<header>
-			<h1>ODONTOGRAMA</h1>
-			
+			<h1>LEGAJO</h1>
             
 			<address contenteditable>
 
-        <p>NOMBRE DEL PACIENTE: {{ $odontograma->paciente?->user->first_name .' '. $odontograma->paciente?->user->last_name }}</p>
-        
+        <p>NOMBRE DEL PACIENTE: {{ $legajo->paciente?->user?->first_name .' '. $legajo->paciente?->user?->last_name }}</p>
+        <p>OBRA SOCIAL: {{ $legajo->paciente?->obra_social?->obra_social}}</p>
+        <p>TELEFONO: {{ $legajo->paciente?->phone }}</p> <br><br>
         <p>{{ \Carbon\Carbon::now()->format('d-m-Y H:i:s') }}</p>
 		
 			</address>
 			<span><img alt="" src="{{ public_path('imagenes/logo.png')}}" /></span>
 		</header>
-		<h1 class="text-center">Detalles del Odontograma</h1>
-		<article>
-
-		<table class="meta">
-		@foreach($referencias_colores as $color_ref)
-				<tr>
-					<th><span>COLOR</span></th>
-					
-					<td>
-
-                		<span>{{ $color_ref->color }}</span><br>
-						
-					
-
-        			</td>
-					
-				</tr>
-				<tr>
-					<th><span>REFERENCIA</span></th>
-					<td>
-					
-                		<span>{{ $color_ref->descripcion }}</span><br>
-					 	
-        			</td>
-					
-					
-				</tr>
-		@endforeach
-		</table>
-			
-			<table class="inventory">
-				<thead>
-					<tr>
-
-						<th><span>FECHA</span></th>
-                        <th><span>PIEZA</span></th>
-                        <th><span>COLOR</span></th>
-                    	<th><span>CARA DENTAL</span></th>
-                        <th><span>TRATAMIENTO(S) REALIZADOS</span></th> 
-                        <th><span>DIAGNOSTICO</span></th>
-						
-					</tr>
-				</thead>
-				<tbody>
-				@foreach($odontogramas as $odontograma)	
-					
-					<tr>
-						<td><span>{{ $odontograma->created_at->format('d-m-Y H:i') }}</span></td>
-						<td><span>{{ $odontograma->pieza?->pieza }}</span></td>
-						 <td><span>{{ $odontograma->anomalia_color?->color }}</span></td>
-                    	 <td><span>{{ $odontograma->cara_odontograma?->nombre }}</span></td>  
-                		<td><span>{{ $odontograma->tratamiento?->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>
-                        <td><span>{{ $odontograma->diagnostico }}</span></td>
-					</tr>
-
-				@endforeach
-				</tbody>
-			</table>
-			
-			
-		</article>
+		<h1 class="text-center">AÚN NO POSEES UN HISTORIAL CLÍNICO</h1>
+		
        
 	</body>
 </html>

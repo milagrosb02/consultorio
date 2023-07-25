@@ -12,16 +12,21 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Rules\UniqueAppointment;
 use App\Models\Paciente;
 use App\Models\Especialidad;
+use Illuminate\Support\Facades\Auth;
 
 
 class TurnoController extends Controller
 {
    
-    public function index()
+    public function index($user_id)
     {
         //return TurnoResource::collection(Turno::all());
 
-        return TurnoResource::collection(Turno::with('user', 'especialidad')->get());
+        //return TurnoResource::collection(Turno::with('user', 'especialidad')->get());
+        return TurnoResource::collection(Turno::with('user', 'especialidad')
+        ->where('user_id', $user_id) // Filtrar por el ID del usuario pasado como parámetro
+        ->get()
+    );
     }
 
     

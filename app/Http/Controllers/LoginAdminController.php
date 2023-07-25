@@ -33,31 +33,25 @@ class LoginAdminController extends Controller
     {
         $credentials = $request->only('user', 'password');
 
+    $request->validate([
+        'user' => 'required',
+        'password' => 'required',
+    ]);
 
-        $request->validate([
-            'user' => 'required',
-            'password' => 'required',
+    $user = User::where('user', $request->user)->first();
+
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'user' => ['Las credenciales son incorrectas.'],
         ]);
+    }
 
-       $user = User::where('user', $request->user)->first();
+    if ($token = $this->guard()->attempt($credentials)) {
+        $user_id = Auth::user()->id; // Obtiene el ID del usuario logueado
+        return $this->respondWithToken($token, $user_id);
+    }
 
-       if (!$user || !Hash::check($request->password, $user->password)) 
-        {
-            throw ValidationException::withMessages([
-                'user' => ['Las credenciales son incorrectas.'],
-            ]);
-        }
-
-
-        if ($token = $this->guard()->attempt($credentials)) {
-            return $this->respondWithToken($token);
-        }
-        
-
-       
-
-
-        return response()->json(['error' => 'Unauthorized'], 401);
+    return response()->json(['error' => 'Unauthorized'], 401);
     }
 
 
@@ -70,12 +64,13 @@ class LoginAdminController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $user_id)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60
+            'expires_in' => $this->guard()->factory()->getTTL() * 60,
+            'user_id' => $user_id // Agrega el ID del usuario al resultado
         ]);
     }
 
