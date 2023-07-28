@@ -60,7 +60,7 @@ class ForgotPasswordController extends Controller
 
         if ($status == Password::PASSWORD_RESET) {
             return response([
-                'message' => 'Password reset successfully'
+                'message' => 'La contraseña ha sido correctamente actualizada!'
             ]);
         }
 

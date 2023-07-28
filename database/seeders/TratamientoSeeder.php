@@ -38,5 +38,13 @@ class TratamientoSeeder extends Seeder
             'nombre' => 'Endodoncia'
         ]);
 
+        Tratamiento::create([
+            'nombre' => 'Prótesis'
+        ]);
+
+        Tratamiento::create([
+            'nombre' => 'Implante'
+        ]);
+
     }
 }

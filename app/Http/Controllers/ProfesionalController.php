@@ -9,19 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfesionalController extends Controller
 {
-   
+
     public function ver_pacientes($profesional_id)
     {
 
-        $pacientes = DB::table('users')
-        ->join('pacientes', 'users.id', '=' , 'pacientes.user_id')
-        ->join('turnos', 'pacientes.id', '=' , 'turnos.paciente_id')
-        ->select('first_name AS nombre', 'last_name AS apellido')
+        $turnosPacientes = DB::table('users')
+        ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+        ->join('turnos', 'pacientes.id', '=', 'turnos.paciente_id')
+        ->select('first_name AS nombre', 'last_name AS apellido',
+            DB::raw('COALESCE(turnos.motivo_consulta, especialidades.especialidad) AS motivo_consulta'),
+            'fecha', 'hora')
+        ->leftJoin('especialidades', 'turnos.especialidad_id', '=', 'especialidades.id')
         ->whereDate('fecha', now())
-        ->where('turnos.user_id', '=' , $profesional_id)
+        ->where('turnos.user_id', '=', $profesional_id)
         ->get();
 
-        return response()->json($pacientes);
+    return response()->json($turnosPacientes);
     }
 
 
@@ -47,10 +50,10 @@ class ProfesionalController extends Controller
 
 
     public function profesional_perfil($usuario_id)
-{
-    $usuario = User::select('first_name as nombre', 'last_name as apellido', 'user as usuario')
-        ->find($usuario_id);
+    {
+        $usuario = User::select('first_name as nombre', 'last_name as apellido', 'user as usuario')
+            ->find($usuario_id);
 
-    return response()->json($usuario);
-}
+        return response()->json($usuario);
+    }
 }
