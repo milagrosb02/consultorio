@@ -46,5 +46,9 @@ class TratamientoSeeder extends Seeder
             'nombre' => 'Implante'
         ]);
 
+        Tratamiento::create([
+            'nombre' => 'No se realizó un tratamiento'
+        ]);
+
     }
 }

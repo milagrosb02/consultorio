@@ -32,10 +32,9 @@ class LegajoController extends Controller
 
             'descripcion' => ['string', 'max: 100'],
 
-            'tratamiento_id' => ['nullable'],
+            'tratamiento_id' => ['required'],
 
             'user_id' => ['required']
-
 
         ];
 

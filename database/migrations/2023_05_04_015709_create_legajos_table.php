@@ -28,7 +28,7 @@ class CreateLegajosTable extends Migration
 
 
             // hago relacion con el ususario
-            $table->unsignedBigInteger('user_id')->nullable()->constrained();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->date('fecha');

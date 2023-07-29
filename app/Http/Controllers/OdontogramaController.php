@@ -42,7 +42,7 @@ class OdontogramaController extends Controller
 
             'pieza_id' => ['required', 'array'],
 
-            'tratamiento_id' => ['nullable'],
+            'tratamiento_id' => ['required'],
 
             'anomalia_color_id' => ['required'],
 
@@ -62,6 +62,8 @@ class OdontogramaController extends Controller
             'pieza_id.required' => ['Debe seleccionar una pieza dental. '],
 
             'diagnostico.required' => ['Debes escribir un diagnostico sobre el estado de este diente. '],
+
+            'tratamiento_id.required' => ['Debe seleccionar un tratamiento.'],
 
             'anomalia_color_id.required' => ['Selecciona un color de referencia. '],
 

@@ -28,7 +28,7 @@ class CreateOdontogramasTable extends Migration
              $table->foreign('pieza_id')->references('id')->on('piezas');
 
               // hago relacion con el tratamiento
-            $table->unsignedBigInteger('tratamiento_id')->nullable()->constrained();
+            $table->unsignedBigInteger('tratamiento_id');
             $table->foreign('tratamiento_id')->references('id')->on('tratamientos');
 
 
