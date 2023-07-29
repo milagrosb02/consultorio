@@ -154,18 +154,18 @@ class OdontogramaController extends Controller
 
     public function showOdontoAdmin($paciente_id)
     {
-        $odontograma = Odontograma::where('paciente_id', $paciente_id)
+        $odontogramas = Odontograma::where('paciente_id', $paciente_id)
         ->latest('fecha_actualizacion') // Ordenar por fecha_actualizacion en orden descendente
-        ->first();
+        ->get();
 
-    if (!$odontograma) {
+    if ($odontogramas->isEmpty()) {
         return response()->json([
             'message' => 'Aún no posees un odontograma.'
         ], 404);
     } else {
         return response()->json([
             'message' => '¡Aquí está tu odontograma!',
-            'odontograma' => $odontograma
+            'odontogramas' => $odontogramas
         ], 201);
     }
     }

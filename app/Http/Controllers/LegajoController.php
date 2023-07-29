@@ -121,30 +121,65 @@ class LegajoController extends Controller
     // id legajo
     public function update(Request $request, $legajo_id)
     {
-        $modificar_legajo = $request->only([
+        // $modificar_legajo = $request->only([
 
-            'descripcion' => $request->descripcion,
+        //     'descripcion' => $request->descripcion,
 
-            'tratamiento_id' => $request->tratamiento_id,
+        //     'tratamiento_id' => $request->tratamiento_id,
 
-            'fecha' => $request->fecha
+        //     'fecha' => $request->fecha
 
-        ]);
+        // ]);
         
 
 
-        $legajo = Legajo::where('id', $legajo_id)->firstOrFail();
+        // $legajo = Legajo::where('id', $legajo_id)->firstOrFail();
 
+        // $legajo->update($modificar_legajo);
+
+        // return response()->json([
+
+        //     'message' => '¡Historial Clinico modificado!',
+        //     'legajo' => $legajo
+
+        // ], 201);
+        $modificar_legajo = $request->only([
+            'descripcion',
+            'tratamiento_id'
+        ]);
+    
+        $legajo = Legajo::where('id', $legajo_id)
+            ->latest('fecha') // Ordenar por fecha en orden descendente
+            ->firstOrFail();
+    
         $legajo->update($modificar_legajo);
-
+    
         return response()->json([
-
-            'message' => '¡Historial Clinico modificado!',
+            'message' => '¡Historial Clínico modificado!',
             'legajo' => $legajo
-
         ], 201);
         
     }
+
+    public function showLegajoAdmin($paciente_id)
+    {
+        $legajo = Legajo::where('paciente_id', $paciente_id)
+        ->latest('fecha')
+        ->first();
+
+    if (!$legajo) {
+        return [
+            'message' => 'Aún no posees un historial clínico.'
+        ];
+    } else {
+        return [
+            'message' => '¡Aquí está tu historial clínico!',
+            'legajo' => $legajo
+        ];
+    }
+    }
+
+
 
     
     public function generarPDF()

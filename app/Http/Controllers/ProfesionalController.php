@@ -12,11 +12,12 @@ class ProfesionalController extends Controller
 
     public function ver_pacientes($profesional_id)
     {
-
         $turnosPacientes = DB::table('users')
         ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
         ->join('turnos', 'pacientes.id', '=', 'turnos.paciente_id')
-        ->select('first_name AS nombre', 'last_name AS apellido',
+        ->select('pacientes.id AS paciente_id', // Usamos pacientes.id para obtener el ID del paciente
+            'first_name AS nombre',
+            'last_name AS apellido',
             DB::raw('COALESCE(turnos.motivo_consulta, especialidades.especialidad) AS motivo_consulta'),
             'fecha', 'hora')
         ->leftJoin('especialidades', 'turnos.especialidad_id', '=', 'especialidades.id')

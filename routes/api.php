@@ -120,6 +120,8 @@ Route::group([
     Route::post('legajo/create', [LegajoController::class, 'store']);
     Route::get('legajo/list', [LegajoController::class, 'index']);
     Route::put('legajo/update/{legajo_id}', [LegajoController::class, 'update']);
+    Route::get('legajo/last_legajo/{paciente_id}', [LegajoController::class, 'showLegajoAdmin']);
+
 
     Route::post('profile', [AdminController::class, 'admin_perfil']);
 
