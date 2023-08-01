@@ -19,7 +19,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 1,
             'user_id' => 2,
             'especialidad_id' => 1,
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '08:00'
         ]);
 
@@ -28,7 +28,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 2,
             'user_id' => 2,
             'especialidad_id' => 1,
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '08:30'
         ]);
 
@@ -36,7 +36,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 3,
             'user_id' => 2,
             'especialidad_id' => 1,
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '09:00'
         ]);
 
@@ -44,7 +44,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 4,
             'user_id' => 3,
             'especialidad_id' => 1,
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '09:30'
         ]);
 
@@ -52,7 +52,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 5,
             'user_id' => 3,
             'motivo_consulta' => "Cambio de muela",
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '10:00'
         ]);
 
@@ -61,7 +61,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 6,
             'user_id' => 3,
             'motivo_consulta' => "Dolor de muela",
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '10:30'
         ]);
 
@@ -69,7 +69,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 7,
             'user_id' => 2,
             'motivo_consulta' => "Carie",
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '11:00'
         ]);
 
@@ -77,7 +77,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 8,
             'user_id' => 2,
             'especialidad_id' => 1,
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '11:30'
         ]);
 
@@ -85,7 +85,7 @@ class TurnoSeeder extends Seeder
             'paciente_id' => 9,
             'user_id' => 2,
             'especialidad_id' => 2,
-            'fecha' => '2023-07-29',
+            'fecha' => '2023-07-31',
             'hora' => '12:00'
         ]);
 

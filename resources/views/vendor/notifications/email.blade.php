@@ -43,7 +43,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('¡Que tenga un excelente día!'),<br>
+@lang('¡Que tenga un excelente día!')<br>
 <!-- app name es LARAVEL -->
 <!-- {{ config('app.name') }}  -->
 @lang('Consultorio Odontológico DRA PADROS y DRA GALMARINI')

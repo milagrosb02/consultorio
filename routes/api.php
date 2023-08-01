@@ -18,7 +18,8 @@ use App\Http\Controllers\ProfesionalController;
 use App\Http\Controllers\LegajoController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\OdontogramaController;
-use App\Models\Odontograma;
+use App\Http\Controllers\VerifyEmailController;
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -37,6 +38,21 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+
+// ------------------------------------------------------------------------------------------ //
+// Verify email
+Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('verification.verify');
+
+// Resend link to verify email
+Route::post('/email/verify/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth:api', 'throttle:6,1'])->name('verification.send');
+
+
+// ------------------------------------------------------------------------------------------ //
 
 
 // ruta para resetear la contraseña
