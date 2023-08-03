@@ -214,7 +214,7 @@ ini_set('max_execution_time', 120);
 					<tr>
 
 						<th><span>FECHA</span></th>
-                        {{-- <th><span>PIEZA</span></th> --}}
+                        <th><span>PIEZA</span></th> 
                         <th><span>COLOR</span></th>
                     	<th><span>CARA DENTAL</span></th>
                         <th><span>TRATAMIENTO(S) REALIZADOS</span></th> 
@@ -227,7 +227,11 @@ ini_set('max_execution_time', 120);
 					
 					<tr>
 						<td><span>{{ $odontograma->created_at->format('d-m-Y H:i') }}</span></td>
-						{{-- <td><span>{{ $odontograma->pieza?->pieza }}</span></td> --}}
+						<td>
+						 @foreach($odontograma->piezas as $pieza)
+						 	<span>{{ $pieza->pieza }}</span>
+						 @endforeach
+						</td> 
 						 <td><span>{{ $odontograma->anomalia_color?->color }}</span></td>
                     	 <td><span>{{ $odontograma->cara_odontograma?->nombre }}</span></td>  
                 		<td><span>{{ $odontograma->tratamiento?->nombre ?? 'No se realizo un tratamiento. ' }}</span></td>

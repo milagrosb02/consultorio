@@ -157,7 +157,7 @@ class OdontogramaController extends Controller
         $odontogramas = Odontograma::with('piezas', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')
         ->where('paciente_id', $paciente_id)
         //->where('created_at', now())
-        ->latest('fecha_actualizacion') // Ordenar por fecha_actualizacion en orden descendente
+        ->latest() // Ordenar por fecha_actualizacion en orden descendente
         ->first();
         // falta iteracion 
         $piezas = Pieza::join('odontograma_piezas', 'piezas.id', '=' , 'odontograma_piezas.pieza_id')
@@ -198,7 +198,7 @@ class OdontogramaController extends Controller
             'cara_odontograma_id'
         ]);
     
-        $odontograma = Odontograma::findOrFail($odontograma_id);
+        $odontograma = Odontograma::where('id', $odontograma_id)->latest()->first();
     
         // Actualizar el odontograma con los datos proporcionados
         $odontograma->update($modificar_odontograma);
@@ -228,7 +228,7 @@ class OdontogramaController extends Controller
     public function generarOdontogramaPDF($paciente_id)
     {
         
-        $odontogramas = Odontograma::with('pieza', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')
+        $odontogramas = Odontograma::with('piezas', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')
                         ->where("paciente_id",$paciente_id)->get();
 
         //dd($odontogramas);
