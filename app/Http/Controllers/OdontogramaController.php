@@ -92,18 +92,18 @@ class OdontogramaController extends Controller
             $odontogramas = [];
 
 
-            foreach ($piezasSeleccionadas as $piezaId) {
+             
                 $odontograma = Odontograma::create([
                     'paciente_id' => $request->input('paciente_id'),
-                    'pieza_id' => $piezaId,
+                    'pieza_id' => 2,
                     'tratamiento_id' => $request->input('tratamiento_id'),
                     'anomalia_color_id' => $request->input('anomalia_color_id'),
                     'cara_odontograma_id' => $request->input('cara_odontograma_id'),
                     'diagnostico' => $request->input('diagnostico'),
                 ]);
     
-                $odontogramas[] = $odontograma;
-            }
+                $odontograma->piezas()->sync($piezasSeleccionadas);
+            
     
             return response()->json([
                 'message' => '¡Odontograma creado!',
@@ -154,20 +154,30 @@ class OdontogramaController extends Controller
 
     public function showOdontoAdmin($paciente_id)
     {
-        $odontogramas = Odontograma::where('paciente_id', $paciente_id)
+        $odontogramas = Odontograma::with('piezas', 'tratamiento', 'anomalia_color', 'paciente', 'cara_odontograma')
+        ->where('paciente_id', $paciente_id)
+        //->where('created_at', now())
         ->latest('fecha_actualizacion') // Ordenar por fecha_actualizacion en orden descendente
+        ->first();
+        // falta iteracion 
+        $piezas = Pieza::join('odontograma_piezas', 'piezas.id', '=' , 'odontograma_piezas.pieza_id')
+        ->join('odontogramas', 'odontograma_piezas.odontograma_id', '=', 'odontogramas.id')
+        ->select('odontograma_piezas.pieza_id')
+        ->where('paciente_id', $paciente_id)
         ->get();
-
-    if ($odontogramas->isEmpty()) {
-        return response()->json([
-            'message' => 'Aún no posees un odontograma.'
-        ], 404);
-    } else {
-        return response()->json([
-            'message' => '¡Aquí está tu odontograma!',
-            'odontogramas' => $odontogramas
-        ], 201);
-    }
+        
+        if (empty($odontogramas)) 
+        {
+            return response()->json([
+                'message' => 'Aún no posees un odontograma.'
+            ], 404);
+        } else {
+            return response()->json([
+                'message' => '¡Aquí está tu odontograma!',
+                'odontogramas' => $odontogramas,
+                'piezas' => $piezas
+            ], 201);
+        }
     }
 
     /**
@@ -179,29 +189,9 @@ class OdontogramaController extends Controller
      */
     public function update(Request $request, $odontograma_id)
     {
-        // $modificar_odontograma = $request->only([
-        //     'pieza_id',
-        //     'tratamiento_id',
-        //     'diagnostico',
-        //     'anomalia_color_id',
-        //     'cara_odontograma_id'
-        // ]);
-    
-        // $odontograma = Odontograma::findOrFail($odontograma_id);
-    
-        // // Actualizar el odontograma con los datos proporcionados
-        // $odontograma->update($modificar_odontograma);
-    
-        // // Obtener el último registro actualizado del odontograma
-        // $ultimo_odontograma = Odontograma::where('paciente_id', $odontograma->paciente_id)->latest()->first();
-    
-        // return response()->json([
-        //     'message' => '¡Odontograma modificado!',
-        //     'odontograma' => $ultimo_odontograma
-        // ], 200);
 
         $modificar_odontograma = $request->only([
-            'pieza_id',
+            //'pieza_id',
             'tratamiento_id',
             'diagnostico',
             'anomalia_color_id',
@@ -216,12 +206,17 @@ class OdontogramaController extends Controller
         // Establecer la fecha de actualización al momento de la actualización
         $odontograma->fecha_actualizacion = now();
         $odontograma->save();
+        $piezasSeleccionadas = $request->input('pieza_id');
+        $odontograma->piezas()->sync($piezasSeleccionadas);
     
         // Obtener el último registro actualizado del odontograma por fecha de actualización
         $ultimo_odontograma = Odontograma::where('paciente_id', $odontograma->paciente_id)
             ->latest('fecha_actualizacion') // Ordenar por fecha_actualizacion en orden descendente
             ->first();
-    
+        
+         
+            
+            
         return response()->json([
             'message' => '¡Odontograma modificado!',
             'odontograma' => $ultimo_odontograma

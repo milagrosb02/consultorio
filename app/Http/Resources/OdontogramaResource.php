@@ -18,7 +18,7 @@ class OdontogramaResource extends JsonResource
 
             'id' => $this->id,
 
-            'pieza nro' => $this->pieza->pieza,   
+            'piezas' => $this->piezas->pieza,   
 
             "paciente" => $this->paciente?->user?->first_name .' '. $this->paciente?->user?->last_name,
 

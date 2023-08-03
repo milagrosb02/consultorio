@@ -44,8 +44,7 @@ class ResetPasswordNotification extends Notification
     {
         return (new MailMessage)
                     ->line('¿Olvidaste tu contraseña?')
-                    ->action('Click aqui para recuperarla', $this->url)
-                    ->line('Thank you for using our application!');
+                    ->action('Click aqui para recuperarla', $this->url);
     }
 
     /**

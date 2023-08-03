@@ -20,7 +20,7 @@ class OdontogramaCollection extends ResourceCollection
 
             'paciente_id' => $this->paciente_id,
 
-            'pieza_id' => $this->pieza_id,
+            'piezas' => $this->piezas->pieza,
 
             'tratamiento_id' => $this->tratamiento_id,
 

@@ -190,7 +190,8 @@ class LegajoController extends Controller
 
         //dd($legajos);
         $pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a4', 'landscape');
-
+         // Ajusta las dimensiones y la orientación del papel para dispositivos móviles
+    //$pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a6', 'portrait'); // Cambia 'a4', 'landscape' a 'a6', 'portrait'
         
 
         return $pdf->stream('paciente_legajo.pdf');
