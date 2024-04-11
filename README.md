@@ -1,55 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+ # 🦷 Consultorio 🦷
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Esta api fue creada con el fin de poder ayudar a un consultorio odontológico.
 
-## About Laravel
+# Build With
+## Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Requisites
+- PHP >= 7.4 (Para esta api utilice la 8.1.6)
+- Composer
+- MySQL
+- Laravel version 8
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Install
+1. Clona este repositorio en tu máquina local.
+2. Instala las dependencias del proyecto ejecutando `composer install`.
+3. Crea una copia del archivo `.env.example` y renómbralo a `.env`. Luego, configura las variables de entorno, especialmente la conexión a la base de datos.
+4. Genera una nueva clave de aplicación ejecutando `php artisan key:generate`.
+5. Ejecuta las migraciones de la base de datos para crear las tablas necesarias con el comando `php artisan migrate`.
+6. Opcionalmente, puedes ejecutar los seeders para poblar la base de datos con datos de ejemplo ejecutando `php artisan db:seed`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+# Usage
+- Para ejecutar la aplicación en tu servidor local, utiliza el comando `php artisan serve`.
+- La API estará disponible en la URL `http://localhost:8000`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Resources
+- Administrador
+- Doctoras
+- Pacientes
+- Turnos
+- Odontograma
+- Historial Clínico
+  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Endpoints
+## Los endpoints principales de la api:
+> Para autentificacion
+- Route::post('register', [RegisterController::class, 'register']);
+- Route::post('login',[LoginPacienteController::class, 'login']);
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+> Para dar de alta un turno, poder verlo y cancelarlo
+- Route::post('turnos/create', [TurnoController::class, 'store']);
+- Route::get('turnos/show/{paciente_id}', [TurnoController::class, 'show']);
+- Route::get('turnos/cancelar/{turno_id}', [TurnoController::class, 'cancelar_turno']);
 
-### Premium Partners
+> Para ver el historial clínico
+-  Route::get('legajo/show/{paciente_id}', [LegajoController::class, 'show']);
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+> Para ver el odontograma
+-  Route::get('odontograma/show/{paciente_id}', [OdontogramaController::class, 'show']);
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Usage
+## Auth
+### Login
+```
+{
+  "email": "usuario@example.com",
+  "password": "contraseña"
+};
+```
+### Registro (Paciente)
+```
+{
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "email@email.com",
+  "password": "password",
+  "password_confirmation": "password",
+  "phone": "1234",
+  "obra_social_id": 2
+}
+```
+### Crear turno
+> Se puede tener un motivo de consulta o elegir una especialidad, pero ambos no, un campo debe estar nulo.
+```
+{
+  "user_id": "2",
+ 'especialidad_id': 2, // ejemplo especialidad
+ 'motivo_consulta': 'Dolor de muela', // emeplo motivo consulta
+ 'fecha': 2024-5-10,
+ 'hora': 10:00,
+'paciente_id': 2
+}
+```
+### Para probar la API
+> Cualquier herramienta disponible para enviar peticiones a servicios web y ver respuestasfound in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Code of Conduct
 
