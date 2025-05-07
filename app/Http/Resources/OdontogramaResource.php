@@ -18,12 +18,13 @@ class OdontogramaResource extends JsonResource
 
             'id' => $this->id,
 
-            'piezas' => $this->pieza->map(function($pieza) {
-                return [
-                    'id' => $pieza->id,
-                    'pieza' => $pieza->pieza,
-                ];
-            }),  
+            'piezas' => $this->piezas->map(function($pieza) {
+            return [
+                'id' => $pieza->id,
+                'pieza' => $pieza->pieza,
+            ];
+        }),
+
 
             "paciente" => $this->paciente?->user?->first_name .' '. $this->paciente?->user?->last_name,
 

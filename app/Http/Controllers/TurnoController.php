@@ -285,21 +285,20 @@ class TurnoController extends Controller
     {
         $horarios = [];
 
-        $fechas = Carbon::parse(now()->format('Y-m-d') . ' 8 am')
-                    ->toPeriod(now()->format('Y-m-d') . ' 12 pm', 30, 'minutes');
+        $fechas = Carbon::parse($fecha . ' 08:00')
+                    ->toPeriod($fecha . ' 12:00', 30, 'minutes');
 
-        
-        $turnos = Turno::whereDate('fecha', now())->get();
+        $turnos = Turno::whereDate('fecha', $fecha)->get();
 
-        
-        foreach ($fechas as $fecha) {
-            
-            $horarios[$fecha->format('h:i A')] = !$turnos->contains('fecha', $fecha);
-
+        foreach ($fechas as $hora) {
+            $estaDisponible = !$turnos->contains('fecha', $hora);
+            $horarios[$hora->format('H:i')] = $estaDisponible ? 'Disponible' : 'Ocupado';
         }
 
-        dd($horarios);            
+        return response()->json($horarios);
     }
+
+    
 
 
 

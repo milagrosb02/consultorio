@@ -23,15 +23,11 @@ class OdontogramaController extends Controller
      */
     public function index()
     {
-        return OdontogramaResource::collection(Odontograma::with('pieza', 'tratamiento', 'anomalia_color', 'legajo', 'cara_odontograma')->get());
+        return OdontogramaResource::collection(Odontograma::with('piezas', 'tratamiento', 'anomalia_color', 'legajo', 'cara_odontograma')->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function store(Request $request)
     {
         // reglas
@@ -95,7 +91,7 @@ class OdontogramaController extends Controller
              
                 $odontograma = Odontograma::create([
                     'paciente_id' => $request->input('paciente_id'),
-                    'pieza_id' => 2,
+                    'pieza_id' => $piezasSeleccionadas[0],
                     'tratamiento_id' => $request->input('tratamiento_id'),
                     'anomalia_color_id' => $request->input('anomalia_color_id'),
                     'cara_odontograma_id' => $request->input('cara_odontograma_id'),
@@ -180,13 +176,6 @@ class OdontogramaController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $odontograma_id)
     {
 
