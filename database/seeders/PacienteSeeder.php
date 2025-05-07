@@ -14,6 +14,8 @@ class PacienteSeeder extends Seeder
      */
     public function run()
     {
+
+        // PACIENTE 1
         Paciente::create([
 
             'user_id'=> 4,
@@ -22,6 +24,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 2
         Paciente::create([
 
             'user_id'=> 5,
@@ -30,6 +33,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 3
         Paciente::create([
 
             'user_id'=> 6,
@@ -38,6 +42,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 4
         Paciente::create([
 
             'user_id'=> 7,
@@ -46,6 +51,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 5
         Paciente::create([
 
             'user_id'=> 8,
@@ -54,6 +60,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 6
         Paciente::create([
 
             'user_id'=> 9,
@@ -62,6 +69,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 7
         Paciente::create([
 
             'user_id'=> 10,
@@ -70,6 +78,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 8
         Paciente::create([
 
             'user_id'=> 11,
@@ -78,6 +87,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 9
         Paciente::create([
 
             'user_id'=> 12,
@@ -86,6 +96,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 10
         Paciente::create([
 
             'user_id'=> 13,
@@ -94,6 +105,8 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+
+        // PACIENTE 11
         Paciente::create([
 
             'user_id'=> 14,
@@ -102,6 +115,8 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+
+        // PACIENTE 12
         Paciente::create([
 
             'user_id'=> 15,
@@ -110,6 +125,8 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+
+        // PACIENTE 13
         Paciente::create([
 
             'user_id'=> 16,
@@ -118,6 +135,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 14
         Paciente::create([
 
             'user_id'=> 17,
@@ -126,6 +144,7 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+        // PACIENTE 15
         Paciente::create([
 
             'user_id'=> 18,
@@ -134,6 +153,8 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+
+        // PACIENTE 16
         Paciente::create([
 
             'user_id'=> 19,
@@ -142,10 +163,89 @@ class PacienteSeeder extends Seeder
 
         ]);
 
+
+        // PACIENTE 17
         Paciente::create([
 
             'user_id'=> 20,
-            'phone' => '376411112233',
+            'phone' => '3764951772',
+            'obra_social_id' => 3
+
+        ]);
+
+
+        // PACIENTE 18
+        Paciente::create([
+
+            'user_id'=> 21,
+            'phone' => '3764210657',
+            'obra_social_id' => 3
+
+        ]);
+
+
+        // PACIENTE 19
+        Paciente::create([
+
+            'user_id'=> 22,
+            'phone' => '3764849833',
+            'obra_social_id' => 2
+
+        ]);
+
+        // PACIENTE 20
+        Paciente::create([
+
+            'user_id'=> 23,
+            'phone' => '37647924818',
+            'obra_social_id' => 2
+
+        ]);
+
+        // PACIENTE 21
+        Paciente::create([
+
+            'user_id'=> 24,
+            'phone' => '3766001333',
+            'obra_social_id' => 1
+
+        ]);
+
+
+        // PACIENTE 22
+        Paciente::create([
+
+            'user_id'=> 25,
+            'phone' => '3764801401',
+            'obra_social_id' => 1
+
+        ]);
+
+
+        // PACIENTE 23
+        Paciente::create([
+
+            'user_id'=> 26,
+            'phone' => '3765315127',
+            'obra_social_id' => 4
+
+        ]);
+
+
+        // PACIENTE 24
+        Paciente::create([
+
+            'user_id'=> 27,
+            'phone' => '3765315100',
+            'obra_social_id' => 4
+
+        ]);
+
+        // PACIENTE 25
+        Paciente::create([
+
+            'user_id'=> 28,
+            'phone' => '3765315188',
             'obra_social_id' => 4
 
         ]);

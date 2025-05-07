@@ -80,7 +80,7 @@ Route::group([
 
     Route::post('login_admin',[LoginAdminController::class, 'login']);
 
-    
+    Route::post('profile', [AdminController::class, 'admin_perfil']);
 
 
     // para restablecer la clave
@@ -139,7 +139,7 @@ Route::group([
     Route::get('legajo/last_legajo/{paciente_id}', [LegajoController::class, 'showLegajoAdmin']);
 
 
-    Route::post('profile', [AdminController::class, 'admin_perfil']);
+   
 
 
     // odontograma

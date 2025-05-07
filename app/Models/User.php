@@ -90,7 +90,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
 
         // url del front-end
-        $url = 'https://spa.test/reset-password?token=' . $token;
+        $url = 'http://localhost:5173/reset/' . $token;
 
         $this->notify(new ResetPasswordNotification($url));
     }

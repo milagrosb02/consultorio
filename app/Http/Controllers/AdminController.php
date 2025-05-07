@@ -128,7 +128,7 @@ class AdminController extends Controller
 
     public function admin_perfil()
     {
-        return response()->json($this->guard()->user());
+        return response()->json(Auth::guard('api')->user());
     }
 
     

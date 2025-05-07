@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
     public function passwordAction(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'nullable',
             'token' => 'required_with:password,password_confirmation'
         ]);
 

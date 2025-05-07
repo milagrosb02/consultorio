@@ -42,9 +42,10 @@ class NotificarTurno extends Command
      */
     public function handle()
     {
-         // el turno se cancela hasta 48 hs antes
-         $date = now()->addDays(2);
        
+
+         $date = now()->addDays(4);
+
 
          // NOTIFICACION
          // filtro del turno

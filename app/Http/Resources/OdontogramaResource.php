@@ -18,7 +18,12 @@ class OdontogramaResource extends JsonResource
 
             'id' => $this->id,
 
-            'piezas' => $this->piezas->pieza,   
+            'piezas' => $this->pieza->map(function($pieza) {
+                return [
+                    'id' => $pieza->id,
+                    'pieza' => $pieza->pieza,
+                ];
+            }),  
 
             "paciente" => $this->paciente?->user?->first_name .' '. $this->paciente?->user?->last_name,
 
@@ -26,9 +31,12 @@ class OdontogramaResource extends JsonResource
 
             "diagnostico de la pieza" => $this->diagnostico,
 
-            "color de la pieza" => $this->anomalias_colores->pluck('color'),
+            "color de la pieza" => $this->anomalia_color?->color,
 
-            "descripcion de la pieza" => $this->anomalias_colores->pluck('descripcion'),
+
+            "descripcion de la pieza" => $this->anomalia_color?->descripcion,
+
+
 
             "cara dental" => $this->cara_odontograma?->nombre,
 

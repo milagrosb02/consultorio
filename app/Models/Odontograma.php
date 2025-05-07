@@ -20,7 +20,7 @@ class Odontograma extends Model
         return $attributes;
     }
 
-    public function piezas()
+    public function pieza()
     {
         return $this->belongsToMany(Pieza::class, 'odontograma_piezas', 'odontograma_id', 'pieza_id');
     }
@@ -52,7 +52,10 @@ class Odontograma extends Model
     }
 
 
-
+    public function legajo()
+    {
+        return $this->belongsTo(Legajo::class, 'legajo_id');
+    }
 
 
 }
