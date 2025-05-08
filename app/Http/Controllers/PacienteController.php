@@ -18,72 +18,54 @@ class PacienteController extends Controller
 
     public function datos_pacientes(Request $request)
     {
-        // creo una validacion de datos
-        // con $request->all() tomo todos los datos que ingreso
-        $validarPaciente = Validator::make($request->all(), 
-        
-        [
+        try {
+            $validarPaciente = Validator::make($request->all(), [
+                'phone' => 'required|numeric',
+                'obra_social_id' => 'required'
+            ]);
 
-            //'user_id' => 'required',
+            if ($validarPaciente->fails()) {
+                return response()->json($validarPaciente->errors()->toJson(), 400);
+            }
 
-            'phone' => 'required|numeric',
+            $paciente = Paciente::create(array_merge($validarPaciente->validate()));
 
-            'obra_social_id' => 'required'
-
-        ]);
-
-        // si la solicitud no es valida
-        if($validarPaciente->fails()){
-
-            return response()->json($validarPaciente->errors()->toJson(), 400);
-
+            return response()->json([
+                'message' => '¡Estas registrado!',
+                'paciente' => $paciente,
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al registrar al paciente.'], 500);
         }
-
-        // si la solicitud es valida, creo el nuevo usuario
-        $paciente = Paciente::create(array_merge(
-            $validarPaciente->validate()));
-
-
-        return response()->json([
-
-            'message' => '¡Estas registrado!',
-            'paciente' => $paciente,
-           
-
-        ], 201);
-
     }
 
     
     
     public function editar_telefono(Request $request, $paciente_id)
     {
-        $paciente = Paciente::findOrFail($paciente_id);
+        try {
+            $paciente = Paciente::findOrFail($paciente_id);
 
-    // Verificar si se envió el campo "telefono" y actualizar si es necesario
-    if ($request->has('phone')) {
-        $this->validate($request, [
-            'phone' => 'required|numeric'
-        ]);
+            if ($request->has('phone')) {
+                $this->validate($request, [
+                    'phone' => 'required|numeric'
+                ]);
+                $paciente->phone = $request->phone;
+            }
 
-        $paciente->phone = $request->phone;
+            $paciente->save();
+
+            return response()->json([
+                'message' => '¡Número de teléfono actualizado correctamente!',
+                'paciente' => $paciente
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al actualizar el teléfono.'], 500);
+        }
     }
-
     
-    // Guardar los cambios
-    $paciente->save();
-
-    return response()->json([
-        'message' => '¡Número de teléfono actualizado correctamente!',
-        'paciente' => $paciente
-    ], 200);
-    }
     
-    /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\Guard
-     */
+
     public function guard()
     {
         return Auth::guard();

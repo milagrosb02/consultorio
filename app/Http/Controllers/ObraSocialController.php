@@ -27,80 +27,80 @@ class ObraSocialController extends Controller
 
    
     public function store(Request $request)
-    {
+{
+    $rules = [
+        'obra_social' => ['required', 'string', 'min:3', 'unique:obra_sociales', new Uppercase]
+    ];
 
-        $rules = [
+    $messages = [
+        'obra_social.required' => 'La obra social es obligatoria.',
+        'obra_social.string' => 'La obra social no es válida. Ingresa nuevamente.',
+        'obra_social.min' => 'La obra social no es válida. Ingresa nuevamente.',
+        'obra_social.unique' => 'Esta obra social ya está registrada. Ingresa otra.',
+        'obra_social.uppercase' => 'El registro debe estar todo en MAYÚSCULAS.'
+    ];
 
-            'obra_social' => ['required', 'string', 'min:3','unique:obra_sociales', new Uppercase]
+    $validator = Validator::make($request->only('obra_social'), $rules, $messages);
 
-        ];
-
-        $messages = 
-        [
-
-            'obra_social.required' => 'La obra social es obligatoria. ',
-
-            'obra_social.string' => 'La obra social no es válida. Ingresa nuevamente. ',
-
-            'obra_social.min' => 'La obra social no es válida. Ingresa nuevamente. ',
-
-            'obra_social.unique' => 'Esta obra social ya está registrada. Ingresa otra. '
-
-        ];
-
-
-        $obra_socialValidate = Validator::make($request->only('obra_social'), $rules, $messages);
-
-        $obra_Social = ObraSociale::create(array_merge($obra_socialValidate->validate()));
-
-
-       
-        
-
+    // Si falla la validación, se devuelve el error y no entra al try
+    if ($validator->fails()) {
         return response()->json([
-
-                'message' => '¡Obra Social creada!',
-                'obra_social' => $obra_Social
-    
-             ], 201);
-       
-        
+            'message' => 'Error en los datos enviados.',
+            'errors' => $validator->errors()
+        ], 422);
     }
 
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, $id)
-    {
-        $borrar_obraSocial = 
-        [
-            'obra_social' => $request->obra_social
-        ];
-
-        ObraSociale::whereId($id)->delete($borrar_obraSocial);
+    try {
+        $obraSocial = ObraSociale::create($validator->validated());
 
         return response()->json([
-
-         'message' => '¡Cobertura medica borrada!'
-        
+            'message' => '¡Obra Social creada!',
+            'obra_social' => $obraSocial
         ], 201);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'error' => 'Error al crear la obra social.',
+            'detalle' => $th->getMessage()
+        ], 500);
+    }
+}
+
+    
+
+    
+    public function destroy(Request $request, $id)
+    {
+        try {
+            ObraSociale::whereId($id)->delete();
+
+            return response()->json([
+                'message' => '¡Cobertura médica borrada!'
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => 'Error al eliminar la cobertura médica.',
+                'detalle' => $th->getMessage()
+            ], 500);
+        }
     }
 
 
 
     public function buscar_obra_social($obra_social)
     {
-        $obras_sociales = DB::table('obra_sociales')
-                    ->select('obra_social AS obra social')
-                    ->where('obra_social', 'LIKE', '%'.$obra_social.'%')
-                    ->get();
+        try {
+            $obras_sociales = DB::table('obra_sociales')
+                ->select('obra_social AS obra social')
+                ->where('obra_social', 'LIKE', '%' . $obra_social . '%')
+                ->get();
 
-        return response()->json($obras_sociales);
+            return response()->json($obras_sociales);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => 'Error al buscar la obra social.',
+                'detalle' => $th->getMessage()
+            ], 500);
+        }
     }
 
 }

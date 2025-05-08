@@ -18,6 +18,7 @@ class LegajoController extends Controller
     public function index()
     {
         return LegajoResource::collection(Legajo::with('paciente', 'tratamiento', 'profesional')->get());
+        
     }
     
 
@@ -25,158 +26,102 @@ class LegajoController extends Controller
 
     public function store(Request $request)
     {
-        // reglas
-        $rules = 
-        [
-            'paciente_id' => ['required'],
+        try {
+            $rules = [
+                'paciente_id' => ['required'],
+                'descripcion' => ['string', 'max:100'],
+                'tratamiento_id' => ['required'],
+                'user_id' => ['required']
+            ];
 
-            'descripcion' => ['string', 'max: 100'],
+            $messages = [
+                'descripcion.string' => 'El campo debe ser rellenado con caracteres alfanuméricos.',
+                'descripcion.max' => 'El campo excedió la cantidad de caracteres.',
+                'user_id.required' => ['Debe estar el nombre de la profesional a cargo.']
+            ];
 
-            'tratamiento_id' => ['required'],
+            $validateLegajo = Validator::make($request->all(), $rules, $messages);
 
-            'user_id' => ['required']
+            if ($validateLegajo->fails()) {
+                return response()->json([
+                    'message' => 'Error en los datos enviados.',
+                    'errors' => $validateLegajo->errors(),
+                ], 400);
+            }
 
-        ];
+            $legajo = Legajo::create(array_merge($validateLegajo->validate(), [
+                'fecha' => Carbon::now()->format('Y-m-d')
+            ]));
 
+            return response()->json([
+                'message' => '¡Historial clínico creado!',
+                'legajo' => $legajo
+            ], 201);
 
-        // creo los mensajes de validacion
-        $messages = 
-        [
-            'descripcion.string' => 'El campo debe ser rellenado con caracteres alfanuméricos. ',
-
-            'descripcion.max' => 'El campo excedio la cantidad de caracteres. ',
-
-            'user_id.required' => ['Debe estar el nombre de la profesional a cargo. ']
-
-        ];
-
-
-         // creo la validación de datos
-         $validateLegajo = Validator::make($request->all(), $rules, $messages);
-
-           // Verificar si la validación falla
-        if ($validateLegajo->fails()) 
-        {
-            return response()->json
-            ([
-                'message' => 'Error en los datos enviados.',
-                'errors' => $validateLegajo->errors(),
-            ], 400);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al crear legajo'], 500);
         }
-
-
-
-         $legajo = Legajo::create(array_merge($validateLegajo->validate(), [
-
-            'fecha' => Carbon::now()->format('Y-m-d') 
-
-         ]));
-
-
-         return response()->json([
- 
-             'message' => '¡Historial clínico creado!',
-             'legajo' => $legajo
- 
-         ], 201);
-
-
     }
+
 
     
 
     public function show($paciente_id)
     {
+        try {
+            $legajo = Legajo::where('paciente_id', $paciente_id)->get();
 
-        $legajo = Legajo::where('paciente_id', $paciente_id)->get();
-
-
-        if ($legajo->isEmpty()) 
-        {
-            return response()->json
-            ([
-
-                'message' => 'Aún no posees un historial clinico.'
-
-            ], 404);
-
-        } 
-        else 
-        {
-            return response()->json
-            ([
-
-                'message' => '¡Aquí está tu historial clinico!',
-
-                'legajo' => $legajo
-
-            ], 201);
+            if ($legajo->isEmpty()) {
+                return response()->json(['message' => 'Aún no posees un historial clínico.'], 404);
+            } else {
+                return response()->json([
+                    'message' => '¡Aquí está tu historial clínico!',
+                    'legajo' => $legajo
+                ], 201);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al obtener legajo'], 500);
         }
-
-
-
     }
 
     
-    // id legajo
+    
+
     public function update(Request $request, $legajo_id)
     {
-        // $modificar_legajo = $request->only([
+        try {
+            $modificar_legajo = $request->only(['descripcion', 'tratamiento_id']);
 
-        //     'descripcion' => $request->descripcion,
+            $legajo = Legajo::where('id', $legajo_id)->latest('fecha')->firstOrFail();
+            $legajo->update($modificar_legajo);
 
-        //     'tratamiento_id' => $request->tratamiento_id,
-
-        //     'fecha' => $request->fecha
-
-        // ]);
-        
-
-
-        // $legajo = Legajo::where('id', $legajo_id)->firstOrFail();
-
-        // $legajo->update($modificar_legajo);
-
-        // return response()->json([
-
-        //     'message' => '¡Historial Clinico modificado!',
-        //     'legajo' => $legajo
-
-        // ], 201);
-        $modificar_legajo = $request->only([
-            'descripcion',
-            'tratamiento_id'
-        ]);
-    
-        $legajo = Legajo::where('id', $legajo_id)
-            ->latest('fecha') // Ordenar por fecha en orden descendente
-            ->firstOrFail();
-    
-        $legajo->update($modificar_legajo);
-    
-        return response()->json([
-            'message' => '¡Historial Clínico modificado!',
-            'legajo' => $legajo
-        ], 201);
-        
+            return response()->json([
+                'message' => '¡Historial Clínico modificado!',
+                'legajo' => $legajo
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al modificar legajo'], 500);
+        }
     }
+
+
 
     public function showLegajoAdmin($paciente_id)
     {
-        $legajo = Legajo::where('paciente_id', $paciente_id)
-        ->latest('fecha')
-        ->first();
+        try {
+            $legajo = Legajo::where('paciente_id', $paciente_id)->latest('fecha')->first();
 
-    if (!$legajo) {
-        return [
-            'message' => 'Aún no posees un historial clínico.'
-        ];
-    } else {
-        return [
-            'message' => '¡Aquí está tu historial clínico!',
-            'legajo' => $legajo
-        ];
-    }
+            if (!$legajo) {
+                return ['message' => 'Aún no posees un historial clínico.'];
+            } else {
+                return [
+                    'message' => '¡Aquí está tu historial clínico!',
+                    'legajo' => $legajo
+                ];
+            }
+        } catch (\Throwable $th) {
+            return ['error' => 'Error al obtener historial clínico'];
+        }
     }
 
 
@@ -184,60 +129,67 @@ class LegajoController extends Controller
     
     public function generarPDF()
     {
-
-        $legajos = Legajo::with('paciente', 'profesional', 'tratamiento')->get();
-
-
-        //dd($legajos);
-        $pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a4', 'landscape');
-         // Ajusta las dimensiones y la orientación del papel para dispositivos móviles
-    //$pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a6', 'portrait'); // Cambia 'a4', 'landscape' a 'a6', 'portrait'
-        
-
-        return $pdf->stream('paciente_legajo.pdf');
-
+        try {
+            $legajos = Legajo::with('paciente', 'profesional', 'tratamiento')->get();
+            $pdf = Pdf::loadView('prueba1', compact('legajos'))->setPaper('a4', 'landscape');
+            return $pdf->stream('paciente_legajo.pdf');
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al generar PDF'], 500);
+        }
     }
+
 
 
 
     public function generarPDFPaciente($paciente_id)
     {
-        $legajos = Legajo::with('paciente', 'profesional', 'tratamiento')->where("paciente_id",$paciente_id)->get();
-
-        $legajo = Legajo::with('paciente')->where("paciente_id",$paciente_id)->latest()->first();
-
-        $pdf = Pdf::loadView('legajo_paciente', compact('legajos', 'legajo'))->setPaper('a4', 'landscape');
-
-        return $pdf->stream('paciente_legajo_unico.pdf');
+        try {
+            $legajos = Legajo::with('paciente', 'profesional', 'tratamiento')->where("paciente_id", $paciente_id)->get();
+            $legajo = Legajo::with('paciente')->where("paciente_id", $paciente_id)->latest()->first();
+            $pdf = Pdf::loadView('legajo_paciente', compact('legajos', 'legajo'))->setPaper('a4', 'landscape');
+            return $pdf->stream('paciente_legajo_unico.pdf');
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al generar PDF del paciente'], 500);
+        }
     }
 
 
     // SELECT PARA CARGAR EL PACIENTE
     public function obtener_pacientes_por_nombres()
     {
+        try {
+            $pacientes = DB::table('users')
+                ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
+                ->select('first_name AS nombre', 'last_name AS apellido')
+                ->get();
 
-        $pacientes = DB::table('users')
-                    ->join('pacientes', 'users.id', '=', 'pacientes.user_id')
-                    ->select('first_name AS nombre', 'last_name AS apellido')
-                    ->get();
-
-        return $pacientes;
-        
+            return $pacientes;
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al obtener pacientes'], 500);
+        }
     }
 
 
     // SELECT PARA TRAER LOS TRATAMIENTOS
     public function listar_tratamientos()
     {
-        return Tratamiento::select('id', 'nombre')->get();
+        try {
+            return Tratamiento::select('id', 'nombre')->get();
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al listar tratamientos'], 500);
+        }
     }
+
 
 
     public function listar_dentistas()
     {
-        $dentistas = User::select('id', 'first_name', 'last_name')->whereIn('id', [2, 3])->get();
-
-        return response()->json($dentistas);
+        try {
+            $dentistas = User::select('id', 'first_name', 'last_name')->whereIn('id', [2, 3])->get();
+            return response()->json($dentistas);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al listar dentistas'], 500);
+        }
     }
     
 }

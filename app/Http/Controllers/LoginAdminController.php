@@ -22,48 +22,45 @@ class LoginAdminController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    /**
-     * Get a JWT token via given credentials.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    
     public function login(Request $request)
     {
-        $credentials = $request->only('user', 'password');
+        try {
+            $request->validate([
+                'user' => 'required',
+                'password' => 'required',
+            ]);
 
-    $request->validate([
-        'user' => 'required',
-        'password' => 'required',
-    ]);
+            $credentials = $request->only('user', 'password');
 
-    $user = User::where('user', $request->user)->first();
+            $user = User::where('user', $credentials['user'])->first();
 
-    if (!$user || !Hash::check($request->password, $user->password)) {
-        throw ValidationException::withMessages([
-            'user' => ['Las credenciales son incorrectas.'],
-        ]);
+            if (!$user || !Hash::check($credentials['password'], $user->password)) {
+                throw ValidationException::withMessages([
+                    'user' => ['Las credenciales son incorrectas.'],
+                ]);
+            }
+
+            if ($token = $this->guard()->attempt($credentials)) {
+                $user_id = Auth::user()->id;
+                return $this->respondWithToken($token, $user_id);
+            }
+
+            return response()->json(['error' => 'No se pudo generar el token.'], 401);
+
+        } catch (ValidationException $e) {
+            throw $e; // Esto permite que Laravel maneje los mensajes de validación como siempre
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => 'Ocurrió un error.',
+                'detalle' => $th->getMessage(), // útil para debug
+            ], 500);
+        }
     }
 
-    if ($token = $this->guard()->attempt($credentials)) {
-        $user_id = Auth::user()->id; // Obtiene el ID del usuario logueado
-        return $this->respondWithToken($token, $user_id);
-    }
-
-    return response()->json(['error' => 'Unauthorized'], 401);
-    }
 
 
-
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     protected function respondWithToken($token, $user_id)
     {
         return response()->json([
@@ -75,11 +72,7 @@ class LoginAdminController extends Controller
     }
 
 
-     /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\Guard
-     */
+     
     public function guard()
     {
         return Auth::guard();

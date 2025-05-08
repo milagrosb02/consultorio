@@ -10,80 +10,60 @@ use Illuminate\Support\Facades\DB;
 
 class TratamientoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         return TratamientoResource::collection(Tratamiento::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        // reglas
-        $rules = 
-        [
+        try {
+            $rules = [
+                'nombre' => ['required', 'string', 'max:70', 'unique:tratamientos,nombre']
+            ];
 
-            'nombre' => ['required', 'string', 'max: 70', 'unique:tratamientos,nombre']
+            $messages = [
+                'nombre.required' => 'El tratamiento es requerido.',
+                'nombre.string' => 'El nombre del tratamiento debe ser alfanumérico.',
+                'nombre.max' => 'El nombre del tratamiento es demasiado largo.',
+                'nombre.unique' => 'Este tratamiento ya se encuentra en la lista.'
+            ];
 
-        ];
+            $validateTratamiento = Validator::make($request->only('nombre'), $rules, $messages);
 
+            if ($validateTratamiento->fails()) {
+                return response()->json([
+                    'message' => 'Error en los datos enviados.',
+                    'errors' => $validateTratamiento->errors(),
+                ], 400);
+            }
 
-        // mensajes
-        $messages = 
-        [
+            $tratamiento = Tratamiento::create($validateTratamiento->validate());
 
-            'nombre.required' => 'El tratamiento es requerido. ',
-
-            'nombre.string' => 'El nombre del tratamiento deben ser caracteres alfanuméricos. ',
-
-            'nombre.max' => 'El nombre del tratamiento es demasiado largo. ',
-
-            'nombre.unique' => 'Este tratamiento ya se encuentra en la lista.'
-        ];
-
-
-        // creo la validacion de datos
-        $validateTratamiento = Validator::make($request->only('nombre'), $rules, $messages);
-
-        // crea el tratamiento
-        $tratamiento = Tratamiento::create(array_merge($validateTratamiento->validate()));
-
-
-        return response()->json([
-
-            'message' => '¡Tratamiento creado!',
-            'tratamiento' => $tratamiento
-
-        ], 201);
-
-
+            return response()->json([
+                'message' => '¡Tratamiento creado!',
+                'tratamiento' => $tratamiento
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al crear el tratamiento.'], 500);
+        }
     }
 
    
 
     public function destroy(Request $request, $id)
     {
-        $borrar_tratamiento = 
-        [
-            'nombre' => $request->nombre
-        ];
+        try {
+            Tratamiento::whereId($id)->delete();
 
-        Tratamiento::whereId($id)->delete($borrar_tratamiento);
-
-        return response()->json([
-
-         'message' => '¡Tratamiento borrado!'
-        
-        ], 201);
+            return response()->json([
+                'message' => '¡Tratamiento borrado!'
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al borrar el tratamiento.'], 500);
+        }
     }
 
 
@@ -93,13 +73,16 @@ class TratamientoController extends Controller
 
     public function buscar_tratamiento($tratamiento)
     {
-        $tratamientos = DB::table('tratamientos')
-                    ->select('nombre AS tratamiento')
-                    ->where('nombre', 'LIKE', '%'.$tratamiento.'%')
-                    ->get();
+        try {
+            $tratamientos = DB::table('tratamientos')
+                ->select('nombre AS tratamiento')
+                ->where('nombre', 'LIKE', '%'.$tratamiento.'%')
+                ->get();
 
-        return response()->json($tratamientos);
-
+            return response()->json($tratamientos);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error al buscar tratamientos.'], 500);
+        }
     }
 
    
