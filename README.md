@@ -5,6 +5,9 @@
 # Build With
 ## Laravel
 
+# Documentation 
+https://milagrosb02.github.io/consultorio/
+
 # Requisites
 - PHP >= 7.4 (Para esta api utilice la 8.1.6)
 - Composer
