@@ -46,6 +46,13 @@ class ForgotPasswordController extends Controller
 
     private function resetPassword(Request $request)
     {
+        $request->validate([
+            'email' => 'required|email',
+            'token' => 'required',
+            'password' => 'required|confirmed|min:6',
+            // 'password_confirmation' no es necesario porque 'confirmed' ya lo compara automáticamente
+        ]);
+
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
@@ -68,4 +75,5 @@ class ForgotPasswordController extends Controller
             'message' => __($status)
         ], 500);
     }
+
 }

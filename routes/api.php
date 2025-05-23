@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ObraSocialController;
-use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\LoginPacienteController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LogoutController;
@@ -77,8 +76,6 @@ Route::group([
     Route::post('login',[LoginPacienteController::class, 'login']);
 
     Route::post('logout', [LogoutController::class, 'logout']);
-
-    Route::post('login_admin',[LoginAdminController::class, 'login']);
 
     Route::post('profile', [AdminController::class, 'admin_perfil']);
 
