@@ -1,22 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Documentación API - Consultorio</title>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="https://redoc.ly/favicon.ico" />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      redoc {
-        display: block;
-        height: 100vh;
-      }
-    </style>
-  </head>
-  <body>
-    <redoc spec-url="consultorio-api.openapi.json"></redoc>
-    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-  </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation</title>
+  <link rel="icon" href="https://redoc.ly/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f8fa;
+      color: #333;
+    }
+
+    header {
+      background: #cb6eaf;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    redoc {
+      display: block;
+      height: calc(100vh - 80px); /* Ajustar por la altura del header */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Consultorio API Doc</h1>
+  </header>
+
+  <redoc spec-url="consultorio-api.openapi.json"></redoc>
+  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+</body>
 </html>
