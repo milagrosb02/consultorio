@@ -10,19 +10,19 @@ use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
 
 
-class LoginPacienteController extends Controller
+class LoginController extends Controller
 {
 
     
     public function __construct()
     {
-        // como el registro no esta como metodo, lo agrego (esta en la ruta)
+       
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
 
 
-    // hay que resolver esta funcion (admin no puede ingresar con user, solo con mail)
+    
      public function login(Request $request)
     {
         try {
