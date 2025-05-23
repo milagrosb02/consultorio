@@ -82,8 +82,8 @@
                 "type": "string"
               },
               "example": {
-                "email": "admin@gmail.com",
-                "password": "admin123"
+                "email": "docg@gmail.com",
+                "password": "galmarini123"
               }
             }
           }
@@ -96,6 +96,94 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Sucess Login Patient",
+                    "value": {
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MTk5NzAsImV4cCI6MTc0ODA5Mjc3MCwibmJmIjoxNzQ3OTE5OTcwLCJqdGkiOiJaN3VMMDdabm1mZXpPanZqIiwic3ViIjoiMjkiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.X_LXvX6LQ0AnpP5kwM9dmUhPUyNRHLDTp75Jm7ztgkc",
+                      "token_type": "bearer",
+                      "expires_in": 172800,
+                      "user_id": 29,
+                      "rol": "paciente",
+                      "email": "fabi@gmail.com",
+                      "first_name": "Fabiana",
+                      "last_name": "Aizcorbe",
+                      "paciente_id": 26
+                    }
+                  },
+                  "2": {
+                    "summary": "Sucess Login Patient",
+                    "value": {
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MTk5NzAsImV4cCI6MTc0ODA5Mjc3MCwibmJmIjoxNzQ3OTE5OTcwLCJqdGkiOiJaN3VMMDdabm1mZXpPanZqIiwic3ViIjoiMjkiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.X_LXvX6LQ0AnpP5kwM9dmUhPUyNRHLDTp75Jm7ztgkc",
+                      "token_type": "bearer",
+                      "expires_in": 172800,
+                      "user_id": 29,
+                      "rol": "paciente",
+                      "email": "fabi@gmail.com",
+                      "first_name": "Fabiana",
+                      "last_name": "Aizcorbe",
+                      "paciente_id": 26
+                    }
+                  },
+                  "3": {
+                    "summary": "Sucess Login Admin",
+                    "value": {
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MjAxMzQsImV4cCI6MTc0ODA5MjkzNCwibmJmIjoxNzQ3OTIwMTM0LCJqdGkiOiI5ZmdFcEF5WEkySEFJaFNPIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.jrLmgOUtDfT80kntnoap3woiGQgX6TWjUn4eGWlfIq0",
+                      "token_type": "bearer",
+                      "expires_in": 172800,
+                      "user_id": 1,
+                      "rol": "admin",
+                      "email": "admin@gmail.com",
+                      "first_name": "Admin",
+                      "last_name": "Admin Admin"
+                    }
+                  },
+                  "4": {
+                    "summary": "Sucess Login Admin",
+                    "value": {
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MjAxMzQsImV4cCI6MTc0ODA5MjkzNCwibmJmIjoxNzQ3OTIwMTM0LCJqdGkiOiI5ZmdFcEF5WEkySEFJaFNPIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.jrLmgOUtDfT80kntnoap3woiGQgX6TWjUn4eGWlfIq0",
+                      "token_type": "bearer",
+                      "expires_in": 172800,
+                      "user_id": 1,
+                      "rol": "admin",
+                      "email": "admin@gmail.com",
+                      "first_name": "Admin",
+                      "last_name": "Admin Admin"
+                    }
+                  },
+                  "5": {
+                    "summary": "Authentication Error",
+                    "value": {
+                      "error": "Credenciales incorrectas."
+                    }
+                  },
+                  "6": {
+                    "summary": "Success Login Doc 1",
+                    "value": {
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MjAzNzgsImV4cCI6MTc0ODA5MzE3OCwibmJmIjoxNzQ3OTIwMzc4LCJqdGkiOiJubkRlZVNpZTlJbkRsSGtsIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.AkIZaaxR06g2Rn-OWDipSVejrOVqic3ivDl2WI52WuY",
+                      "token_type": "bearer",
+                      "expires_in": 172800,
+                      "user_id": 2,
+                      "rol": "doctora",
+                      "email": "docb@gmail.com",
+                      "first_name": "Beatriz",
+                      "last_name": "Padros"
+                    }
+                  },
+                  "7": {
+                    "summary": "Success Login Dentist 2",
+                    "value": {
+                      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MjA0NDIsImV4cCI6MTc0ODA5MzI0MiwibmJmIjoxNzQ3OTIwNDQyLCJqdGkiOiJVREhpNVI3d2l4SjBLeWFQIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.5SQ4eY7cR7d8QPN64HeQNPKikEtca9efnwvq4XCVu_8",
+                      "token_type": "bearer",
+                      "expires_in": 172800,
+                      "user_id": 3,
+                      "rol": "doctora",
+                      "email": "docg@gmail.com",
+                      "first_name": "Gabriela",
+                      "last_name": "Galmarini"
+                    }
+                  }
                 }
               }
             },
@@ -168,6 +256,48 @@
               }
             },
             "headers": {}
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "detalle": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "detalle"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          },
+          "x-200:OK": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            },
+            "headers": {}
           }
         },
         "security": []
@@ -236,6 +366,31 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "message": "La contraseña ha sido correctamente actualizada!"
+                    }
+                  },
+                  "2": {
+                    "summary": "Validation Error",
+                    "value": {
+                      "message": "The given data was invalid.",
+                      "errors": {
+                        "password": [
+                          "La confirmación de la contraseña no coincide."
+                        ]
+                      }
+                    }
+                  },
+                  "3": {
+                    "summary": "Success",
+                    "value": {
+                      "message": "La contraseña ha sido correctamente actualizada!"
+                    }
+                  }
                 }
               }
             },
@@ -296,6 +451,19 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "message": "¡Usuario modificado!",
+                  "user": {
+                    "id": 1,
+                    "first_name": "Admin",
+                    "last_name": "Admin Admin",
+                    "user": "admin",
+                    "email": "admin@gmail.com",
+                    "email_verified_at": null,
+                    "created_at": "2025-04-25T12:29:36.000000Z",
+                    "updated_at": "2025-05-22T13:32:43.000000Z"
+                  }
                 }
               }
             },
@@ -329,7 +497,7 @@
             "in": "header",
             "description": "",
             "required": false,
-            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDU2ODEwNDgsImV4cCI6MTc0NTg1Mzg0OCwibmJmIjoxNzQ1NjgxMDQ4LCJqdGkiOiJjbWJZN3REaWY2bWwxYThjIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0fOtms7YwwONywLkekNdsg9krQfONrQaw3pTW1HeFGc",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDc5MjExNDIsImV4cCI6MTc0ODA5Mzk0MiwibmJmIjoxNzQ3OTIxMTQyLCJqdGkiOiJscENoVUFVdFlEeE1tNXd5Iiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.MQu4ZM2Uwlv6J3q_1EVMkLImeenLQj5BkuuJSWj_nrY",
             "schema": {
               "type": "string"
             }
@@ -354,6 +522,16 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "id": 3,
+                  "first_name": "Gabriela",
+                  "last_name": "Galmarini",
+                  "user": "docgalmarini",
+                  "email": "docg@gmail.com",
+                  "email_verified_at": null,
+                  "created_at": "2025-04-25T12:29:37.000000Z",
+                  "updated_at": "2025-04-25T12:29:37.000000Z"
                 }
               }
             },
@@ -401,6 +579,34 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "obra_social": "IPS"
+                    },
+                    {
+                      "id": 2,
+                      "obra_social": "MEDIFÉ"
+                    },
+                    {
+                      "id": 3,
+                      "obra_social": "PARTICULAR"
+                    },
+                    {
+                      "id": 4,
+                      "obra_social": "OSDE"
+                    },
+                    {
+                      "id": 5,
+                      "obra_social": "OSECAC"
+                    },
+                    {
+                      "id": 7,
+                      "obra_social": "UNAM"
+                    }
+                  ]
                 }
               }
             },
@@ -446,19 +652,44 @@
                 "properties": {}
               },
               "example": {
-                "obra_social": "UNAM"
+                "obra_social": "SWISS MEDICAL"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Validation Error ",
+                    "value": {
+                      "message": "Error en los datos enviados.",
+                      "errors": {
+                        "obra_social": [
+                          "La obra_social debe estar en MAYÚSCULAS."
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Success Create",
+                    "value": {
+                      "message": "¡Obra Social creada!",
+                      "obra_social": {
+                        "obra_social": "SWISS MEDICAL",
+                        "updated_at": "2025-05-22T13:47:16.000000Z",
+                        "created_at": "2025-05-22T13:47:16.000000Z",
+                        "id": 8
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -468,7 +699,7 @@
         "security": []
       }
     },
-    "/api/admin/obras_sociales/6": {
+    "/api/admin/obras_sociales/8": {
       "delete": {
         "summary": "Delete",
         "deprecated": false,
@@ -517,6 +748,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "message": "¡Cobertura médica borrada!"
                 }
               }
             },
@@ -564,7 +798,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "obra social": "IPS"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -611,7 +850,243 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "paciente_id": 1,
+                    "nombre": "Luis",
+                    "apellido": "Zelaya",
+                    "email": "luis@gmail.com",
+                    "telefono": "3764112581",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 2,
+                    "nombre": "Gustavo",
+                    "apellido": "Benitez",
+                    "email": "gustavo@gmail.com",
+                    "telefono": "3764112518",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 4,
+                    "nombre": "Daniel",
+                    "apellido": "Ojeda",
+                    "email": "dany@gmail.com",
+                    "telefono": "3764112566",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 6,
+                    "nombre": "Lidia",
+                    "apellido": "Villalba",
+                    "email": "lidia@gmail.com",
+                    "telefono": "3764112599",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 10,
+                    "nombre": "Hortencia",
+                    "apellido": "Lopez",
+                    "email": "hortencia@gmail.com",
+                    "telefono": "3764112598",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 11,
+                    "nombre": "Giovanni",
+                    "apellido": "Zelaya",
+                    "email": "giovanni@gmail.com",
+                    "telefono": "3764112577",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 21,
+                    "nombre": "Elias",
+                    "apellido": "Alvez",
+                    "email": "elias@gmail.com",
+                    "telefono": "3766001333",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 22,
+                    "nombre": "Fernando",
+                    "apellido": "Garcia",
+                    "email": "fernando@gmail.com",
+                    "telefono": "3764801401",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 26,
+                    "nombre": "Fabiana",
+                    "apellido": "Aizcorbe",
+                    "email": "fabi@gmail.com",
+                    "telefono": "3764802505",
+                    "obra_social_id": 1,
+                    "obra_social": "IPS"
+                  },
+                  {
+                    "paciente_id": 3,
+                    "nombre": "Felicia",
+                    "apellido": "Martinez",
+                    "email": "felicia@gmail.com",
+                    "telefono": "37641125112",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 5,
+                    "nombre": "Lautaro",
+                    "apellido": "Bordon",
+                    "email": "lautaro@gmail.com",
+                    "telefono": "3764112533",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 7,
+                    "nombre": "Felipe",
+                    "apellido": "Saucedo",
+                    "email": "felipe@gmail.com",
+                    "telefono": "3764112544",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 8,
+                    "nombre": "Carlos",
+                    "apellido": "Zelaya",
+                    "email": "carlos@gmail.com",
+                    "telefono": "3764112522",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 9,
+                    "nombre": "Gabriel",
+                    "apellido": "Estevanez",
+                    "email": "gabriel@gmail.com",
+                    "telefono": "3764112545",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 12,
+                    "nombre": "Miguel",
+                    "apellido": "González",
+                    "email": "miguel@gmail.com",
+                    "telefono": "3764998877",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 19,
+                    "nombre": "Agostina",
+                    "apellido": "Duarte",
+                    "email": "agos@gmail.com",
+                    "telefono": "3764849833",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 20,
+                    "nombre": "Antonia",
+                    "apellido": "Nuñez",
+                    "email": "antonia@gmail.com",
+                    "telefono": "37647924818",
+                    "obra_social_id": 2,
+                    "obra_social": "MEDIFÉ"
+                  },
+                  {
+                    "paciente_id": 13,
+                    "nombre": "Pedro",
+                    "apellido": "Alonso",
+                    "email": "pedro@gmail.com",
+                    "telefono": "3764111134",
+                    "obra_social_id": 3,
+                    "obra_social": "PARTICULAR"
+                  },
+                  {
+                    "paciente_id": 14,
+                    "nombre": "Ana",
+                    "apellido": "Quiroga",
+                    "email": "ana@gmail.com",
+                    "telefono": "37641109998",
+                    "obra_social_id": 3,
+                    "obra_social": "PARTICULAR"
+                  },
+                  {
+                    "paciente_id": 15,
+                    "nombre": "Yael",
+                    "apellido": "Rodriguez",
+                    "email": "yael@gmail.com",
+                    "telefono": "3764134567",
+                    "obra_social_id": 3,
+                    "obra_social": "PARTICULAR"
+                  },
+                  {
+                    "paciente_id": 17,
+                    "nombre": "Lucas",
+                    "apellido": "Romero",
+                    "email": "lucas@gmail.com",
+                    "telefono": "3764951772",
+                    "obra_social_id": 3,
+                    "obra_social": "PARTICULAR"
+                  },
+                  {
+                    "paciente_id": 18,
+                    "nombre": "Florencia",
+                    "apellido": "Rodriguez",
+                    "email": "flor@gmail.com",
+                    "telefono": "3764210657",
+                    "obra_social_id": 3,
+                    "obra_social": "PARTICULAR"
+                  },
+                  {
+                    "paciente_id": 16,
+                    "nombre": "Adrián",
+                    "apellido": "Jiménez",
+                    "email": "adrian@gmail.com",
+                    "telefono": "3764198866",
+                    "obra_social_id": 4,
+                    "obra_social": "OSDE"
+                  },
+                  {
+                    "paciente_id": 23,
+                    "nombre": "Melina",
+                    "apellido": "Benitez",
+                    "email": "melina@gmail.com",
+                    "telefono": "3765315127",
+                    "obra_social_id": 4,
+                    "obra_social": "OSDE"
+                  },
+                  {
+                    "paciente_id": 24,
+                    "nombre": "Carol",
+                    "apellido": "Irala",
+                    "email": "carol@gmail.com",
+                    "telefono": "3765315100",
+                    "obra_social_id": 4,
+                    "obra_social": "OSDE"
+                  },
+                  {
+                    "paciente_id": 25,
+                    "nombre": "Mario",
+                    "apellido": "Balmaceda",
+                    "email": "mario@gmail.com",
+                    "telefono": "3765315188",
+                    "obra_social_id": 4,
+                    "obra_social": "OSDE"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -658,7 +1133,16 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "nombre": "Fabiana",
+                    "apellido": "Aizcorbe",
+                    "email": "fabi@gmail.com",
+                    "telefono": "3764802505",
+                    "obra_social": "IPS"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -705,7 +1189,16 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "nombre": "Lautaro",
+                    "apellido": "Bordon",
+                    "email": "lautaro@gmail.com",
+                    "telefono": "3764112533",
+                    "obra_social": "MEDIFÉ"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -752,7 +1245,16 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "nombre": "Lautaro",
+                    "apellido": "Bordon",
+                    "email": "lautaro@gmail.com",
+                    "telefono": "3764112533",
+                    "obra_social": "MEDIFÉ"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -799,7 +1301,25 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "nombre": "Adrián",
+                    "apellido": "Jiménez"
+                  },
+                  {
+                    "nombre": "Melina",
+                    "apellido": "Benitez"
+                  },
+                  {
+                    "nombre": "Carol",
+                    "apellido": "Irala"
+                  },
+                  {
+                    "nombre": "Mario",
+                    "apellido": "Balmaceda"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -852,13 +1372,37 @@
           }
         },
         "responses": {
-          "200": {
+          "422": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Error Treatment",
+                    "value": {
+                      "message": "Error en los datos enviados.",
+                      "errors": {
+                        "nombre": [
+                          "Este tratamiento ya se encuentra en la lista."
+                        ]
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Validation Error",
+                    "value": {
+                      "message": "Error en los datos enviados.",
+                      "errors": {
+                        "nombre": [
+                          "El tratamiento es requerido."
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -917,6 +1461,54 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "tratamiento": "Limpieza"
+                    },
+                    {
+                      "id": 2,
+                      "tratamiento": "Ortodoncia"
+                    },
+                    {
+                      "id": 3,
+                      "tratamiento": "Obturación"
+                    },
+                    {
+                      "id": 4,
+                      "tratamiento": "Cirugía"
+                    },
+                    {
+                      "id": 5,
+                      "tratamiento": "Sensibilidad"
+                    },
+                    {
+                      "id": 6,
+                      "tratamiento": "Endodoncia"
+                    },
+                    {
+                      "id": 7,
+                      "tratamiento": "Prótesis"
+                    },
+                    {
+                      "id": 8,
+                      "tratamiento": "Implante"
+                    },
+                    {
+                      "id": 9,
+                      "tratamiento": "No se realizó un tratamiento"
+                    },
+                    {
+                      "id": 10,
+                      "tratamiento": "Conducto en premolar"
+                    },
+                    {
+                      "id": 12,
+                      "tratamiento": "Puentes Dentales"
+                    }
+                  ]
                 }
               }
             },
@@ -1031,7 +1623,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "tratamiento": "Conducto en premolar"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -1095,6 +1692,19 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "message": "¡Historial clínico creado!",
+                  "legajo": {
+                    "paciente_id": 21,
+                    "descripcion": "muela del juicio a extraer lado izquierdo",
+                    "tratamiento_id": 9,
+                    "user_id": 2,
+                    "fecha": "2025-05-22",
+                    "updated_at": "2025-05-22T14:09:50.000000Z",
+                    "created_at": "2025-05-22T14:09:50.000000Z",
+                    "id": 2
+                  }
                 }
               }
             },
@@ -1207,6 +1817,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "message": "¡Odontograma creado!",
+                  "odontograma": {
+                    "paciente_id": 21,
+                    "pieza_id": 2,
+                    "tratamiento_id": 10,
+                    "anomalia_color_id": 2,
+                    "cara_odontograma_id": 5,
+                    "diagnostico": "extraccion exitosa",
+                    "updated_at": "2025-05-22T14:11:10.000000Z",
+                    "created_at": "2025-05-22 11:11",
+                    "id": 8
+                  }
                 }
               }
             },
@@ -1275,6 +1899,21 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "message": "¡Odontograma modificado!",
+                  "odontograma": {
+                    "id": 7,
+                    "paciente_id": 20,
+                    "pieza_id": 6,
+                    "tratamiento_id": 10,
+                    "anomalia_color_id": 1,
+                    "cara_odontograma_id": 5,
+                    "diagnostico": "el molar mejoro",
+                    "created_at": "2025-05-07 09:40",
+                    "updated_at": "2025-05-22T14:14:42.000000Z",
+                    "fecha_actualizacion": "2025-05-22 11:14:42"
+                  }
                 }
               }
             },
@@ -1324,6 +1963,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "example": {
+                  "message": "No hay pacientes asignados para hoy."
                 }
               }
             },
@@ -1371,7 +2013,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "nombre": "Fabiana",
+                    "apellido": "Aizcorbe"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -1397,7 +2045,13 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "nombre": "Fabiana",
+                    "apellido": "Aizcorbe"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -1455,7 +2109,137 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "pieza": 18
+                  },
+                  {
+                    "id": 2,
+                    "pieza": 17
+                  },
+                  {
+                    "id": 3,
+                    "pieza": 16
+                  },
+                  {
+                    "id": 4,
+                    "pieza": 15
+                  },
+                  {
+                    "id": 5,
+                    "pieza": 14
+                  },
+                  {
+                    "id": 6,
+                    "pieza": 13
+                  },
+                  {
+                    "id": 7,
+                    "pieza": 12
+                  },
+                  {
+                    "id": 8,
+                    "pieza": 11
+                  },
+                  {
+                    "id": 9,
+                    "pieza": 21
+                  },
+                  {
+                    "id": 10,
+                    "pieza": 22
+                  },
+                  {
+                    "id": 11,
+                    "pieza": 23
+                  },
+                  {
+                    "id": 12,
+                    "pieza": 24
+                  },
+                  {
+                    "id": 13,
+                    "pieza": 25
+                  },
+                  {
+                    "id": 14,
+                    "pieza": 26
+                  },
+                  {
+                    "id": 15,
+                    "pieza": 27
+                  },
+                  {
+                    "id": 16,
+                    "pieza": 28
+                  },
+                  {
+                    "id": 17,
+                    "pieza": 48
+                  },
+                  {
+                    "id": 18,
+                    "pieza": 47
+                  },
+                  {
+                    "id": 19,
+                    "pieza": 46
+                  },
+                  {
+                    "id": 20,
+                    "pieza": 45
+                  },
+                  {
+                    "id": 21,
+                    "pieza": 44
+                  },
+                  {
+                    "id": 22,
+                    "pieza": 43
+                  },
+                  {
+                    "id": 23,
+                    "pieza": 42
+                  },
+                  {
+                    "id": 24,
+                    "pieza": 41
+                  },
+                  {
+                    "id": 25,
+                    "pieza": 31
+                  },
+                  {
+                    "id": 26,
+                    "pieza": 32
+                  },
+                  {
+                    "id": 27,
+                    "pieza": 33
+                  },
+                  {
+                    "id": 28,
+                    "pieza": 34
+                  },
+                  {
+                    "id": 29,
+                    "pieza": 35
+                  },
+                  {
+                    "id": 30,
+                    "pieza": 36
+                  },
+                  {
+                    "id": 31,
+                    "pieza": 37
+                  },
+                  {
+                    "id": 32,
+                    "pieza": 38
+                  }
+                ]
               }
             },
             "headers": {}
@@ -1502,7 +2286,29 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "nombre": "Vestibular"
+                  },
+                  {
+                    "id": 2,
+                    "nombre": "Palatino"
+                  },
+                  {
+                    "id": 3,
+                    "nombre": "Mesial"
+                  },
+                  {
+                    "id": 4,
+                    "nombre": "Distal"
+                  },
+                  {
+                    "id": 5,
+                    "nombre": "Oclusal"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -1549,7 +2355,17 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
-                }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "color": "Rojo"
+                  },
+                  {
+                    "id": 2,
+                    "color": "Azul"
+                  }
+                ]
               }
             },
             "headers": {}
@@ -1607,6 +2423,140 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "piezas": [
+                        {
+                          "id": 1,
+                          "pieza": 18
+                        },
+                        {
+                          "id": 2,
+                          "pieza": 17
+                        }
+                      ],
+                      "paciente": "Fabiana Aizcorbe",
+                      "tratamiento": "No se realizó un tratamiento",
+                      "diagnostico de la pieza": "molar dañado",
+                      "color de la pieza": "Rojo",
+                      "descripcion de la pieza": "Patologia o lesión. ",
+                      "cara dental": "Distal",
+                      "fecha y hora": "2025-05-05T13:47:18.000000Z"
+                    },
+                    {
+                      "id": 3,
+                      "piezas": [
+                        {
+                          "id": 2,
+                          "pieza": 17
+                        },
+                        {
+                          "id": 5,
+                          "pieza": 14
+                        },
+                        {
+                          "id": 9,
+                          "pieza": 21
+                        }
+                      ],
+                      "paciente": "Mario Balmaceda",
+                      "tratamiento": "Conducto en premolar",
+                      "diagnostico de la pieza": "probando odonto",
+                      "color de la pieza": "Rojo",
+                      "descripcion de la pieza": "Patologia o lesión. ",
+                      "cara dental": "Mesial",
+                      "fecha y hora": "2025-05-07T11:49:49.000000Z"
+                    },
+                    {
+                      "id": 4,
+                      "piezas": [],
+                      "paciente": "Mario Balmaceda",
+                      "tratamiento": "Conducto en premolar",
+                      "diagnostico de la pieza": "probando odonto",
+                      "color de la pieza": "Azul",
+                      "descripcion de la pieza": "Tratamiento que el paciente tiene hecho. ",
+                      "cara dental": "Oclusal",
+                      "fecha y hora": "2025-05-07T11:50:11.000000Z"
+                    },
+                    {
+                      "id": 5,
+                      "piezas": [],
+                      "paciente": "Mario Balmaceda",
+                      "tratamiento": "Conducto en premolar",
+                      "diagnostico de la pieza": "probando odonto",
+                      "color de la pieza": "Azul",
+                      "descripcion de la pieza": "Tratamiento que el paciente tiene hecho. ",
+                      "cara dental": "Oclusal",
+                      "fecha y hora": "2025-05-07T11:50:30.000000Z"
+                    },
+                    {
+                      "id": 6,
+                      "piezas": [
+                        {
+                          "id": 2,
+                          "pieza": 17
+                        },
+                        {
+                          "id": 5,
+                          "pieza": 14
+                        },
+                        {
+                          "id": 8,
+                          "pieza": 11
+                        }
+                      ],
+                      "paciente": "Mario Balmaceda",
+                      "tratamiento": "Conducto en premolar",
+                      "diagnostico de la pieza": "probando odonto",
+                      "color de la pieza": "Azul",
+                      "descripcion de la pieza": "Tratamiento que el paciente tiene hecho. ",
+                      "cara dental": "Oclusal",
+                      "fecha y hora": "2025-05-07T11:54:35.000000Z"
+                    },
+                    {
+                      "id": 7,
+                      "piezas": [
+                        {
+                          "id": 1,
+                          "pieza": 18
+                        },
+                        {
+                          "id": 9,
+                          "pieza": 21
+                        }
+                      ],
+                      "paciente": "Antonia Nuñez",
+                      "tratamiento": "Conducto en premolar",
+                      "diagnostico de la pieza": "el molar mejoro",
+                      "color de la pieza": "Rojo",
+                      "descripcion de la pieza": "Patologia o lesión. ",
+                      "cara dental": "Oclusal",
+                      "fecha y hora": "2025-05-07T12:40:13.000000Z"
+                    },
+                    {
+                      "id": 8,
+                      "piezas": [
+                        {
+                          "id": 2,
+                          "pieza": 17
+                        },
+                        {
+                          "id": 9,
+                          "pieza": 21
+                        }
+                      ],
+                      "paciente": "Elias Alvez",
+                      "tratamiento": "Conducto en premolar",
+                      "diagnostico de la pieza": "extraccion exitosa",
+                      "color de la pieza": "Azul",
+                      "descripcion de la pieza": "Tratamiento que el paciente tiene hecho. ",
+                      "cara dental": "Oclusal",
+                      "fecha y hora": "2025-05-22T14:11:10.000000Z"
+                    }
+                  ]
                 }
               }
             },
@@ -1654,6 +2604,34 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "paciente": "Fabiana Aizcorbe",
+                      "observacion": "muela del juicio a extraer lado izquierdo",
+                      "tratamiento": {
+                        "id": 9,
+                        "nombre": "No se realizó un tratamiento",
+                        "created_at": "2025-04-25T12:29:40.000000Z",
+                        "updated_at": "2025-04-25T12:29:40.000000Z"
+                      },
+                      "fecha": "2025-05-05T03:00:00.000000Z"
+                    },
+                    {
+                      "id": 2,
+                      "paciente": "Elias Alvez",
+                      "observacion": "muela del juicio a extraer lado izquierdo",
+                      "tratamiento": {
+                        "id": 9,
+                        "nombre": "No se realizó un tratamiento",
+                        "created_at": "2025-04-25T12:29:40.000000Z",
+                        "updated_at": "2025-04-25T12:29:40.000000Z"
+                      },
+                      "fecha": "2025-05-22T03:00:00.000000Z"
+                    }
+                  ]
                 }
               }
             },
@@ -1680,6 +2658,19 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "message": "¡Aquí está tu historial clínico!",
+                  "legajo": {
+                    "id": 1,
+                    "paciente_id": 26,
+                    "descripcion": "muela del juicio a extraer lado izquierdo",
+                    "tratamiento_id": 9,
+                    "user_id": 2,
+                    "fecha": "2025-05-05",
+                    "created_at": "2025-05-05T12:52:18.000000Z",
+                    "updated_at": "2025-05-05T12:52:18.000000Z"
+                  }
                 }
               }
             },
@@ -1744,6 +2735,30 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Validation Error",
+                    "value": {
+                      "message": "Debe registrar al menos uno de los campos: motivo_consulta o especialidad."
+                    }
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "value": {
+                      "message": "¡Turno creado!",
+                      "turno": {
+                        "user_id": 2,
+                        "motivo_consulta": "Dolor excesivo",
+                        "fecha": "2025-05-30",
+                        "hora": "09:00",
+                        "paciente_id": 26,
+                        "updated_at": "2025-05-22T14:31:36.000000Z",
+                        "created_at": "2025-05-22T14:31:36.000000Z",
+                        "id": 27
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -1809,6 +2824,23 @@
                   "required": [
                     "message"
                   ]
+                },
+                "example": {
+                  "message": "¡Aquí está tu turno!",
+                  "turno": [
+                    {
+                      "id": 3,
+                      "user_id": 2,
+                      "especialidad_id": 1,
+                      "motivo_consulta": null,
+                      "fecha": "2023-08-04",
+                      "hora": "09:00",
+                      "paciente_id": 3,
+                      "deleted_at": null,
+                      "created_at": "2025-04-25T12:29:40.000000Z",
+                      "updated_at": "2025-04-25T12:29:40.000000Z"
+                    }
+                  ]
                 }
               }
             },
@@ -1820,7 +2852,7 @@
     },
     "/api/paciente/turnos/cancelar/26": {
       "get": {
-        "summary": "Get Specialties",
+        "summary": "Delete",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -1874,6 +2906,32 @@
                   "required": [
                     "message"
                   ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "message": "¡El turno se ha cancelado correctamente!",
+                      "turno": {
+                        "id": 27,
+                        "user_id": 2,
+                        "especialidad_id": null,
+                        "motivo_consulta": "Dolor excesivo",
+                        "fecha": "2025-05-30",
+                        "hora": "09:00",
+                        "paciente_id": 26,
+                        "deleted_at": "2025-05-22T14:44:15.000000Z",
+                        "created_at": "2025-05-22T14:31:36.000000Z",
+                        "updated_at": "2025-05-22T14:44:15.000000Z"
+                      }
+                    }
+                  },
+                  "2": {
+                    "summary": "Validaton Error",
+                    "value": {
+                      "message": "No se encontró el turno a cancelar."
+                    }
+                  }
                 }
               }
             },
@@ -1921,6 +2979,67 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "example": {
+                  "08:00": "Disponible",
+                  "08:30": "Disponible",
+                  "09:00": "Disponible",
+                  "09:30": "Disponible",
+                  "10:00": "Disponible",
+                  "10:30": "Disponible",
+                  "11:00": "Disponible",
+                  "11:30": "Disponible",
+                  "12:00": "Disponible"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/paciente/turno/especialidad/2": {
+      "get": {
+        "summary": "Get Specialties",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Patients/Appointments"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success Get Specialtie Dentist 1",
+                    "value": [
+                      {
+                        "especialidad": "Protesis"
+                      },
+                      {
+                        "especialidad": "Implantes"
+                      }
+                    ]
+                  },
+                  "2": {
+                    "summary": "Success Get Specialtie Dentist 2",
+                    "value": [
+                      {
+                        "especialidad": "Protesis"
+                      },
+                      {
+                        "especialidad": "Ortodoncia"
+                      }
+                    ]
+                  }
                 }
               }
             },
@@ -1969,6 +3088,49 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Validation Error",
+                    "value": "\"{\\\"first_name\\\":[\\\"El nombre es obligatorio.\\\"],\\\"last_name\\\":[\\\"El apellido es obligatorio.\\\"],\\\"email\\\":[\\\"El email es obligatorio.\\\"],\\\"password\\\":[\\\"La contrase\\ña es obligatoria.\\\"],\\\"password_confirmation\\\":[\\\"The password confirmation field is required.\\\"],\\\"phone\\\":[\\\"El tel\\éfono es obligatorio.\\\"],\\\"obra_social_id\\\":[\\\"La obra social es obligatoria.\\\"]}\""
+                  },
+                  "2": {
+                    "summary": "Success Create",
+                    "value": {
+                      "message": "¡Paciente creado!",
+                      "user": {
+                        "first_name": "Ariana",
+                        "last_name": "Velazques",
+                        "email": "arivelazquez@gamail.com",
+                        "updated_at": "2025-05-22T14:53:39.000000Z",
+                        "created_at": "2025-05-22T14:53:39.000000Z",
+                        "id": 30,
+                        "roles": [
+                          {
+                            "id": 3,
+                            "name": "paciente",
+                            "guard_name": "api",
+                            "created_at": "2025-04-25T12:29:35.000000Z",
+                            "updated_at": "2025-04-25T12:29:35.000000Z",
+                            "pivot": {
+                              "model_id": 30,
+                              "role_id": 3,
+                              "model_type": "App\\Models\\User"
+                            }
+                          }
+                        ],
+                        "paciente": {
+                          "id": 27,
+                          "user_id": 30,
+                          "phone": "3567994",
+                          "obra_social_id": 3,
+                          "created_at": "2025-05-22T14:53:40.000000Z",
+                          "updated_at": "2025-05-22T14:53:40.000000Z"
+                        }
+                      },
+                      "rol_id": 3
+                    }
+                  }
                 }
               }
             },
